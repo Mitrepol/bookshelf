@@ -398,6 +398,14 @@
 
 <script>
 (function(){
+  // ========================================================================
+  // CONFIG — paste your Cloudflare Worker URL here once you've deployed it
+  // It should look like: https://ao3-bookshelf.yourname.workers.dev
+  // Leave as empty string ("") to disable AO3 autofill features.
+  // ========================================================================
+  const AO3_WORKER_URL = "https://ao3-bookshelf.mitrepol.workers.dev/";
+  // ========================================================================
+
   const STORAGE_KEY = 'bookshelf-v1';
   let books = [];
   let editingId = null;
@@ -652,6 +660,10 @@
     document.getElementById('ao3-section').style.display = e.target.checked ? 'block' : 'none';
     if (e.target.checked) document.getElementById('extra-section').style.display = 'block';
     document.getElementById('expand-btn').style.display = e.target.checked ? 'none' : (document.getElementById('extra-section').style.display === 'block' ? 'none' : 'block');
+    document.getElementById('title-input').placeholder = e.target.checked
+      ? (AO3_WORKER_URL ? 'Search AO3 by title…' : 'Type fic title…')
+      : 'Start typing to find it…';
+    closeAllSuggestions();
   });
 
   // Rating
@@ -672,14 +684,21 @@
     const q = e.target.value.trim();
     clearTimeout(searchTimer);
     if (q.length < 3) { suggestions.classList.remove('active'); return; }
-    if (document.getElementById('is-ao3').checked) { suggestions.classList.remove('active'); return; }
-    searchTimer = setTimeout(() => searchOpenLibrary(q), 300);
+    const isAO3 = document.getElementById('is-ao3').checked;
+    if (isAO3) {
+      if (!AO3_WORKER_URL) { suggestions.classList.remove('active'); return; }
+      searchTimer = setTimeout(() => searchAO3(q), 400);
+    } else {
+      searchTimer = setTimeout(() => searchOpenLibrary(q), 300);
+    }
   });
 
   titleInput.addEventListener('focus', e => {
-    if (e.target.value.trim().length >= 3 && !document.getElementById('is-ao3').checked) {
-      searchOpenLibrary(e.target.value.trim());
-    }
+    const q = e.target.value.trim();
+    if (q.length < 3) return;
+    const isAO3 = document.getElementById('is-ao3').checked;
+    if (isAO3 && AO3_WORKER_URL) searchAO3(q);
+    else if (!isAO3) searchOpenLibrary(q);
   });
 
   document.addEventListener('click', e => {
@@ -765,13 +784,89 @@
   setupLibraryAutocomplete('fandom-input', 'fandom-suggestions', 'fandom');
   setupLibraryAutocomplete('ship-input', 'ship-suggestions', 'ship');
 
-  // ---------- AO3 URL PARSING ----------
+  // ---------- AO3 SEARCH (via Cloudflare Worker) ----------
+  async function searchAO3(query) {
+    suggestions.innerHTML = '<div class="suggestion-loading">Searching AO3…</div>';
+    suggestions.classList.add('active');
+    try {
+      const res = await fetch(`${AO3_WORKER_URL}/search?q=${encodeURIComponent(query)}`);
+      if (!res.ok) throw new Error('fetch failed');
+      const data = await res.json();
+      const results = (data.results || []).slice(0, 8);
+      if (results.length === 0) {
+        suggestions.innerHTML = '<div class="suggestion-loading">No matches. Type it in yourself.</div>';
+        return;
+      }
+      suggestions.innerHTML = results.map((r, i) => `
+        <div class="suggestion" data-i="${i}">
+          <div class="suggestion-cover" style="background:rgba(139,58,31,0.08); display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; color:var(--accent); font-size:14px;">AO3</div>
+          <div class="suggestion-text">
+            <p class="suggestion-title">${esc(r.title)}</p>
+            <p class="suggestion-author">${esc(r.author)}${r.fandom ? ' · ' + esc(r.fandom) : ''}${r.wordCount ? ' · ' + Number(r.wordCount).toLocaleString() + ' words' : ''}</p>
+          </div>
+        </div>
+      `).join('');
+      suggestions.querySelectorAll('.suggestion').forEach((el, i) => {
+        el.onclick = () => pickAO3Result(results[i]);
+      });
+    } catch (err) {
+      suggestions.innerHTML = '<div class="suggestion-loading">Couldn\'t reach AO3. Type it in manually.</div>';
+    }
+  }
+
+  function pickAO3Result(r) {
+    document.getElementById('title-input').value = r.title || '';
+    document.getElementById('author-input').value = r.author || '';
+    document.getElementById('fandom-input').value = r.fandom || '';
+    document.getElementById('ship-input').value = r.ship || '';
+    document.getElementById('words-input').value = r.wordCount || '';
+    document.getElementById('chapters-input').value = r.chapters || '';
+    document.getElementById('ao3-url').value = r.url || '';
+    document.getElementById('extra-section').style.display = 'block';
+    document.getElementById('ao3-section').style.display = 'block';
+    document.getElementById('expand-btn').style.display = 'none';
+    closeAllSuggestions();
+    toast('Pulled from AO3');
+    document.getElementById('notes-input').focus();
+  }
+
+  async function fetchAO3Work(id) {
+    if (!AO3_WORKER_URL) return null;
+    try {
+      const res = await fetch(`${AO3_WORKER_URL}/work?id=${id}`);
+      if (!res.ok) throw new Error('fetch failed');
+      return await res.json();
+    } catch { return null; }
+  }
+
+  // ---------- AO3 URL PASTE ----------
+  let urlTimer = null;
   document.getElementById('ao3-url').addEventListener('input', e => {
     const url = e.target.value.trim();
     const match = url.match(/archiveofourown\.org\/works\/(\d+)/);
-    if (match) {
-      toast('AO3 link saved');
-    }
+    if (!match) return;
+    const id = match[1];
+    clearTimeout(urlTimer);
+    if (!AO3_WORKER_URL) { toast('AO3 link saved'); return; }
+    urlTimer = setTimeout(async () => {
+      toast('Fetching from AO3…');
+      const work = await fetchAO3Work(id);
+      if (!work || work.error) { toast('Couldn\'t fetch — link saved only'); return; }
+      // Only fill empty fields so we don't overwrite anything she typed
+      const fill = (id, val) => {
+        const el = document.getElementById(id);
+        if (el && !el.value && val) el.value = val;
+      };
+      fill('title-input', work.title);
+      fill('author-input', work.author);
+      fill('fandom-input', work.fandom);
+      fill('ship-input', work.ship);
+      fill('words-input', work.wordCount);
+      fill('chapters-input', work.chapters);
+      document.getElementById('extra-section').style.display = 'block';
+      document.getElementById('expand-btn').style.display = 'none';
+      toast('Pulled from AO3');
+    }, 500);
   });
 
   // ---------- SAVE ----------
