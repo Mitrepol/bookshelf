@@ -160,6 +160,13 @@
   .btn-row .btn { flex: 1; }
   .expand-btn { width: 100%; padding: 12px; background: transparent; border: 1px dashed var(--line); border-radius: 10px; color: var(--ink-soft); font-family: inherit; font-size: 13px; cursor: pointer; margin-bottom: 12px; }
   .expand-btn:hover { background: var(--bg-alt); }
+  .cover-preview { width: 72px; height: 108px; background: var(--bg-alt); border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--ink-faint); font-family: 'Fraunces', serif; font-size: 28px; margin-bottom: 10px; border: 1px solid var(--line); flex-shrink: 0; }
+  .cover-preview img { width: 100%; height: 100%; object-fit: cover; }
+  .cover-row { display: flex; gap: 12px; align-items: flex-start; }
+  .cover-inputs { flex: 1; min-width: 0; }
+  .cover-upload-btn { display: block; width: 100%; padding: 9px; background: transparent; border: 1px dashed var(--line); border-radius: 8px; color: var(--ink-soft); font-family: inherit; font-size: 13px; cursor: pointer; text-align: center; margin-top: 8px; }
+  .cover-upload-btn:hover { background: var(--bg-alt); }
+  .cover-clear { font-size: 12px; color: var(--dnf); background: transparent; border: none; cursor: pointer; padding: 4px 0; font-family: inherit; display: none; }
 
   /* Stats */
   .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
@@ -277,6 +284,19 @@
 
     <div class="form-section" id="extra-section" style="display:none;">
       <h3>Details</h3>
+      <div class="field">
+        <label>Cover image</label>
+        <div class="cover-row">
+          <div class="cover-preview" id="cover-preview-main">✦</div>
+          <div class="cover-inputs">
+            <label style="font-size:12px; color:var(--ink-soft); margin-bottom:6px; display:block;">Paste image URL</label>
+            <input type="url" id="cover-url-input-main" autocomplete="off" placeholder="https://… (right-click image → Copy image address)" />
+            <button type="button" class="cover-upload-btn" id="cover-upload-btn-main">📁 Or upload from phone</button>
+            <input type="file" id="cover-file-input-main" accept="image/*" style="display:none;" />
+            <button type="button" class="cover-clear" id="cover-clear-btn-main">Remove cover</button>
+          </div>
+        </div>
+      </div>
       <div class="field-row">
         <div class="field">
           <label for="started-input">Date started</label>
@@ -313,6 +333,19 @@
       <div class="field">
         <label for="ao3-url">AO3 URL (paste to extract work info)</label>
         <input type="url" id="ao3-url" autocomplete="off" placeholder="https://archiveofourown.org/works/…" />
+      </div>
+      <div class="field">
+        <label>Cover image</label>
+        <div class="cover-row">
+          <div class="cover-preview" id="cover-preview">✦</div>
+          <div class="cover-inputs">
+            <label class="bt-field" style="font-size:12px; color:var(--ink-soft); margin-bottom:6px; display:block;">Paste image URL</label>
+            <input type="url" id="cover-url-input" autocomplete="off" placeholder="https://… (right-click image → Copy image address)" />
+            <button type="button" class="cover-upload-btn" id="cover-upload-btn">📁 Or upload from phone</button>
+            <input type="file" id="cover-file-input" accept="image/*" style="display:none;" />
+            <button type="button" class="cover-clear" id="cover-clear-btn">Remove cover</button>
+          </div>
+        </div>
       </div>
       <div class="field">
         <label for="fandom-input">Fandom</label>
@@ -403,13 +436,76 @@
   // It should look like: https://ao3-bookshelf.yourname.workers.dev
   // Leave as empty string ("") to disable AO3 autofill features.
   // ========================================================================
-  const AO3_WORKER_URL = "https://ao3-bookshelf.mitrepol.workers.dev";
+  const AO3_WORKER_URL = "";
   // ========================================================================
 
   const STORAGE_KEY = 'bookshelf-v1';
   let books = [];
   let editingId = null;
   let formRating = 0;
+  let formCover = ''; // base64 or URL
+
+  function updateCoverPreview(src, previewId, clearBtnId) {
+    const preview = document.getElementById(previewId);
+    const clearBtn = document.getElementById(clearBtnId);
+    if (!preview) return;
+    if (src) {
+      preview.innerHTML = `<img src="${src}" alt="cover" onerror="this.parentElement.innerHTML='✦'" />`;
+      if (clearBtn) clearBtn.style.display = 'block';
+    } else {
+      preview.innerHTML = '✦';
+      if (clearBtn) clearBtn.style.display = 'none';
+    }
+  }
+
+  function setupCoverHandlers(urlInputId, uploadBtnId, fileInputId, previewId, clearBtnId, isAO3Mode) {
+    const urlInput = document.getElementById(urlInputId);
+    const uploadBtn = document.getElementById(uploadBtnId);
+    const fileInput = document.getElementById(fileInputId);
+    const clearBtn = document.getElementById(clearBtnId);
+    if (!urlInput) return;
+
+    urlInput.addEventListener('input', () => {
+      const val = urlInput.val = urlInput.value.trim();
+      if (val) {
+        formCover = val;
+        updateCoverPreview(val, previewId, clearBtnId);
+        // clear other cover input
+        const otherId = isAO3Mode ? 'cover-url-input-main' : 'cover-url-input';
+        const other = document.getElementById(otherId);
+        if (other) other.value = '';
+      }
+    });
+
+    if (uploadBtn && fileInput) {
+      uploadBtn.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          formCover = reader.result;
+          urlInput.value = '';
+          updateCoverPreview(formCover, previewId, clearBtnId);
+          // clear other
+          const otherId = isAO3Mode ? 'cover-url-input-main' : 'cover-url-input';
+          const other = document.getElementById(otherId);
+          if (other) other.value = '';
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        formCover = '';
+        urlInput.value = '';
+        if (fileInput) fileInput.value = '';
+        updateCoverPreview('', previewId, clearBtnId);
+        clearBtn.style.display = 'none';
+      });
+    }
+  }
   let currentView = 'library';
   let filterStatus = 'all';
   let filterSort = 'added-desc';
@@ -614,6 +710,15 @@
     document.getElementById('ao3-section').style.display = 'none';
     updateRatingDisplay();
     closeAllSuggestions();
+    formCover = '';
+    updateCoverPreview('', 'cover-preview', 'cover-clear-btn');
+    updateCoverPreview('', 'cover-preview-main', 'cover-clear-btn-main');
+    const cu = document.getElementById('cover-url-input');
+    const cum = document.getElementById('cover-url-input-main');
+    if (cu) cu.value = '';
+    if (cum) cum.value = '';
+    setupCoverHandlers('cover-url-input', 'cover-upload-btn', 'cover-file-input', 'cover-preview', 'cover-clear-btn', true);
+    setupCoverHandlers('cover-url-input-main', 'cover-upload-btn-main', 'cover-file-input-main', 'cover-preview-main', 'cover-clear-btn-main', false);
   }
 
   function editBook(id) {
@@ -642,6 +747,11 @@
     document.getElementById('chapters-input').value = b.chapters || '';
     document.getElementById('extra-section').style.display = 'block';
     document.getElementById('ao3-section').style.display = b.isAO3 ? 'block' : 'none';
+    formCover = b.cover || '';
+    updateCoverPreview(formCover, 'cover-preview', 'cover-clear-btn');
+    updateCoverPreview(formCover, 'cover-preview-main', 'cover-clear-btn-main');
+    setupCoverHandlers('cover-url-input', 'cover-upload-btn', 'cover-file-input', 'cover-preview', 'cover-clear-btn', true);
+    setupCoverHandlers('cover-url-input-main', 'cover-upload-btn-main', 'cover-file-input-main', 'cover-preview-main', 'cover-clear-btn-main', false);
     updateRatingDisplay();
     switchView('add');
   }
@@ -890,7 +1000,8 @@
       fandom: document.getElementById('fandom-input').value.trim(),
       ship: document.getElementById('ship-input').value.trim(),
       wordCount: document.getElementById('words-input').value,
-      chapters: document.getElementById('chapters-input').value.trim()
+      chapters: document.getElementById('chapters-input').value.trim(),
+      cover: formCover || ''
     };
     if (editingId) {
       const idx = books.findIndex(b => b.id === editingId);
@@ -899,7 +1010,12 @@
     } else {
       data.id = uid();
       data.dateAdded = new Date().toISOString().slice(0,10);
-      if (lastSuggested) data.cover = lastSuggested.cover;
+    if (lastSuggested) {
+      data.cover = lastSuggested.cover;
+      formCover = lastSuggested.cover;
+    } else {
+      data.cover = formCover || '';
+    }
       books.push(data);
       toast('Added to shelf');
     }
