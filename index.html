@@ -10,47 +10,49 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #e8ede8;
-    --bg-alt: #d8e2d8;
-    --bg-card: #f2f7f2;
-    --ink: #1e2d22;
-    --ink-soft: #4a6350;
-    --ink-faint: #8aaa90;
-    --line: #bdd0bf;
-    --line-soft: #cfdecf;
-    --accent: #3d5a47;
-    --accent-soft: #6a8f72;
-    --gold: #8a7a3a;
-    --reading: #8a7a3a;
-    --finished: #3d5a47;
-    --want: #4a6350;
-    --dnf: #8a4040;
-    --shadow: 0 1px 2px rgba(30,45,34,0.04), 0 4px 12px rgba(30,45,34,0.04);
+    --bg: #f0e8d8;
+    --bg-alt: #e8dcc8;
+    --bg-card: #faf6ee;
+    --ink: #2e2018;
+    --ink-soft: #6a5040;
+    --ink-faint: #a89080;
+    --line: #d4c4a8;
+    --line-soft: #e0d0b8;
+    --accent: #5a7a5a;
+    --accent-soft: #7a9a7a;
+    --gold: #a08030;
+    --reading: #a08030;
+    --finished: #5a7a5a;
+    --want: #6a5040;
+    --dnf: #904040;
+    --shadow: 0 1px 2px rgba(46,32,24,0.05), 0 4px 12px rgba(46,32,24,0.04);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #263326;
-      --bg-alt: #2e3d2e;
-      --bg-card: #324832;
-      --ink: #e8f2e8;
-      --ink-soft: #a8c8a8;
-      --ink-faint: #6a8f6a;
-      --line: #3e5a3e;
-      --line-soft: #364e36;
-      --accent: #8aba92;
-      --accent-soft: #7aaa82;
-      --gold: #d4c070;
-      --reading: #d4c070;
-      --finished: #8aba92;
-      --want: #a8c8a8;
-      --dnf: #e08888;
-      --shadow: 0 1px 2px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.1);
+      --bg: #f0e8d8;
+      --bg-alt: #e8dcc8;
+      --bg-card: #faf6ee;
+      --ink: #2e2018;
+      --ink-soft: #6a5040;
+      --ink-faint: #a89080;
+      --line: #d4c4a8;
+      --line-soft: #e0d0b8;
+      --accent: #5a7a5a;
+      --accent-soft: #7a9a7a;
+      --gold: #a08030;
+      --reading: #a08030;
+      --finished: #5a7a5a;
+      --want: #6a5040;
+      --dnf: #904040;
+      --shadow: 0 1px 2px rgba(46,32,24,0.05), 0 4px 12px rgba(46,32,24,0.04);
     }
   }
-  .header-banner { background: linear-gradient(135deg, #c8ddc8 0%, #ddeedd 50%, #c8d8c0 100%); padding: 0.75rem 1.25rem 1rem; margin-bottom: 0; }
-  @media (prefers-color-scheme: dark) {
-    .header-banner { background: linear-gradient(135deg, #1e2e1e 0%, #243424 50%, #1a2a1a 100%); }
-  }
+  /* Header banner — fixed warm cream, same in light and dark, inspired by Goodreads */
+  .header-banner { background: #3d2b1f; border-bottom: 2px solid #2a1e15; padding: 0.85rem 1.25rem 1rem; margin-bottom: 0; }
+  .header-quote-strip { background: #f4ede0; border-bottom: 1px solid #d4c4a8; padding: 0.55rem 1.25rem; }
+  .header-quote-strip div { max-width: 720px; margin: 0 auto; font-size: 13px; color: #8a7460; font-family: 'Fraunces', serif; font-style: italic; transition: opacity 0.4s; }
+  /* spacing between banner and first card on every view */
+  .view.active { padding-top: 1.1rem; }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Inter', -apple-system, sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
   body { min-height: 100vh; padding-bottom: 80px; }
@@ -202,63 +204,61 @@
 
 <div class="header-banner">
   <div style="display:flex; align-items:center; gap:14px; max-width:720px; margin:0 auto;">
-    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Raccoon with glasses reading a book">
-      <!-- Tail behind body -->
-      <path d="M54 60 Q66 55 64 45 Q62 37 57 41" stroke="#7a7a7a" stroke-width="6" stroke-linecap="round" fill="none"/>
-      <path d="M54 60 Q66 55 64 45 Q62 37 57 41" stroke="#c8c8c8" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 4" fill="none"/>
-      <!-- Body -->
-      <ellipse cx="36" cy="52" rx="18" ry="14" fill="#7a7a7a"/>
-      <!-- Belly -->
-      <ellipse cx="36" cy="54" rx="10" ry="9" fill="#c8c8c8"/>
-      <!-- Head -->
-      <ellipse cx="36" cy="30" rx="16" ry="15" fill="#7a7a7a"/>
+    <!-- Raccoon head portrait with glasses and HP scar -->
+    <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Raccoon with glasses and Harry Potter scar">
       <!-- Ears -->
-      <ellipse cx="22" cy="17" rx="6" ry="7" fill="#7a7a7a"/>
-      <ellipse cx="50" cy="17" rx="6" ry="7" fill="#7a7a7a"/>
-      <ellipse cx="22" cy="17" rx="3.5" ry="4.5" fill="#c8c8c8"/>
-      <ellipse cx="50" cy="17" rx="3.5" ry="4.5" fill="#c8c8c8"/>
-      <!-- Mask patches -->
-      <ellipse cx="28" cy="29" rx="7" ry="6" fill="#2a2a2a"/>
-      <ellipse cx="44" cy="29" rx="7" ry="6" fill="#2a2a2a"/>
-      <!-- Eyes (looking down at book) -->
-      <circle cx="28" cy="29" r="3.5" fill="white"/>
-      <circle cx="44" cy="29" r="3.5" fill="white"/>
-      <circle cx="28.5" cy="30" r="2" fill="#1a1a1a"/>
-      <circle cx="44.5" cy="30" r="2" fill="#1a1a1a"/>
-      <circle cx="29.2" cy="29.2" r="0.7" fill="white"/>
-      <circle cx="45.2" cy="29.2" r="0.7" fill="white"/>
-      <!-- Glasses frames -->
-      <circle cx="28" cy="29" r="5.5" stroke="#3a2a1a" stroke-width="1.5" fill="none"/>
-      <circle cx="44" cy="29" r="5.5" stroke="#3a2a1a" stroke-width="1.5" fill="none"/>
-      <!-- Glasses bridge -->
-      <path d="M33.5 29 L38.5 29" stroke="#3a2a1a" stroke-width="1.5" stroke-linecap="round"/>
-      <!-- Glasses arms -->
-      <path d="M22.5 27 L18 25" stroke="#3a2a1a" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M49.5 27 L54 25" stroke="#3a2a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <ellipse cx="18" cy="18" rx="10" ry="11" fill="#7a7a7a"/>
+      <ellipse cx="50" cy="18" rx="10" ry="11" fill="#7a7a7a"/>
+      <ellipse cx="18" cy="18" rx="6" ry="7" fill="#d0c8c0"/>
+      <ellipse cx="50" cy="18" rx="6" ry="7" fill="#d0c8c0"/>
+      <!-- Head -->
+      <ellipse cx="34" cy="40" rx="24" ry="22" fill="#8a8a8a"/>
+      <!-- Face lighter centre -->
+      <ellipse cx="34" cy="42" rx="16" ry="15" fill="#b0a8a0"/>
+      <!-- Dark mask patches around eyes -->
+      <ellipse cx="24" cy="36" rx="9" ry="8" fill="#2e2e2e"/>
+      <ellipse cx="44" cy="36" rx="9" ry="8" fill="#2e2e2e"/>
+      <!-- Eyes -->
+      <circle cx="24" cy="36" r="5" fill="#f8f8f8"/>
+      <circle cx="44" cy="36" r="5" fill="#f8f8f8"/>
+      <!-- Pupils — looking slightly down -->
+      <circle cx="24.5" cy="37" r="3" fill="#1a1a1a"/>
+      <circle cx="44.5" cy="37" r="3" fill="#1a1a1a"/>
+      <!-- Eye shine -->
+      <circle cx="25.5" cy="35.8" r="1.1" fill="white"/>
+      <circle cx="45.5" cy="35.8" r="1.1" fill="white"/>
+      <!-- Glasses — round wire frames -->
+      <circle cx="24" cy="36" r="7.5" stroke="#3a2a12" stroke-width="1.8" fill="none"/>
+      <circle cx="44" cy="36" r="7.5" stroke="#3a2a12" stroke-width="1.8" fill="none"/>
+      <!-- Bridge -->
+      <path d="M31.5 36 L36.5 36" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- Arms -->
+      <path d="M16.5 33 L10 30" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M51.5 33 L58 30" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
       <!-- Snout -->
-      <ellipse cx="36" cy="35" rx="6" ry="4" fill="#c8c8c8"/>
+      <ellipse cx="34" cy="47" rx="8" ry="5.5" fill="#c8bfb8"/>
       <!-- Nose -->
-      <ellipse cx="36" cy="33.5" rx="2.8" ry="2" fill="#2a2a2a"/>
-      <!-- Forehead stripe -->
-      <rect x="34" y="17" width="4" height="8" rx="2" fill="#4a4a4a"/>
-      <!-- Arms holding book -->
-      <path d="M20 49 Q15 54 17 61" stroke="#7a7a7a" stroke-width="5" stroke-linecap="round" fill="none"/>
-      <path d="M52 49 Q57 54 55 61" stroke="#7a7a7a" stroke-width="5" stroke-linecap="round" fill="none"/>
-      <!-- Book -->
-      <rect x="17" y="59" width="32" height="11" rx="3" fill="var(--accent)"/>
-      <rect x="17" y="59" width="16" height="11" rx="3" fill="var(--accent-soft)"/>
-      <line x1="33" y1="59" x2="33" y2="70" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
-      <!-- Book pages edge -->
-      <rect x="44" y="60" width="3" height="9" rx="1" fill="#e8e0d0" opacity="0.6"/>
+      <ellipse cx="34" cy="44.5" rx="3.5" ry="2.5" fill="#2e2e2e"/>
+      <!-- Forehead fur stripe -->
+      <ellipse cx="34" cy="23" rx="4" ry="5" fill="#5a5a5a"/>
+      <!-- Harry Potter lightning bolt scar ⚡ on forehead -->
+      <path d="M32 18 L35 23 L31 23 L34 29" stroke="#c8a028" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <!-- subtle scar glow -->
+      <path d="M32 18 L35 23 L31 23 L34 29" stroke="#ffd700" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>
+      <!-- Cheek tufts -->
+      <ellipse cx="12" cy="46" rx="5" ry="4" fill="#8a8a8a"/>
+      <ellipse cx="56" cy="46" rx="5" ry="4" fill="#8a8a8a"/>
+      <!-- Mouth — slight smile -->
+      <path d="M30 51 Q34 54 38 51" stroke="#5a5050" stroke-width="1.5" stroke-linecap="round" fill="none"/>
     </svg>
     <div>
-      <h1 style="font-family:'Fraunces',Georgia,serif; font-size:28px; margin:0; line-height:1.1; font-weight:400; color:var(--ink);">Kelly's <em style="font-style:italic; color:var(--accent);">Fandom</em><br>Bookshelf</h1>
-      <p style="font-size:13px; color:var(--ink-soft); margin:0.3rem 0 0; letter-spacing:0.02em;">Every fic deserves to be remembered 🍃</p>
+      <h1 style="font-family:'Fraunces',Georgia,serif; font-size:26px; margin:0; line-height:1.15; font-weight:400; color:#f0e0c0;">Kelly's <em style="font-style:italic; color:#d4a85a;">Fandom</em><br>Bookshelf</h1>
+      <p style="font-size:12px; color:#b09880; margin:0.3rem 0 0; letter-spacing:0.02em;">Every fic deserves to be remembered 🍃</p>
     </div>
   </div>
 </div>
-<div style="background: var(--bg-alt); border-bottom: 1px solid var(--line-soft); padding: 0.6rem 1.25rem; max-width:100%;">
-  <div style="max-width:720px; margin:0 auto; font-size:13px; color:var(--ink-soft); font-family:'Fraunces',serif; font-style:italic;" id="header-quote">✦ &nbsp;A reader lives a thousand lives…</div>
+<div class="header-quote-strip">
+  <div id="header-quote">✦ &nbsp;A reader lives a thousand lives…</div>
 </div>
 
 <div class="container">
@@ -711,7 +711,7 @@
     if (el) { el.style.opacity = '0'; setTimeout(() => { el.innerHTML = HEADER_QUOTES[quoteIdx]; el.style.opacity = '1'; }, 400); }
   }, 10000);
   const hq = document.getElementById('header-quote');
-  if (hq) hq.style.transition = 'opacity 0.4s';
+  if (hq) hq.style.opacity = '1';
 
   function toast(msg, big, duration) {
     const t = document.getElementById('toast');
