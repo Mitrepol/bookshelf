@@ -29,23 +29,27 @@
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1a211a;
-      --bg-alt: #1e2b1e;
-      --bg-card: #223022;
-      --ink: #e0ede0;
-      --ink-soft: #9ab89a;
-      --ink-faint: #4a6350;
-      --line: #2e402e;
-      --line-soft: #263526;
-      --accent: #7aaa82;
-      --accent-soft: #6a8f72;
-      --gold: #c8b860;
-      --reading: #c8b860;
-      --finished: #7aaa82;
-      --want: #9ab89a;
-      --dnf: #d68080;
-      --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
+      --bg: #263326;
+      --bg-alt: #2e3d2e;
+      --bg-card: #324832;
+      --ink: #e8f2e8;
+      --ink-soft: #a8c8a8;
+      --ink-faint: #6a8f6a;
+      --line: #3e5a3e;
+      --line-soft: #364e36;
+      --accent: #8aba92;
+      --accent-soft: #7aaa82;
+      --gold: #d4c070;
+      --reading: #d4c070;
+      --finished: #8aba92;
+      --want: #a8c8a8;
+      --dnf: #e08888;
+      --shadow: 0 1px 2px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.1);
     }
+  }
+  .header-banner { background: linear-gradient(135deg, #c8ddc8 0%, #ddeedd 50%, #c8d8c0 100%); padding: 0.75rem 1.25rem 1rem; margin-bottom: 0; }
+  @media (prefers-color-scheme: dark) {
+    .header-banner { background: linear-gradient(135deg, #1e2e1e 0%, #243424 50%, #1a2a1a 100%); }
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Inter', -apple-system, sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
@@ -187,62 +191,74 @@
   .tip-box strong { color: var(--ink); font-weight: 500; }
 
   /* Toast */
-  .toast { position: fixed; bottom: 96px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px; font-size: 13px; opacity: 0; transition: all 0.25s; z-index: 100; pointer-events: none; }
+  .toast { position: fixed; bottom: 96px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px; font-size: 13px; opacity: 0; transition: all 0.25s; z-index: 100; pointer-events: none; text-align: center; max-width: 80vw; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.big { border-radius: 16px; padding: 14px 20px; font-size: 15px; line-height: 1.5; font-family: 'Fraunces', serif; font-style: italic; }
 
   .ornament { text-align: center; color: var(--ink-faint); font-family: 'Fraunces', serif; font-size: 20px; margin: 2rem 0 1rem; letter-spacing: 8px; }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div style="display:flex; align-items:flex-end; gap:12px;">
-    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Raccoon reading a book">
+<div class="header-banner">
+  <div style="display:flex; align-items:center; gap:14px; max-width:720px; margin:0 auto;">
+    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Raccoon with glasses reading a book">
+      <!-- Tail behind body -->
+      <path d="M54 60 Q66 55 64 45 Q62 37 57 41" stroke="#7a7a7a" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <path d="M54 60 Q66 55 64 45 Q62 37 57 41" stroke="#c8c8c8" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 4" fill="none"/>
       <!-- Body -->
-      <ellipse cx="32" cy="44" rx="16" ry="13" fill="#7a7a7a"/>
+      <ellipse cx="36" cy="52" rx="18" ry="14" fill="#7a7a7a"/>
       <!-- Belly -->
-      <ellipse cx="32" cy="46" rx="9" ry="8" fill="#c8c8c8"/>
+      <ellipse cx="36" cy="54" rx="10" ry="9" fill="#c8c8c8"/>
       <!-- Head -->
-      <ellipse cx="32" cy="26" rx="14" ry="13" fill="#7a7a7a"/>
+      <ellipse cx="36" cy="30" rx="16" ry="15" fill="#7a7a7a"/>
       <!-- Ears -->
-      <ellipse cx="20" cy="15" rx="5" ry="6" fill="#7a7a7a"/>
-      <ellipse cx="44" cy="15" rx="5" ry="6" fill="#7a7a7a"/>
-      <ellipse cx="20" cy="15" rx="3" ry="4" fill="#c8c8c8"/>
-      <ellipse cx="44" cy="15" rx="3" ry="4" fill="#c8c8c8"/>
-      <!-- Mask -->
-      <ellipse cx="25" cy="25" rx="6" ry="5" fill="#2a2a2a"/>
-      <ellipse cx="39" cy="25" rx="6" ry="5" fill="#2a2a2a"/>
-      <!-- Eyes -->
-      <circle cx="25" cy="25" r="3" fill="white"/>
-      <circle cx="39" cy="25" r="3" fill="white"/>
-      <circle cx="26" cy="25" r="1.5" fill="#1a1a1a"/>
-      <circle cx="40" cy="25" r="1.5" fill="#1a1a1a"/>
-      <!-- Eye shine -->
-      <circle cx="26.7" cy="24.3" r="0.6" fill="white"/>
-      <circle cx="40.7" cy="24.3" r="0.6" fill="white"/>
-      <!-- Nose -->
-      <ellipse cx="32" cy="30" rx="2.5" ry="1.8" fill="#2a2a2a"/>
+      <ellipse cx="22" cy="17" rx="6" ry="7" fill="#7a7a7a"/>
+      <ellipse cx="50" cy="17" rx="6" ry="7" fill="#7a7a7a"/>
+      <ellipse cx="22" cy="17" rx="3.5" ry="4.5" fill="#c8c8c8"/>
+      <ellipse cx="50" cy="17" rx="3.5" ry="4.5" fill="#c8c8c8"/>
+      <!-- Mask patches -->
+      <ellipse cx="28" cy="29" rx="7" ry="6" fill="#2a2a2a"/>
+      <ellipse cx="44" cy="29" rx="7" ry="6" fill="#2a2a2a"/>
+      <!-- Eyes (looking down at book) -->
+      <circle cx="28" cy="29" r="3.5" fill="white"/>
+      <circle cx="44" cy="29" r="3.5" fill="white"/>
+      <circle cx="28.5" cy="30" r="2" fill="#1a1a1a"/>
+      <circle cx="44.5" cy="30" r="2" fill="#1a1a1a"/>
+      <circle cx="29.2" cy="29.2" r="0.7" fill="white"/>
+      <circle cx="45.2" cy="29.2" r="0.7" fill="white"/>
+      <!-- Glasses frames -->
+      <circle cx="28" cy="29" r="5.5" stroke="#3a2a1a" stroke-width="1.5" fill="none"/>
+      <circle cx="44" cy="29" r="5.5" stroke="#3a2a1a" stroke-width="1.5" fill="none"/>
+      <!-- Glasses bridge -->
+      <path d="M33.5 29 L38.5 29" stroke="#3a2a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Glasses arms -->
+      <path d="M22.5 27 L18 25" stroke="#3a2a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M49.5 27 L54 25" stroke="#3a2a1a" stroke-width="1.5" stroke-linecap="round"/>
       <!-- Snout -->
-      <ellipse cx="32" cy="30" rx="5" ry="3.5" fill="#c8c8c8"/>
-      <ellipse cx="32" cy="30" rx="2.5" ry="1.8" fill="#2a2a2a"/>
-      <!-- Stripe on forehead -->
-      <rect x="30" y="15" width="4" height="7" rx="2" fill="#4a4a4a"/>
+      <ellipse cx="36" cy="35" rx="6" ry="4" fill="#c8c8c8"/>
+      <!-- Nose -->
+      <ellipse cx="36" cy="33.5" rx="2.8" ry="2" fill="#2a2a2a"/>
+      <!-- Forehead stripe -->
+      <rect x="34" y="17" width="4" height="8" rx="2" fill="#4a4a4a"/>
       <!-- Arms holding book -->
-      <path d="M18 42 Q14 46 16 52" stroke="#7a7a7a" stroke-width="4" stroke-linecap="round" fill="none"/>
-      <path d="M46 42 Q50 46 48 52" stroke="#7a7a7a" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <path d="M20 49 Q15 54 17 61" stroke="#7a7a7a" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <path d="M52 49 Q57 54 55 61" stroke="#7a7a7a" stroke-width="5" stroke-linecap="round" fill="none"/>
       <!-- Book -->
-      <rect x="18" y="50" width="28" height="10" rx="2" fill="var(--accent)"/>
-      <rect x="18" y="50" width="14" height="10" rx="2" fill="var(--accent-soft)"/>
-      <line x1="32" y1="50" x2="32" y2="60" stroke="var(--bg-card)" stroke-width="1.5"/>
-      <!-- Tail -->
-      <path d="M48 54 Q58 50 56 42 Q54 36 50 40" stroke="#7a7a7a" stroke-width="5" stroke-linecap="round" fill="none"/>
-      <path d="M48 54 Q58 50 56 42 Q54 36 50 40" stroke="#c8c8c8" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" fill="none"/>
+      <rect x="17" y="59" width="32" height="11" rx="3" fill="var(--accent)"/>
+      <rect x="17" y="59" width="16" height="11" rx="3" fill="var(--accent-soft)"/>
+      <line x1="33" y1="59" x2="33" y2="70" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+      <!-- Book pages edge -->
+      <rect x="44" y="60" width="3" height="9" rx="1" fill="#e8e0d0" opacity="0.6"/>
     </svg>
     <div>
-      <h1>Kelly's <em>Fandom</em><br>Bookshelf</h1>
-      <p class="sub">Every fic deserves to be remembered 🍃</p>
+      <h1 style="font-family:'Fraunces',Georgia,serif; font-size:28px; margin:0; line-height:1.1; font-weight:400; color:var(--ink);">Kelly's <em style="font-style:italic; color:var(--accent);">Fandom</em><br>Bookshelf</h1>
+      <p style="font-size:13px; color:var(--ink-soft); margin:0.3rem 0 0; letter-spacing:0.02em;">Every fic deserves to be remembered 🍃</p>
     </div>
   </div>
+</div>
+<div style="background: var(--bg-alt); border-bottom: 1px solid var(--line-soft); padding: 0.6rem 1.25rem; max-width:100%;">
+  <div style="max-width:720px; margin:0 auto; font-size:13px; color:var(--ink-soft); font-family:'Fraunces',serif; font-style:italic;" id="header-quote">✦ &nbsp;A reader lives a thousand lives…</div>
 </div>
 
 <div class="container">
@@ -640,11 +656,69 @@
   }
   function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
   function esc(s){ if(s==null) return ''; return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-  function toast(msg) {
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  const FINISHED_MESSAGES = [
+    "You finished it! I love you so much! 🥺💚",
+    "Look at you go! Another one done. I'm so proud of you! ✨",
+    "You absolute legend! Book finished! 💚",
+    "Well done my love! You smashed it! 🎉",
+    "Another one conquered! You're amazing, you know that? 💚",
+    "Finished! You're on fire! I love you! 🔥📚",
+    "Yes!! You did it! My brilliant reader! 💚✨",
+    "Book complete! You're incredible! So proud of you! 🥰",
+    "That's my girl! Another book down! I love you! 💚",
+    "Finished! You absolute bookworm queen! 👑📚"
+  ];
+
+  const READING_MESSAGES = [
+    "Ooh a new adventure begins! Enjoy every page! 📖✨",
+    "Happy reading! I hope it's everything you want it to be! 💚",
+    "A new book! How exciting! Dive in! 🌊📚",
+    "Go on then, get cosy and start reading! 🍃",
+    "New book unlocked! May it be wonderful! ✨",
+    "The story awaits! Happy reading my love! 💚📖",
+    "Off you go on your next adventure! Enjoy! 🌟",
+    "Fresh pages, fresh story! I hope you love it! 💚"
+  ];
+
+  const WANT_MESSAGES = [
+    "Ooh that does look interesting! Almost as interesting as Harry Potter… almost! ⚡📚",
+    "Adding to the list! Dumbledore would approve of a well-stocked reading list! 🧙",
+    "The Sorting Hat has sorted this straight onto your to-read shelf! ⚡",
+    "Into the want-to-read pile! Even Hermione would be impressed by your taste! 📚✨",
+    "Oooh good choice! Platform 9¾ of great books right there! 🚂⚡",
+    "Filed away for later! Harry, Ron and Hermione would want to read it too! 💚",
+    "On the list! Nearly as magical as a Hogwarts acceptance letter! ✉️⚡",
+    "Saved! Dobby is very happy you found such an interesting book! 🧦📚"
+  ];
+
+  const HEADER_QUOTES = [
+    "✦ &nbsp;A reader lives a thousand lives…",
+    "✦ &nbsp;So many books, so little time 📚",
+    "✦ &nbsp;One more chapter… 🍃",
+    "✦ &nbsp;Reading is dreaming with open eyes ✨",
+    "✦ &nbsp;Lost in the right direction 📖",
+    "✦ &nbsp;Every book is a new adventure 💚",
+    "✦ &nbsp;Currently: very much in my reading era 🌿"
+  ];
+
+  // Rotate header quote every 10 seconds
+  let quoteIdx = 0;
+  setInterval(() => {
+    quoteIdx = (quoteIdx + 1) % HEADER_QUOTES.length;
+    const el = document.getElementById('header-quote');
+    if (el) { el.style.opacity = '0'; setTimeout(() => { el.innerHTML = HEADER_QUOTES[quoteIdx]; el.style.opacity = '1'; }, 400); }
+  }, 10000);
+  const hq = document.getElementById('header-quote');
+  if (hq) hq.style.transition = 'opacity 0.4s';
+
+  function toast(msg, big, duration) {
     const t = document.getElementById('toast');
-    t.textContent = msg;
+    t.innerHTML = msg;
+    t.classList.toggle('big', !!big);
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2200);
+    setTimeout(() => t.classList.remove('show'), duration || (big ? 3500 : 2200));
   }
 
   // ---------- VIEW SWITCHING ----------
@@ -1154,13 +1228,31 @@
     };
     if (editingId) {
       const idx = books.findIndex(b => b.id === editingId);
-      if (idx >= 0) books[idx] = { ...books[idx], ...data };
-      toast('Saved');
+      if (idx >= 0) {
+        const prev = books[idx];
+        books[idx] = { ...prev, ...data };
+        // check if status changed
+        if (data.status === 'finished' && prev.status !== 'finished') {
+          setTimeout(() => toast(pick(FINISHED_MESSAGES), true), 400);
+        } else if (data.status === 'reading' && prev.status !== 'reading') {
+          setTimeout(() => toast(pick(READING_MESSAGES), true), 400);
+        } else {
+          toast('Saved ✓');
+        }
+      }
     } else {
       data.id = uid();
       data.dateAdded = new Date().toISOString().slice(0,10);
       books.push(data);
-      toast('Added to shelf');
+      if (data.status === 'finished') {
+        setTimeout(() => toast(pick(FINISHED_MESSAGES), true), 400);
+      } else if (data.status === 'reading') {
+        setTimeout(() => toast(pick(READING_MESSAGES), true), 400);
+      } else if (data.status === 'want') {
+        setTimeout(() => toast(pick(WANT_MESSAGES), true), 400);
+      } else {
+        toast('Added to shelf ✓');
+      }
     }
     saveBooks();
     resetForm();
