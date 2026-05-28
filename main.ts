@@ -102,6 +102,13 @@ async function searchAO3(query: string) {
   const res = await fetchAO3(searchUrl);
   const html = await res.text();
 
+  // Debug: return a snippet of the HTML so we can see what AO3 sends
+  return { debug: html.slice(0, 2000), results: [] };
+}
+
+  const res = await fetchAO3(searchUrl);
+  const html = await res.text();
+
   const results: object[] = [];
   const workBlocks = html.split(/<li[^>]*class="[^"]*work blurb[^"]*"[^>]*id="work_(\d+)"/);
 
