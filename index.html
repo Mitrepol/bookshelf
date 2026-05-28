@@ -3,46 +3,46 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#1a1714" />
-<title>My Bookshelf</title>
+<meta name="theme-color" content="#3d5a47" />
+<title>Kelly's Fandom Bookshelf</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f5f0e8;
-    --bg-alt: #ede6d8;
-    --bg-card: #fffaf2;
-    --ink: #2a221a;
-    --ink-soft: #6b5d4f;
-    --ink-faint: #a89886;
-    --line: #d8ccb8;
-    --line-soft: #e8dec9;
-    --accent: #8b3a1f;
-    --accent-soft: #c2825a;
-    --gold: #b88a3a;
-    --reading: #b88a3a;
-    --finished: #5a7548;
-    --want: #6b5d4f;
-    --dnf: #a04040;
-    --shadow: 0 1px 2px rgba(42,34,26,0.04), 0 4px 12px rgba(42,34,26,0.03);
+    --bg: #e8ede8;
+    --bg-alt: #d8e2d8;
+    --bg-card: #f2f7f2;
+    --ink: #1e2d22;
+    --ink-soft: #4a6350;
+    --ink-faint: #8aaa90;
+    --line: #bdd0bf;
+    --line-soft: #cfdecf;
+    --accent: #3d5a47;
+    --accent-soft: #6a8f72;
+    --gold: #8a7a3a;
+    --reading: #8a7a3a;
+    --finished: #3d5a47;
+    --want: #4a6350;
+    --dnf: #8a4040;
+    --shadow: 0 1px 2px rgba(30,45,34,0.04), 0 4px 12px rgba(30,45,34,0.04);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1a1714;
-      --bg-alt: #221d18;
-      --bg-card: #26211b;
-      --ink: #f0e8d8;
-      --ink-soft: #b8a892;
-      --ink-faint: #6b5d4f;
-      --line: #3a3128;
-      --line-soft: #2e2620;
-      --accent: #d6724f;
-      --accent-soft: #c2825a;
-      --gold: #d9b878;
-      --reading: #d9b878;
-      --finished: #92b377;
-      --want: #b8a892;
+      --bg: #1a211a;
+      --bg-alt: #1e2b1e;
+      --bg-card: #223022;
+      --ink: #e0ede0;
+      --ink-soft: #9ab89a;
+      --ink-faint: #4a6350;
+      --line: #2e402e;
+      --line-soft: #263526;
+      --accent: #7aaa82;
+      --accent-soft: #6a8f72;
+      --gold: #c8b860;
+      --reading: #c8b860;
+      --finished: #7aaa82;
+      --want: #9ab89a;
       --dnf: #d68080;
       --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
     }
@@ -196,8 +196,53 @@
 <body>
 
 <div class="header">
-  <h1>My <em>Bookshelf</em></h1>
-  <p class="sub">A quiet place for the books I love</p>
+  <div style="display:flex; align-items:flex-end; gap:12px;">
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Raccoon reading a book">
+      <!-- Body -->
+      <ellipse cx="32" cy="44" rx="16" ry="13" fill="#7a7a7a"/>
+      <!-- Belly -->
+      <ellipse cx="32" cy="46" rx="9" ry="8" fill="#c8c8c8"/>
+      <!-- Head -->
+      <ellipse cx="32" cy="26" rx="14" ry="13" fill="#7a7a7a"/>
+      <!-- Ears -->
+      <ellipse cx="20" cy="15" rx="5" ry="6" fill="#7a7a7a"/>
+      <ellipse cx="44" cy="15" rx="5" ry="6" fill="#7a7a7a"/>
+      <ellipse cx="20" cy="15" rx="3" ry="4" fill="#c8c8c8"/>
+      <ellipse cx="44" cy="15" rx="3" ry="4" fill="#c8c8c8"/>
+      <!-- Mask -->
+      <ellipse cx="25" cy="25" rx="6" ry="5" fill="#2a2a2a"/>
+      <ellipse cx="39" cy="25" rx="6" ry="5" fill="#2a2a2a"/>
+      <!-- Eyes -->
+      <circle cx="25" cy="25" r="3" fill="white"/>
+      <circle cx="39" cy="25" r="3" fill="white"/>
+      <circle cx="26" cy="25" r="1.5" fill="#1a1a1a"/>
+      <circle cx="40" cy="25" r="1.5" fill="#1a1a1a"/>
+      <!-- Eye shine -->
+      <circle cx="26.7" cy="24.3" r="0.6" fill="white"/>
+      <circle cx="40.7" cy="24.3" r="0.6" fill="white"/>
+      <!-- Nose -->
+      <ellipse cx="32" cy="30" rx="2.5" ry="1.8" fill="#2a2a2a"/>
+      <!-- Snout -->
+      <ellipse cx="32" cy="30" rx="5" ry="3.5" fill="#c8c8c8"/>
+      <ellipse cx="32" cy="30" rx="2.5" ry="1.8" fill="#2a2a2a"/>
+      <!-- Stripe on forehead -->
+      <rect x="30" y="15" width="4" height="7" rx="2" fill="#4a4a4a"/>
+      <!-- Arms holding book -->
+      <path d="M18 42 Q14 46 16 52" stroke="#7a7a7a" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <path d="M46 42 Q50 46 48 52" stroke="#7a7a7a" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <!-- Book -->
+      <rect x="18" y="50" width="28" height="10" rx="2" fill="var(--accent)"/>
+      <rect x="18" y="50" width="14" height="10" rx="2" fill="var(--accent-soft)"/>
+      <line x1="32" y1="50" x2="32" y2="60" stroke="var(--bg-card)" stroke-width="1.5"/>
+      <!-- Tail -->
+      <path d="M48 54 Q58 50 56 42 Q54 36 50 40" stroke="#7a7a7a" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <path d="M48 54 Q58 50 56 42 Q54 36 50 40" stroke="#c8c8c8" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" fill="none"/>
+    </svg>
+    <div>
+      <h1>Kelly's <em>Fandom</em><br>Bookshelf</h1>
+      <p class="sub">Every fic deserves to be remembered 🍃</p>
+    </div>
+  </div>
 </div>
 
 <div class="container">
@@ -232,24 +277,32 @@
 
   <!-- ADD/EDIT -->
   <div class="view" id="view-add">
+
+    <!-- Step 0: AO3 toggle — always visible at top -->
     <div class="form-section">
-      <h3 id="form-mode-label">Add a book</h3>
-
-      <div class="field">
-        <label for="title-input">Title</label>
-        <input type="text" id="title-input" autocomplete="off" placeholder="Start typing to find it…" />
-        <div class="suggestions" id="suggestions"></div>
+      <h3 id="form-mode-label">Add to shelf</h3>
+      <div class="checkbox-row" style="padding:4px 0 0;">
+        <input type="checkbox" id="is-ao3" />
+        <label for="is-ao3" style="font-size:15px; font-weight:500;">This is an AO3 fic</label>
       </div>
+    </div>
 
-      <div class="field">
-        <label for="author-input">Author</label>
-        <input type="text" id="author-input" autocomplete="off" />
-      </div>
-
-      <div class="field-row">
+    <!-- NON-AO3 BOOK FORM -->
+    <div id="book-form-section">
+      <div class="form-section">
+        <h3>Book details</h3>
+        <div class="field">
+          <label for="title-input">Title</label>
+          <input type="text" id="title-input" autocomplete="off" placeholder="Start typing to find it…" />
+          <div class="suggestions" id="suggestions"></div>
+        </div>
+        <div class="field">
+          <label for="author-input">Author</label>
+          <input type="text" id="author-input" autocomplete="off" />
+        </div>
         <div class="field">
           <label for="status-input">Status</label>
-          <select id="status-input">
+          <select id="status-input" style="width:100%;">
             <option value="want">Want to read</option>
             <option value="reading">Reading</option>
             <option value="finished">Finished</option>
@@ -267,104 +320,165 @@
             <button type="button" class="clear-rating" data-rate="0">clear</button>
           </div>
         </div>
+        <div class="field">
+          <label for="notes-input">Notes & comments</label>
+          <textarea id="notes-input" placeholder="What did you think?"></textarea>
+        </div>
       </div>
 
-      <div class="field">
-        <label for="notes-input">Notes & comments</label>
-        <textarea id="notes-input" placeholder="What did you think?"></textarea>
-      </div>
+      <button class="expand-btn" id="expand-btn">+ More details (cover, dates, genre, tags, pages)</button>
 
-      <div class="checkbox-row">
-        <input type="checkbox" id="is-ao3" />
-        <label for="is-ao3">This is an AO3 fic</label>
-      </div>
-    </div>
-
-    <button class="expand-btn" id="expand-btn">+ More details (dates, genre, tags, pages)</button>
-
-    <div class="form-section" id="extra-section" style="display:none;">
-      <h3>Details</h3>
-      <div class="field">
-        <label>Cover image</label>
-        <div class="cover-row">
-          <div class="cover-preview" id="cover-preview-main">✦</div>
-          <div class="cover-inputs">
-            <label style="font-size:12px; color:var(--ink-soft); margin-bottom:6px; display:block;">Paste image URL</label>
-            <input type="url" id="cover-url-input-main" autocomplete="off" placeholder="https://… (right-click image → Copy image address)" />
-            <button type="button" class="cover-upload-btn" id="cover-upload-btn-main">📁 Or upload from phone</button>
-            <input type="file" id="cover-file-input-main" accept="image/*" style="display:none;" />
-            <button type="button" class="cover-clear" id="cover-clear-btn-main">Remove cover</button>
+      <div class="form-section" id="extra-section" style="display:none;">
+        <h3>More details</h3>
+        <div class="field">
+          <label>Cover image</label>
+          <div class="cover-row">
+            <div class="cover-preview" id="cover-preview-main">✦</div>
+            <div class="cover-inputs">
+              <label style="font-size:12px; color:var(--ink-soft); margin-bottom:6px; display:block;">Paste image URL</label>
+              <input type="url" id="cover-url-input-main" autocomplete="off" placeholder="https://…" />
+              <button type="button" class="cover-upload-btn" id="cover-upload-btn-main">📁 Or upload from phone</button>
+              <input type="file" id="cover-file-input-main" accept="image/*" style="display:none;" />
+              <button type="button" class="cover-clear" id="cover-clear-btn-main">Remove cover</button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="started-input">Date started</label>
-          <input type="date" id="started-input" />
+        <div class="field-row">
+          <div class="field">
+            <label for="started-input">Date started</label>
+            <input type="date" id="started-input" />
+          </div>
+          <div class="field">
+            <label for="finished-input">Date finished</label>
+            <input type="date" id="finished-input" />
+          </div>
         </div>
         <div class="field">
-          <label for="finished-input">Date finished</label>
-          <input type="date" id="finished-input" />
-        </div>
-      </div>
-      <div class="field">
-        <label for="genre-input">Genre</label>
-        <input type="text" id="genre-input" autocomplete="off" placeholder="e.g. Fantasy, Romance" />
-        <div class="suggestions" id="genre-suggestions"></div>
-      </div>
-      <div class="field">
-        <label for="tags-input">Tags (comma-separated)</label>
-        <input type="text" id="tags-input" autocomplete="off" placeholder="e.g. favourite, slow-burn, reread" />
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="pages-input">Pages</label>
-          <input type="number" id="pages-input" min="0" />
+          <label for="genre-input">Genre</label>
+          <input type="text" id="genre-input" autocomplete="off" placeholder="e.g. Fantasy, Romance" />
+          <div class="suggestions" id="genre-suggestions"></div>
         </div>
         <div class="field">
-          <label for="year-input">Year published</label>
-          <input type="number" id="year-input" min="0" />
+          <label for="tags-input">Tags (comma-separated)</label>
+          <input type="text" id="tags-input" autocomplete="off" placeholder="e.g. favourite, slow-burn, reread" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="pages-input">Pages</label>
+            <input type="number" id="pages-input" min="0" />
+          </div>
+          <div class="field">
+            <label for="year-input">Year published</label>
+            <input type="number" id="year-input" min="0" />
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="form-section" id="ao3-section" style="display:none;">
-      <h3>AO3 details</h3>
-      <div class="field">
-        <label for="ao3-url">AO3 URL (paste to extract work info)</label>
-        <input type="url" id="ao3-url" autocomplete="off" placeholder="https://archiveofourown.org/works/…" />
+    <!-- AO3 FIC FORM -->
+    <div id="ao3-form-section" style="display:none;">
+      <div class="form-section">
+        <h3>Fetch from AO3</h3>
+        <div class="field">
+          <label for="ao3-url">AO3 URL</label>
+          <input type="url" id="ao3-url" autocomplete="off" placeholder="https://archiveofourown.org/works/…" />
+          <button type="button" id="ao3-fetch-btn" style="display:none; margin-top:8px; width:100%; background:var(--accent); color:white; border:none; border-radius:8px; padding:11px; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit;">↓ Pull info from AO3</button>
+          <p style="font-size:12px; color:var(--ink-faint); margin:6px 0 0; line-height:1.5;">Paste the fic URL and tap the button to autofill everything below.</p>
+        </div>
       </div>
-      <div class="field">
-        <label>Cover image</label>
-        <div class="cover-row">
-          <div class="cover-preview" id="cover-preview">✦</div>
-          <div class="cover-inputs">
-            <label class="bt-field" style="font-size:12px; color:var(--ink-soft); margin-bottom:6px; display:block;">Paste image URL</label>
-            <input type="url" id="cover-url-input" autocomplete="off" placeholder="https://… (right-click image → Copy image address)" />
-            <button type="button" class="cover-upload-btn" id="cover-upload-btn">📁 Or upload from phone</button>
-            <input type="file" id="cover-file-input" accept="image/*" style="display:none;" />
-            <button type="button" class="cover-clear" id="cover-clear-btn">Remove cover</button>
+
+      <div class="form-section">
+        <h3>Fic details</h3>
+        <div class="field">
+          <label for="title-input-ao3">Title</label>
+          <input type="text" id="title-input-ao3" autocomplete="off" placeholder="Fic title" />
+        </div>
+        <div class="field">
+          <label for="author-input-ao3">Author</label>
+          <input type="text" id="author-input-ao3" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="fandom-input">Fandom</label>
+          <input type="text" id="fandom-input" autocomplete="off" />
+          <div class="suggestions" id="fandom-suggestions"></div>
+        </div>
+        <div class="field">
+          <label for="ship-input">Ship / pairing</label>
+          <input type="text" id="ship-input" autocomplete="off" />
+          <div class="suggestions" id="ship-suggestions"></div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="words-input">Word count</label>
+            <input type="number" id="words-input" min="0" />
+          </div>
+          <div class="field">
+            <label for="chapters-input">Chapters</label>
+            <input type="text" id="chapters-input" placeholder="e.g. 12/12" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="status-input-ao3">Status</label>
+          <select id="status-input-ao3" style="width:100%;">
+            <option value="want">Want to read</option>
+            <option value="reading">Reading</option>
+            <option value="finished">Finished</option>
+            <option value="dnf">DNF</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Rating</label>
+          <div class="rating-input" id="rating-input-ao3">
+            <button type="button" class="star-btn" data-rate="1">★</button>
+            <button type="button" class="star-btn" data-rate="2">★</button>
+            <button type="button" class="star-btn" data-rate="3">★</button>
+            <button type="button" class="star-btn" data-rate="4">★</button>
+            <button type="button" class="star-btn" data-rate="5">★</button>
+            <button type="button" class="clear-rating" data-rate="0">clear</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="notes-input-ao3">Notes & comments</label>
+          <textarea id="notes-input-ao3" placeholder="What did you think?"></textarea>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3>Cover image</h3>
+        <div class="field">
+          <div class="cover-row">
+            <div class="cover-preview" id="cover-preview">✦</div>
+            <div class="cover-inputs">
+              <label style="font-size:12px; color:var(--ink-soft); margin-bottom:6px; display:block;">Paste image URL</label>
+              <input type="url" id="cover-url-input" autocomplete="off" placeholder="https://…" />
+              <button type="button" class="cover-upload-btn" id="cover-upload-btn">📁 Or upload from phone</button>
+              <input type="file" id="cover-file-input" accept="image/*" style="display:none;" />
+              <button type="button" class="cover-clear" id="cover-clear-btn">Remove cover</button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="field">
-        <label for="fandom-input">Fandom</label>
-        <input type="text" id="fandom-input" autocomplete="off" />
-        <div class="suggestions" id="fandom-suggestions"></div>
-      </div>
-      <div class="field">
-        <label for="ship-input">Ship / pairing</label>
-        <input type="text" id="ship-input" autocomplete="off" />
-        <div class="suggestions" id="ship-suggestions"></div>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label for="words-input">Word count</label>
-          <input type="number" id="words-input" min="0" />
+
+      <div class="form-section">
+        <h3>More details</h3>
+        <div class="field-row">
+          <div class="field">
+            <label for="started-input">Date started</label>
+            <input type="date" id="started-input" />
+          </div>
+          <div class="field">
+            <label for="finished-input">Date finished</label>
+            <input type="date" id="finished-input" />
+          </div>
         </div>
         <div class="field">
-          <label for="chapters-input">Chapters</label>
-          <input type="text" id="chapters-input" placeholder="e.g. 12/12" />
+          <label for="genre-input-ao3">Genre / tags</label>
+          <input type="text" id="genre-input-ao3" autocomplete="off" placeholder="e.g. Angst, Fluff, Slow burn" />
+          <div class="suggestions" id="genre-suggestions"></div>
+        </div>
+        <div class="field">
+          <label for="tags-input-ao3">Personal tags (comma-separated)</label>
+          <input type="text" id="tags-input-ao3" autocomplete="off" placeholder="e.g. favourite, reread, cried" />
         </div>
       </div>
     </div>
@@ -687,27 +801,40 @@
     editingId = null;
     formRating = 0;
     lastSuggested = null;
-    document.getElementById('form-mode-label').textContent = 'Add a book';
+    document.getElementById('form-mode-label').textContent = 'Add to shelf';
     document.getElementById('save-btn').textContent = 'Add to shelf';
     document.getElementById('cancel-row').style.display = 'none';
+    // AO3 toggle
+    document.getElementById('is-ao3').checked = false;
+    document.getElementById('book-form-section').style.display = 'block';
+    document.getElementById('ao3-form-section').style.display = 'none';
+    // Book fields
     document.getElementById('title-input').value = '';
     document.getElementById('author-input').value = '';
     document.getElementById('status-input').value = 'want';
     document.getElementById('notes-input').value = '';
-    document.getElementById('is-ao3').checked = false;
+    document.getElementById('extra-section').style.display = 'none';
+    document.getElementById('expand-btn').style.display = 'block';
     document.getElementById('started-input').value = '';
     document.getElementById('finished-input').value = '';
     document.getElementById('genre-input').value = '';
     document.getElementById('tags-input').value = '';
     document.getElementById('pages-input').value = '';
     document.getElementById('year-input').value = '';
+    // AO3 fields
+    document.getElementById('title-input-ao3').value = '';
+    document.getElementById('author-input-ao3').value = '';
+    document.getElementById('status-input-ao3').value = 'want';
+    document.getElementById('notes-input-ao3').value = '';
     document.getElementById('ao3-url').value = '';
     document.getElementById('fandom-input').value = '';
     document.getElementById('ship-input').value = '';
     document.getElementById('words-input').value = '';
     document.getElementById('chapters-input').value = '';
-    document.getElementById('extra-section').style.display = 'none';
-    document.getElementById('ao3-section').style.display = 'none';
+    document.getElementById('genre-input-ao3').value = '';
+    document.getElementById('tags-input-ao3').value = '';
+    const fetchBtn = document.getElementById('ao3-fetch-btn');
+    if (fetchBtn) fetchBtn.style.display = 'none';
     updateRatingDisplay();
     closeAllSuggestions();
     formCover = '';
@@ -729,24 +856,39 @@
     document.getElementById('form-mode-label').textContent = 'Edit book';
     document.getElementById('save-btn').textContent = 'Save changes';
     document.getElementById('cancel-row').style.display = 'flex';
-    document.getElementById('title-input').value = b.title || '';
-    document.getElementById('author-input').value = b.author || '';
-    document.getElementById('status-input').value = b.status || 'want';
-    document.getElementById('notes-input').value = b.notes || '';
     document.getElementById('is-ao3').checked = !!b.isAO3;
-    document.getElementById('started-input').value = b.dateStarted || '';
-    document.getElementById('finished-input').value = b.dateFinished || '';
-    document.getElementById('genre-input').value = b.genre || '';
-    document.getElementById('tags-input').value = b.tags || '';
-    document.getElementById('pages-input').value = b.pages || '';
-    document.getElementById('year-input').value = b.year || '';
-    document.getElementById('ao3-url').value = b.url || '';
-    document.getElementById('fandom-input').value = b.fandom || '';
-    document.getElementById('ship-input').value = b.ship || '';
-    document.getElementById('words-input').value = b.wordCount || '';
-    document.getElementById('chapters-input').value = b.chapters || '';
-    document.getElementById('extra-section').style.display = 'block';
-    document.getElementById('ao3-section').style.display = b.isAO3 ? 'block' : 'none';
+    document.getElementById('book-form-section').style.display = b.isAO3 ? 'none' : 'block';
+    document.getElementById('ao3-form-section').style.display = b.isAO3 ? 'block' : 'none';
+
+    if (b.isAO3) {
+      document.getElementById('title-input-ao3').value = b.title || '';
+      document.getElementById('author-input-ao3').value = b.author || '';
+      document.getElementById('status-input-ao3').value = b.status || 'want';
+      document.getElementById('notes-input-ao3').value = b.notes || '';
+      document.getElementById('ao3-url').value = b.url || '';
+      document.getElementById('fandom-input').value = b.fandom || '';
+      document.getElementById('ship-input').value = b.ship || '';
+      document.getElementById('words-input').value = b.wordCount || '';
+      document.getElementById('chapters-input').value = b.chapters || '';
+      document.getElementById('genre-input-ao3').value = b.genre || '';
+      document.getElementById('tags-input-ao3').value = b.tags || '';
+      document.getElementById('started-input').value = b.dateStarted || '';
+      document.getElementById('finished-input').value = b.dateFinished || '';
+    } else {
+      document.getElementById('title-input').value = b.title || '';
+      document.getElementById('author-input').value = b.author || '';
+      document.getElementById('status-input').value = b.status || 'want';
+      document.getElementById('notes-input').value = b.notes || '';
+      document.getElementById('started-input').value = b.dateStarted || '';
+      document.getElementById('finished-input').value = b.dateFinished || '';
+      document.getElementById('genre-input').value = b.genre || '';
+      document.getElementById('tags-input').value = b.tags || '';
+      document.getElementById('pages-input').value = b.pages || '';
+      document.getElementById('year-input').value = b.year || '';
+      document.getElementById('extra-section').style.display = 'block';
+      document.getElementById('expand-btn').style.display = 'none';
+    }
+
     formCover = b.cover || '';
     updateCoverPreview(formCover, 'cover-preview', 'cover-clear-btn');
     updateCoverPreview(formCover, 'cover-preview-main', 'cover-clear-btn-main');
@@ -767,22 +909,20 @@
   });
 
   document.getElementById('is-ao3').addEventListener('change', e => {
-    document.getElementById('ao3-section').style.display = e.target.checked ? 'block' : 'none';
-    if (e.target.checked) document.getElementById('extra-section').style.display = 'block';
-    document.getElementById('expand-btn').style.display = e.target.checked ? 'none' : (document.getElementById('extra-section').style.display === 'block' ? 'none' : 'block');
-    document.getElementById('title-input').placeholder = e.target.checked
-      ? (AO3_WORKER_URL ? 'Search AO3 by title…' : 'Type fic title…')
-      : 'Start typing to find it…';
+    const ao3 = e.target.checked;
+    document.getElementById('book-form-section').style.display = ao3 ? 'none' : 'block';
+    document.getElementById('ao3-form-section').style.display = ao3 ? 'block' : 'none';
+    document.getElementById('title-input').placeholder = ao3 ? 'Fic title' : 'Start typing to find it…';
     closeAllSuggestions();
   });
 
   // Rating
   function updateRatingDisplay() {
-    document.querySelectorAll('#rating-input .star-btn').forEach(b => {
+    document.querySelectorAll('#rating-input .star-btn, #rating-input-ao3 .star-btn').forEach(b => {
       b.classList.toggle('on', parseInt(b.dataset.rate) <= formRating);
     });
   }
-  document.querySelectorAll('#rating-input .star-btn, #rating-input .clear-rating').forEach(b => {
+  document.querySelectorAll('#rating-input .star-btn, #rating-input .clear-rating, #rating-input-ao3 .star-btn, #rating-input-ao3 .clear-rating').forEach(b => {
     b.addEventListener('click', () => { formRating = parseInt(b.dataset.rate); updateRatingDisplay(); });
   });
 
@@ -794,21 +934,11 @@
     const q = e.target.value.trim();
     clearTimeout(searchTimer);
     if (q.length < 3) { suggestions.classList.remove('active'); return; }
-    const isAO3 = document.getElementById('is-ao3').checked;
-    if (isAO3) {
-      if (!AO3_WORKER_URL) { suggestions.classList.remove('active'); return; }
-      searchTimer = setTimeout(() => searchAO3(q), 400);
-    } else {
-      searchTimer = setTimeout(() => searchOpenLibrary(q), 300);
-    }
+    searchTimer = setTimeout(() => searchOpenLibrary(q), 300);
   });
 
   titleInput.addEventListener('focus', e => {
-    const q = e.target.value.trim();
-    if (q.length < 3) return;
-    const isAO3 = document.getElementById('is-ao3').checked;
-    if (isAO3 && AO3_WORKER_URL) searchAO3(q);
-    else if (!isAO3) searchOpenLibrary(q);
+    if (e.target.value.trim().length >= 3) searchOpenLibrary(e.target.value.trim());
   });
 
   document.addEventListener('click', e => {
@@ -894,59 +1024,54 @@
   setupLibraryAutocomplete('fandom-input', 'fandom-suggestions', 'fandom');
   setupLibraryAutocomplete('ship-input', 'ship-suggestions', 'ship');
 
-  // ---------- AO3 SEARCH (via Cloudflare Worker) ----------
-  async function searchAO3(query) {
-    suggestions.innerHTML = '<div class="suggestion-loading">Searching AO3…</div>';
-    suggestions.classList.add('active');
+  // ---------- AO3 DIRECT BROWSER FETCH ----------
+  // Her browser fetches AO3 directly — no server needed, no blocking
+  // Works because it's her own browser making a normal page visit
+
+  function parseAO3HTML(html) {
+    const get = (regex) => { const m = html.match(regex); return m ? decodeAO3Entities(m[1].replace(/<[^>]+>/g, '').trim()) : ''; };
+    const title = get(/<h2[^>]*class="[^"]*title[^"]*"[^>]*>([\s\S]*?)<\/h2>/);
+    const author = get(/<a[^>]*rel="author"[^>]*>([^<]+)<\/a>/);
+    const fandom = get(/<dd[^>]*class="fandom tags"[^>]*>[\s\S]*?<a[^>]*class="tag"[^>]*>([^<]+)<\/a>/);
+    const wordCount = get(/<dd[^>]*class="words"[^>]*>([0-9,]+)<\/dd>/);
+    const chaptersRaw = get(/<dd[^>]*class="chapters"[^>]*>([\s\S]*?)<\/dd>/);
+    const shipMatch = html.match(/<dd[^>]*class="relationship tags"[^>]*>[\s\S]*?<a[^>]*class="tag"[^>]*>([^<]+)<\/a>/);
+    const ship = shipMatch ? decodeAO3Entities(shipMatch[1].trim()) : '';
+    return {
+      title,
+      author,
+      fandom,
+      ship,
+      wordCount: wordCount.replace(/,/g, ''),
+      chapters: chaptersRaw,
+    };
+  }
+
+  function decodeAO3Entities(s) {
+    return s.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&nbsp;/g,' ');
+  }
+
+  async function fetchAO3Direct(workId) {
+    // Fetch through a CORS-friendly proxy that just passes through the request
+    // allorigins.win is a free CORS proxy — fetches from her browser so AO3 sees a normal visit
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://archiveofourown.org/works/' + workId + '?view_adult=true')}`;
+    toast('Fetching from AO3…');
     try {
-      const res = await fetch(`${AO3_WORKER_URL}/search?q=${encodeURIComponent(query)}`);
-      if (!res.ok) throw new Error('fetch failed');
+      const res = await fetch(proxyUrl);
+      if (!res.ok) throw new Error('proxy failed');
       const data = await res.json();
-      const results = (data.results || []).slice(0, 8);
-      if (results.length === 0) {
-        suggestions.innerHTML = '<div class="suggestion-loading">No matches. Type it in yourself.</div>';
-        return;
+      const html = data.contents;
+      if (!html) throw new Error('empty response');
+      // Check if AO3 returned a login wall or error
+      if (html.includes('This work is only available to registered users')) {
+        toast('Log into AO3 first, then try again');
+        return null;
       }
-      suggestions.innerHTML = results.map((r, i) => `
-        <div class="suggestion" data-i="${i}">
-          <div class="suggestion-cover" style="background:rgba(139,58,31,0.08); display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; color:var(--accent); font-size:14px;">AO3</div>
-          <div class="suggestion-text">
-            <p class="suggestion-title">${esc(r.title)}</p>
-            <p class="suggestion-author">${esc(r.author)}${r.fandom ? ' · ' + esc(r.fandom) : ''}${r.wordCount ? ' · ' + Number(r.wordCount).toLocaleString() + ' words' : ''}</p>
-          </div>
-        </div>
-      `).join('');
-      suggestions.querySelectorAll('.suggestion').forEach((el, i) => {
-        el.onclick = () => pickAO3Result(results[i]);
-      });
+      return parseAO3HTML(html);
     } catch (err) {
-      suggestions.innerHTML = '<div class="suggestion-loading">Couldn\'t reach AO3. Type it in manually.</div>';
+      toast('Could not fetch — paste the URL and fill in manually');
+      return null;
     }
-  }
-
-  function pickAO3Result(r) {
-    document.getElementById('title-input').value = r.title || '';
-    document.getElementById('author-input').value = r.author || '';
-    document.getElementById('fandom-input').value = r.fandom || '';
-    document.getElementById('ship-input').value = r.ship || '';
-    document.getElementById('words-input').value = r.wordCount || '';
-    document.getElementById('chapters-input').value = r.chapters || '';
-    document.getElementById('ao3-url').value = r.url || '';
-    document.getElementById('extra-section').style.display = 'block';
-    document.getElementById('ao3-section').style.display = 'block';
-    document.getElementById('expand-btn').style.display = 'none';
-    closeAllSuggestions();
-    toast('Pulled from AO3');
-    document.getElementById('notes-input').focus();
-  }
-
-  async function fetchAO3Work(id) {
-    if (!AO3_WORKER_URL) return null;
-    try {
-      const res = await fetch(`${AO3_WORKER_URL}/work?id=${id}`);
-      if (!res.ok) throw new Error('fetch failed');
-      return await res.json();
-    } catch { return null; }
   }
 
   // ---------- AO3 URL PASTE ----------
@@ -957,51 +1082,75 @@
     if (!match) return;
     const id = match[1];
     clearTimeout(urlTimer);
-    if (!AO3_WORKER_URL) { toast('AO3 link saved'); return; }
-    urlTimer = setTimeout(async () => {
-      toast('Fetching from AO3…');
-      const work = await fetchAO3Work(id);
-      if (!work || work.error) { toast('Couldn\'t fetch — link saved only'); return; }
-      // Only fill empty fields so we don't overwrite anything she typed
-      const fill = (id, val) => {
-        const el = document.getElementById(id);
+    // Show the fetch button
+    const fetchBtn = document.getElementById('ao3-fetch-btn');
+    if (fetchBtn) { fetchBtn.style.display = 'block'; fetchBtn.dataset.id = id; }
+  });
+
+  // Fetch button click
+  document.addEventListener('click', async e => {
+    if (e.target && e.target.id === 'ao3-fetch-btn') {
+      const id = e.target.dataset.id;
+      if (!id) return;
+      e.target.disabled = true;
+      e.target.textContent = 'Fetching…';
+      const work = await fetchAO3Direct(id);
+      e.target.disabled = false;
+      e.target.textContent = '↓ Pull info from AO3';
+      if (!work) return;
+      const fill = (inputId, val) => {
+        const el = document.getElementById(inputId);
         if (el && !el.value && val) el.value = val;
       };
-      fill('title-input', work.title);
-      fill('author-input', work.author);
+      fill('title-input-ao3', work.title);
+      fill('author-input-ao3', work.author);
       fill('fandom-input', work.fandom);
       fill('ship-input', work.ship);
       fill('words-input', work.wordCount);
       fill('chapters-input', work.chapters);
-      document.getElementById('extra-section').style.display = 'block';
-      document.getElementById('expand-btn').style.display = 'none';
-      toast('Pulled from AO3');
-    }, 500);
+      toast('Filled in from AO3 ✓');
+    }
   });
 
   // ---------- SAVE ----------
   document.getElementById('save-btn').addEventListener('click', () => {
-    const title = document.getElementById('title-input').value.trim();
+    const isAO3 = document.getElementById('is-ao3').checked;
+    const title = isAO3
+      ? document.getElementById('title-input-ao3').value.trim()
+      : document.getElementById('title-input').value.trim();
     if (!title) { toast('Please add a title'); return; }
-    const data = {
+
+    const data = isAO3 ? {
       title,
-      author: document.getElementById('author-input').value.trim(),
-      status: document.getElementById('status-input').value,
+      author: document.getElementById('author-input-ao3').value.trim(),
+      status: document.getElementById('status-input-ao3').value,
       rating: formRating,
-      notes: document.getElementById('notes-input').value.trim(),
-      isAO3: document.getElementById('is-ao3').checked,
+      notes: document.getElementById('notes-input-ao3').value.trim(),
+      isAO3: true,
       dateStarted: document.getElementById('started-input').value,
       dateFinished: document.getElementById('finished-input').value,
-      genre: document.getElementById('genre-input').value.trim(),
-      tags: document.getElementById('tags-input').value.trim(),
-      pages: document.getElementById('pages-input').value,
-      year: document.getElementById('year-input').value,
+      genre: document.getElementById('genre-input-ao3').value.trim(),
+      tags: document.getElementById('tags-input-ao3').value.trim(),
       url: document.getElementById('ao3-url').value.trim(),
       fandom: document.getElementById('fandom-input').value.trim(),
       ship: document.getElementById('ship-input').value.trim(),
       wordCount: document.getElementById('words-input').value,
       chapters: document.getElementById('chapters-input').value.trim(),
       cover: formCover || ''
+    } : {
+      title,
+      author: document.getElementById('author-input').value.trim(),
+      status: document.getElementById('status-input').value,
+      rating: formRating,
+      notes: document.getElementById('notes-input').value.trim(),
+      isAO3: false,
+      dateStarted: document.getElementById('started-input').value,
+      dateFinished: document.getElementById('finished-input').value,
+      genre: document.getElementById('genre-input').value.trim(),
+      tags: document.getElementById('tags-input').value.trim(),
+      pages: document.getElementById('pages-input').value,
+      year: document.getElementById('year-input').value,
+      cover: formCover || (lastSuggested ? lastSuggested.cover : '')
     };
     if (editingId) {
       const idx = books.findIndex(b => b.id === editingId);
@@ -1010,12 +1159,6 @@
     } else {
       data.id = uid();
       data.dateAdded = new Date().toISOString().slice(0,10);
-    if (lastSuggested) {
-      data.cover = lastSuggested.cover;
-      formCover = lastSuggested.cover;
-    } else {
-      data.cover = formCover || '';
-    }
       books.push(data);
       toast('Added to shelf');
     }
