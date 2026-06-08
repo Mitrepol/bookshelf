@@ -736,6 +736,14 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+// Catch any JS errors and show them visibly for debugging
+window.addEventListener('error', function(e) {
+  const d = document.createElement('div');
+  d.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#c00;color:#fff;padding:10px;font-size:13px;z-index:9999;word-break:break-all;';
+  d.textContent = 'Error: ' + e.message + ' (line ' + e.lineno + ')';
+  document.body.appendChild(d);
+  setTimeout(() => d.remove(), 8000);
+});
 (function(){
   // ========================================================================
   // CONFIG — paste your Cloudflare Worker URL here once you've deployed it
@@ -1274,7 +1282,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const section = document.getElementById('streak-goal-section');
     if (!section) return;
     const thisYear = new Date().getFullYear();
-    const finishedThisYear = books.filter(b => b.status === 'finished' && (b.dateFinished||'').startsWith(thisYear+'')).length;
+    const finishedThisYear = books.filter(b => {
+      if (b.status !== 'finished') return false;
+      if (b.dateFinished) return b.dateFinished.startsWith(thisYear + '');
+      // No finish date — count it if it was added this year
+      return (b.dateAdded || '').startsWith(thisYear + '');
+    }).length;
     let html = '';
     if (streakData.count > 0) {
       html += `<div class="streak-banner">
@@ -2002,7 +2015,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const want = books.filter(b => b.status === 'want').length;
     const dnf = books.filter(b => b.status === 'dnf').length;
     const thisYear = new Date().getFullYear();
-    const finishedThisYear = finished.filter(b => (b.dateFinished||'').startsWith(thisYear+'')).length;
+    const finishedThisYear = finished.filter(b => {
+      if (b.dateFinished) return b.dateFinished.startsWith(thisYear + '');
+      return (b.dateAdded || '').startsWith(thisYear + '');
+    }).length;
     const totalPages = finished.reduce((s,b) => s + (parseInt(b.pages)||0), 0);
     const totalWords = finished.reduce((s,b) => s + (parseInt(b.wordCount)||0), 0);
     const rated = books.filter(b => b.rating);
