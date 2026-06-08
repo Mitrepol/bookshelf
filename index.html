@@ -198,62 +198,94 @@
   .toast.big { border-radius: 16px; padding: 14px 20px; font-size: 15px; line-height: 1.5; font-family: 'Fraunces', serif; font-style: italic; }
 
   .ornament { text-align: center; color: var(--ink-faint); font-family: 'Fraunces', serif; font-size: 20px; margin: 2rem 0 1rem; letter-spacing: 8px; }
+
+  /* Mood tags */
+  .mood-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .mood-btn { background: var(--bg-alt); border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 15px; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+  .mood-btn.selected { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .mood-pill { font-size: 15px; }
+
+  /* Reading streak */
+  .streak-banner { background: linear-gradient(135deg, #3d2b1f 0%, #5a3a28 100%); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow); }
+  .streak-flame { font-size: 32px; line-height: 1; }
+  .streak-text h3 { margin: 0; font-family: 'Fraunces', serif; font-size: 20px; color: #f0e0c0; font-weight: 400; }
+  .streak-text p { margin: 2px 0 0; font-size: 12px; color: #b09880; }
+
+  /* Reading goal */
+  .goal-card { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; box-shadow: var(--shadow); }
+  .goal-card h3 { margin: 0 0 8px; font-size: 13px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; font-family: 'Inter', sans-serif; }
+  .goal-bar-track { background: var(--bg-alt); border-radius: 999px; height: 10px; overflow: hidden; margin: 6px 0 4px; }
+  .goal-bar-fill { background: var(--accent); border-radius: 999px; height: 100%; transition: width 0.5s; }
+  .goal-nums { font-size: 12px; color: var(--ink-soft); display: flex; justify-content: space-between; }
+
+  /* Currently reading */
+  .reading-now { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; display: flex; gap: 10px; align-items: center; box-shadow: var(--shadow); }
+  .reading-now-cover { width: 40px; min-width: 40px; height: 60px; background: var(--bg-alt); border-radius: 5px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 18px; color: var(--ink-faint); }
+  .reading-now-cover img { width: 100%; height: 100%; object-fit: cover; }
+  .reading-now-body { flex: 1; min-width: 0; }
+  .reading-now-title { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 500; margin: 0; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .reading-now-author { font-size: 12px; color: var(--ink-soft); margin: 2px 0 0; }
+  .reading-now-btn { background: var(--accent); color: white; border: none; border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 500; cursor: pointer; font-family: inherit; white-space: nowrap; }
+
+  /* Custom shelves */
+  .shelf-chip { background: var(--bg-card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--ink-soft); cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
+  .shelf-chip.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .shelf-chip .shelf-x { font-size: 11px; opacity: 0.7; }
+
+  /* Favourite quote */
+  .quote-display { border-left: 3px solid var(--gold); padding: 6px 10px; margin-top: 8px; font-size: 13px; color: var(--ink-soft); font-style: italic; line-height: 1.5; }
+
+  /* Share rec card */
+  .share-rec-modal { position: fixed; inset: 0; background: rgba(46,32,24,0.7); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+  .share-rec-card { background: #3d2b1f; border-radius: 18px; padding: 24px; max-width: 320px; width: 100%; }
+  .share-rec-title { font-family: 'Fraunces', serif; font-size: 20px; color: #f0e0c0; margin: 0 0 4px; font-weight: 400; }
+  .share-rec-author { font-size: 13px; color: #b09880; margin: 0 0 12px; }
+  .share-rec-stars { color: #d4a85a; font-size: 16px; margin-bottom: 8px; }
+  .share-rec-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .share-rec-tag { background: rgba(240,224,192,0.15); color: #d4c8a8; font-size: 11px; padding: 3px 10px; border-radius: 999px; }
+  .share-rec-note { font-size: 13px; color: #c8b898; font-style: italic; line-height: 1.5; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
+  .share-rec-footer { font-size: 11px; color: #8a7a62; margin-top: 12px; text-align: right; }
+  .share-rec-actions { display: flex; gap: 8px; margin-top: 14px; }
+  .share-rec-actions button { flex: 1; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 500; }
+  .share-close { background: rgba(255,255,255,0.1); color: #f0e0c0; }
+  .share-copy { background: #d4a85a; color: #2e1808; }
+
+  /* Quick status menu */
+  .quick-menu { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-card); border-top: 1px solid var(--line); border-radius: 18px 18px 0 0; padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom)); z-index: 150; transform: translateY(100%); transition: transform 0.25s ease; }
+  .quick-menu.open { transform: translateY(0); }
+  .quick-menu-title { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 500; margin: 0 0 12px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .quick-menu-opts { display: flex; flex-direction: column; gap: 8px; }
+  .quick-menu-opt { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; font-size: 15px; color: var(--ink); cursor: pointer; font-family: inherit; text-align: left; display: flex; align-items: center; gap: 10px; }
+  .quick-menu-opt:hover { background: var(--line-soft); }
+  .quick-menu-overlay { position: fixed; inset: 0; z-index: 149; background: rgba(46,32,24,0.4); display: none; }
+  .quick-menu-overlay.open { display: block; }
+
+  /* Anniversary banner */
+  .anniversary-banner { background: linear-gradient(135deg, #5a3a28 0%, #3d2b1f 100%); border-radius: 14px; padding: 12px 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow); cursor: pointer; }
+  .anniversary-banner p { margin: 0; font-size: 13px; color: #f0e0c0; line-height: 1.5; }
+  .anniversary-banner strong { color: #d4a85a; }
+
+  /* Raccoon customiser */
+  .raccoon-customiser { position: fixed; inset: 0; background: rgba(46,32,24,0.7); z-index: 200; display: flex; align-items: flex-end; justify-content: center; }
+  .raccoon-customiser-panel { background: var(--bg-card); border-radius: 18px 18px 0 0; padding: 1.25rem; width: 100%; max-width: 480px; padding-bottom: calc(1.25rem + env(safe-area-inset-bottom)); }
+  .raccoon-customiser-panel h3 { margin: 0 0 1rem; font-family: 'Fraunces', serif; font-weight: 400; font-size: 20px; }
+  .customiser-section { margin-bottom: 1rem; }
+  .customiser-label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin-bottom: 8px; }
+  .customiser-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+  .customiser-opt { background: var(--bg-alt); border: 2px solid var(--line); border-radius: 10px; padding: 8px 14px; font-size: 14px; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+  .customiser-opt.active { border-color: var(--accent); background: var(--accent); color: white; }
+  .colour-opt { width: 36px; height: 36px; border-radius: 50%; border: 3px solid transparent; cursor: pointer; transition: all 0.15s; }
+  .colour-opt.active { border-color: var(--ink); transform: scale(1.15); }
 </style>
 </head>
 <body>
 
 <div class="header-banner">
   <div style="display:flex; align-items:center; gap:14px; max-width:720px; margin:0 auto;">
-    <!-- Raccoon head portrait with glasses and HP scar -->
-    <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Raccoon with glasses and Harry Potter scar">
-      <!-- Ears -->
-      <ellipse cx="18" cy="18" rx="10" ry="11" fill="#7a7a7a"/>
-      <ellipse cx="50" cy="18" rx="10" ry="11" fill="#7a7a7a"/>
-      <ellipse cx="18" cy="18" rx="6" ry="7" fill="#d0c8c0"/>
-      <ellipse cx="50" cy="18" rx="6" ry="7" fill="#d0c8c0"/>
-      <!-- Head -->
-      <ellipse cx="34" cy="40" rx="24" ry="22" fill="#8a8a8a"/>
-      <!-- Face lighter centre -->
-      <ellipse cx="34" cy="42" rx="16" ry="15" fill="#b0a8a0"/>
-      <!-- Dark mask patches around eyes -->
-      <ellipse cx="24" cy="36" rx="9" ry="8" fill="#2e2e2e"/>
-      <ellipse cx="44" cy="36" rx="9" ry="8" fill="#2e2e2e"/>
-      <!-- Eyes -->
-      <circle cx="24" cy="36" r="5" fill="#f8f8f8"/>
-      <circle cx="44" cy="36" r="5" fill="#f8f8f8"/>
-      <!-- Pupils — looking slightly down -->
-      <circle cx="24.5" cy="37" r="3" fill="#1a1a1a"/>
-      <circle cx="44.5" cy="37" r="3" fill="#1a1a1a"/>
-      <!-- Eye shine -->
-      <circle cx="25.5" cy="35.8" r="1.1" fill="white"/>
-      <circle cx="45.5" cy="35.8" r="1.1" fill="white"/>
-      <!-- Glasses — round wire frames -->
-      <circle cx="24" cy="36" r="7.5" stroke="#3a2a12" stroke-width="1.8" fill="none"/>
-      <circle cx="44" cy="36" r="7.5" stroke="#3a2a12" stroke-width="1.8" fill="none"/>
-      <!-- Bridge -->
-      <path d="M31.5 36 L36.5 36" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
-      <!-- Arms -->
-      <path d="M16.5 33 L10 30" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M51.5 33 L58 30" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
-      <!-- Snout -->
-      <ellipse cx="34" cy="47" rx="8" ry="5.5" fill="#c8bfb8"/>
-      <!-- Nose -->
-      <ellipse cx="34" cy="44.5" rx="3.5" ry="2.5" fill="#2e2e2e"/>
-      <!-- Forehead fur stripe -->
-      <ellipse cx="34" cy="23" rx="4" ry="5" fill="#5a5a5a"/>
-      <!-- Harry Potter lightning bolt scar ⚡ on forehead -->
-      <path d="M32 18 L35 23 L31 23 L34 29" stroke="#c8a028" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <!-- subtle scar glow -->
-      <path d="M32 18 L35 23 L31 23 L34 29" stroke="#ffd700" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>
-      <!-- Cheek tufts -->
-      <ellipse cx="12" cy="46" rx="5" ry="4" fill="#8a8a8a"/>
-      <ellipse cx="56" cy="46" rx="5" ry="4" fill="#8a8a8a"/>
-      <!-- Mouth — slight smile -->
-      <path d="M30 51 Q34 54 38 51" stroke="#5a5050" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-    </svg>
+    <div id="raccoon-container" style="cursor:pointer; flex-shrink:0;" title="Tap to customise your raccoon"></div>
     <div>
       <h1 style="font-family:'Fraunces',Georgia,serif; font-size:26px; margin:0; line-height:1.15; font-weight:400; color:#f0e0c0;">Kelly's <em style="font-style:italic; color:#d4a85a;">Fandom</em><br>Bookshelf</h1>
-      <p style="font-size:12px; color:#b09880; margin:0.3rem 0 0; letter-spacing:0.02em;">Every fic deserves to be remembered 🍃</p>
+      <p style="font-size:12px; color:#b09880; margin:0.3rem 0 0; letter-spacing:0.02em;">Every fic deserves to be remembered 🍃 <span style="opacity:0.6; font-size:11px;">(tap raccoon to customise)</span></p>
     </div>
   </div>
 </div>
@@ -265,10 +297,14 @@
 
   <!-- LIBRARY -->
   <div class="view active" id="view-library">
+    <div id="reading-now-section"></div>
+    <div id="streak-goal-section"></div>
     <div class="search-wrap">
       <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <input type="text" class="search" id="library-search" placeholder="Search your shelf…" />
     </div>
+    <!-- Shelf filter chips -->
+    <div class="filter-row" id="shelf-row" style="display:none;"></div>
     <div class="filter-row" id="filter-row">
       <button class="chip active" data-status="all">All</button>
       <button class="chip" data-status="reading">Reading</button>
@@ -340,6 +376,27 @@
           <label for="notes-input">Notes & comments</label>
           <textarea id="notes-input" placeholder="What did you think?"></textarea>
         </div>
+        <div class="field">
+          <label for="quote-input">Favourite quote</label>
+          <textarea id="quote-input" placeholder="A line you loved…" style="min-height:60px;"></textarea>
+        </div>
+        <div class="field">
+          <label>Mood tags</label>
+          <div class="mood-row" id="mood-row">
+            <button type="button" class="mood-btn" data-mood="😭">😭 Cried</button>
+            <button type="button" class="mood-btn" data-mood="🔥">🔥 Spicy</button>
+            <button type="button" class="mood-btn" data-mood="🥰">🥰 Soft</button>
+            <button type="button" class="mood-btn" data-mood="💔">💔 Hurt/comfort</button>
+            <button type="button" class="mood-btn" data-mood="⚡">⚡ Unputdownable</button>
+            <button type="button" class="mood-btn" data-mood="🌙">🌙 Dark</button>
+            <button type="button" class="mood-btn" data-mood="😂">😂 Funny</button>
+            <button type="button" class="mood-btn" data-mood="✨">✨ Magical</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="shelf-select">Add to shelf</label>
+          <select id="shelf-select" style="width:100%;"></select>
+        </div>
       </div>
 
       <button class="expand-btn" id="expand-btn">+ More details (cover, dates, genre, tags, pages)</button>
@@ -398,8 +455,7 @@
         <div class="field">
           <label for="ao3-url">AO3 URL</label>
           <input type="url" id="ao3-url" autocomplete="off" placeholder="https://archiveofourown.org/works/…" />
-          <button type="button" id="ao3-fetch-btn" style="display:none; margin-top:8px; width:100%; background:var(--accent); color:white; border:none; border-radius:8px; padding:11px; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit;">↓ Pull info from AO3</button>
-          <p style="font-size:12px; color:var(--ink-faint); margin:6px 0 0; line-height:1.5;">Paste the fic URL and tap the button to autofill everything below.</p>
+          <p style="font-size:12px; color:var(--ink-faint); margin:6px 0 0; line-height:1.5;">Paste the fic URL here to save a direct link to the fic.</p>
         </div>
       </div>
 
@@ -456,6 +512,27 @@
         <div class="field">
           <label for="notes-input-ao3">Notes & comments</label>
           <textarea id="notes-input-ao3" placeholder="What did you think?"></textarea>
+        </div>
+        <div class="field">
+          <label for="quote-input-ao3">Favourite quote</label>
+          <textarea id="quote-input-ao3" placeholder="A line you loved…" style="min-height:60px;"></textarea>
+        </div>
+        <div class="field">
+          <label>Mood tags</label>
+          <div class="mood-row" id="mood-row-ao3">
+            <button type="button" class="mood-btn" data-mood="😭">😭 Cried</button>
+            <button type="button" class="mood-btn" data-mood="🔥">🔥 Spicy</button>
+            <button type="button" class="mood-btn" data-mood="🥰">🥰 Soft</button>
+            <button type="button" class="mood-btn" data-mood="💔">💔 Hurt/comfort</button>
+            <button type="button" class="mood-btn" data-mood="⚡">⚡ Unputdownable</button>
+            <button type="button" class="mood-btn" data-mood="🌙">🌙 Dark</button>
+            <button type="button" class="mood-btn" data-mood="😂">😂 Funny</button>
+            <button type="button" class="mood-btn" data-mood="✨">✨ Magical</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="shelf-select-ao3">Add to shelf</label>
+          <select id="shelf-select-ao3" style="width:100%;"></select>
         </div>
       </div>
 
@@ -536,9 +613,91 @@
     <div class="ornament">❦</div>
   </div>
 
+  <!-- SHELVES VIEW -->
+  <div class="view" id="view-shelves">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+      <span style="font-size:13px; color:var(--ink-soft);">Your custom shelves</span>
+      <button class="btn" id="new-shelf-btn" style="width:auto; padding:8px 16px; font-size:13px;">+ New shelf</button>
+    </div>
+    <div id="shelves-list"></div>
+    <div class="ornament">❦</div>
+  </div>
+
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- SHARE REC MODAL -->
+<div class="share-rec-modal" id="share-modal" style="display:none;">
+  <div>
+    <div class="share-rec-card" id="share-card">
+      <div class="share-rec-title" id="sr-title"></div>
+      <div class="share-rec-author" id="sr-author"></div>
+      <div class="share-rec-stars" id="sr-stars"></div>
+      <div class="share-rec-tags" id="sr-tags"></div>
+      <div class="share-rec-note" id="sr-note" style="display:none;"></div>
+      <div class="share-rec-footer">Kelly's Fandom Bookshelf 🍃</div>
+    </div>
+    <div class="share-rec-actions">
+      <button class="share-close" id="share-close-btn">Close</button>
+      <button class="share-copy" id="share-copy-btn">Copy as text</button>
+    </div>
+  </div>
+</div>
+
+<!-- Quick status menu -->
+<div class="quick-menu-overlay" id="quick-overlay"></div>
+<div class="quick-menu" id="quick-menu">
+  <p class="quick-menu-title" id="quick-menu-title">Book title</p>
+  <div class="quick-menu-opts">
+    <button class="quick-menu-opt" data-qs="reading">📖 Start reading</button>
+    <button class="quick-menu-opt" data-qs="finished">✅ Mark as finished</button>
+    <button class="quick-menu-opt" data-qs="want">🔖 Move to want to read</button>
+    <button class="quick-menu-opt" data-qs="dnf">❌ DNF</button>
+    <button class="quick-menu-opt" data-qs="edit">✏️ Edit full details</button>
+    <button class="quick-menu-opt" data-qs="cancel" style="color:var(--ink-soft);">Cancel</button>
+  </div>
+</div>
+
+<!-- Raccoon customiser -->
+<div class="raccoon-customiser" id="raccoon-customiser" style="display:none;">
+  <div class="raccoon-customiser-panel">
+    <h3>Customise your raccoon 🦝</h3>
+    <div style="text-align:center; margin-bottom:1rem;" id="raccoon-preview-large"></div>
+    <div class="customiser-section">
+      <div class="customiser-label">Accessory</div>
+      <div class="customiser-opts" id="accessory-opts">
+        <button class="customiser-opt" data-acc="glasses">🕶 Glasses</button>
+        <button class="customiser-opt" data-acc="bow">🎀 Bow</button>
+        <button class="customiser-opt" data-acc="crown">👑 Crown</button>
+        <button class="customiser-opt" data-acc="hat">🎩 Hat</button>
+        <button class="customiser-opt" data-acc="flowers">🌸 Flowers</button>
+        <button class="customiser-opt" data-acc="none">✨ None</button>
+      </div>
+    </div>
+    <div class="customiser-section">
+      <div class="customiser-label">Fur colour</div>
+      <div class="customiser-opts" id="colour-opts">
+        <div class="colour-opt" data-col="grey" style="background:#8a8a8a;"></div>
+        <div class="colour-opt" data-col="brown" style="background:#8a5a3a;"></div>
+        <div class="colour-opt" data-col="black" style="background:#3a3a3a;"></div>
+        <div class="colour-opt" data-col="cream" style="background:#c8b89a;"></div>
+        <div class="colour-opt" data-col="ginger" style="background:#c87a3a;"></div>
+        <div class="colour-opt" data-col="purple" style="background:#7a5a9a;"></div>
+      </div>
+    </div>
+    <div class="customiser-section">
+      <div class="customiser-label">Expression</div>
+      <div class="customiser-opts" id="expression-opts">
+        <button class="customiser-opt" data-exp="happy">😊 Happy</button>
+        <button class="customiser-opt" data-exp="cool">😎 Cool</button>
+        <button class="customiser-opt" data-exp="sleepy">😴 Sleepy</button>
+        <button class="customiser-opt" data-exp="love">🥰 Lovey</button>
+      </div>
+    </div>
+    <button class="btn" id="raccoon-customiser-close" style="margin-top:0.5rem;">Save & close</button>
+  </div>
+</div>
 
 <nav class="tabs">
   <button class="tab active" data-view="library">
@@ -549,13 +708,17 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
     Add
   </button>
+  <button class="tab" data-view="shelves">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="4" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/><rect x="2" y="17" width="20" height="4" rx="1"/></svg>
+    Shelves
+  </button>
   <button class="tab" data-view="stats">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
     Stats
   </button>
   <button class="tab" data-view="backup">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-    Backup
+    More
   </button>
 </nav>
 
@@ -570,10 +733,20 @@
   // ========================================================================
 
   const STORAGE_KEY = 'bookshelf-v1';
+  const SHELVES_KEY = 'bookshelf-shelves-v1';
+  const STREAK_KEY = 'bookshelf-streak-v1';
+  const GOAL_KEY = 'bookshelf-goal-v1';
+  const RACCOON_KEY = 'bookshelf-raccoon-v1';
   let books = [];
+  let shelves = [];
+  let streakData = { lastDate: null, count: 0 };
+  let readingGoal = 0;
+  let currentShelfFilter = null;
+  let raccoonConfig = { accessory: 'glasses', colour: 'grey', expression: 'happy' };
   let editingId = null;
   let formRating = 0;
-  let formCover = ''; // base64 or URL
+  let formCover = '';
+  let formMoods = [];
 
   function updateCoverPreview(src, previewId, clearBtnId) {
     const preview = document.getElementById(previewId);
@@ -645,16 +818,245 @@
 
   // ---------- STORAGE ----------
   function loadBooks() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      books = raw ? JSON.parse(raw) : [];
-    } catch (e) { books = []; }
+    try { const r = localStorage.getItem(STORAGE_KEY); books = r ? JSON.parse(r) : []; } catch(e) { books = []; }
+    try { const r = localStorage.getItem(SHELVES_KEY); shelves = r ? JSON.parse(r) : []; } catch(e) { shelves = []; }
+    try { const r = localStorage.getItem(STREAK_KEY); streakData = r ? JSON.parse(r) : { lastDate: null, count: 0 }; } catch(e) { streakData = { lastDate: null, count: 0 }; }
+    try { readingGoal = parseInt(localStorage.getItem(GOAL_KEY)) || 0; } catch(e) { readingGoal = 0; }
+    try { const r = localStorage.getItem(RACCOON_KEY); if (r) raccoonConfig = JSON.parse(r); } catch(e) {}
   }
   function saveBooks() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(books)); }
-    catch (e) { toast('Could not save — storage full?'); }
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(books)); } catch(e) { toast('Could not save — storage full?'); }
   }
-  function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+  function saveShelves() {
+    try { localStorage.setItem(SHELVES_KEY, JSON.stringify(shelves)); } catch(e) {}
+  }
+  function saveStreak() {
+    try { localStorage.setItem(STREAK_KEY, JSON.stringify(streakData)); } catch(e) {}
+  }
+  function saveGoal() {
+    try { localStorage.setItem(GOAL_KEY, String(readingGoal)); } catch(e) {}
+  }
+  function saveRaccoon() {
+    try { localStorage.setItem(RACCOON_KEY, JSON.stringify(raccoonConfig)); } catch(e) {}
+  }
+
+  // ---------- RACCOON RENDERER ----------
+  const FUR_COLOURS = {
+    grey:   { main: '#8a8a8a', light: '#b0a8a0', dark: '#5a5a5a', cheek: '#8a8a8a' },
+    brown:  { main: '#8a5a3a', light: '#b88a6a', dark: '#5a3a20', cheek: '#8a5a3a' },
+    black:  { main: '#3a3a3a', light: '#6a6a6a', dark: '#1a1a1a', cheek: '#3a3a3a' },
+    cream:  { main: '#c8b89a', light: '#e0d0b8', dark: '#a09070', cheek: '#c8b89a' },
+    ginger: { main: '#c87a3a', light: '#e0a870', dark: '#9a5820', cheek: '#c87a3a' },
+    purple: { main: '#7a5a9a', light: '#a88ab8', dark: '#5a3a78', cheek: '#7a5a9a' },
+  };
+
+  function buildRaccoonSVG(size, cfg) {
+    const c = FUR_COLOURS[cfg.colour] || FUR_COLOURS.grey;
+    const s = size === 'large' ? 120 : 68;
+    const scale = s / 68;
+    const acc = cfg.accessory;
+    const exp = cfg.expression;
+
+    // mouth varies by expression
+    const mouths = {
+      happy:  `<path d="M30 51 Q34 54 38 51" stroke="#5a5050" stroke-width="1.5" stroke-linecap="round" fill="none"/>`,
+      cool:   `<path d="M30 52 L38 52" stroke="#5a5050" stroke-width="1.5" stroke-linecap="round"/>`,
+      sleepy: `<path d="M31 52 Q34 50 37 52" stroke="#5a5050" stroke-width="1.5" stroke-linecap="round" fill="none"/>`,
+      love:   `<path d="M30 50 Q34 55 38 50" stroke="#e07080" stroke-width="1.8" stroke-linecap="round" fill="none"/>`
+    };
+    const mouth = mouths[exp] || mouths.happy;
+
+    // eye extras by expression
+    const eyeExtras = exp === 'sleepy'
+      ? `<path d="M19 33 Q24 30 29 33" stroke="${c.dark}" stroke-width="1.5" fill="none"/><path d="M39 33 Q44 30 49 33" stroke="${c.dark}" stroke-width="1.5" fill="none"/>`
+      : exp === 'love'
+      ? `<text x="19.5" y="39" font-size="9" text-anchor="middle">♥</text><text x="39.5" y="39" font-size="9" text-anchor="middle">♥</text>`
+      : '';
+
+    // accessory SVG
+    const accessories = {
+      glasses: `
+        <circle cx="24" cy="36" r="7.5" stroke="#3a2a12" stroke-width="1.8" fill="none"/>
+        <circle cx="44" cy="36" r="7.5" stroke="#3a2a12" stroke-width="1.8" fill="none"/>
+        <path d="M31.5 36 L36.5 36" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M16.5 33 L10 30" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M51.5 33 L58 30" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M32 18 L35 23 L31 23 L34 29" stroke="#c8a028" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M32 18 L35 23 L31 23 L34 29" stroke="#ffd700" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>`,
+      bow: `
+        <path d="M22 12 Q26 8 30 12 Q26 16 22 12Z" fill="#e07898"/>
+        <path d="M38 12 Q42 8 46 12 Q42 16 38 12Z" fill="#e07898"/>
+        <circle cx="34" cy="12" r="3" fill="#f098b8"/>`,
+      crown: `
+        <path d="M18 16 L22 8 L27 14 L34 6 L41 14 L46 8 L50 16 Z" fill="#d4a82a" stroke="#a07820" stroke-width="1"/>
+        <circle cx="27" cy="14" r="2" fill="#e84040"/>
+        <circle cx="34" cy="8" r="2.5" fill="#4080e8"/>
+        <circle cx="41" cy="14" r="2" fill="#e84040"/>`,
+      hat: `
+        <ellipse cx="34" cy="18" rx="18" ry="4" fill="#2a2a2a"/>
+        <rect x="22" y="4" width="24" height="16" rx="3" fill="#2a2a2a"/>
+        <rect x="22" y="14" width="24" height="3" rx="1" fill="#d4a82a"/>`,
+      flowers: `
+        <circle cx="20" cy="14" r="4" fill="#f8d0e0"/>
+        <circle cx="20" cy="14" r="2" fill="#f8a0c0"/>
+        <circle cx="28" cy="10" r="3" fill="#e0f0d0"/>
+        <circle cx="28" cy="10" r="1.5" fill="#c0e0a0"/>
+        <circle cx="14" cy="20" r="3" fill="#f8e8c0"/>
+        <circle cx="14" cy="20" r="1.5" fill="#f8d080"/>`,
+      none: `
+        <path d="M32 18 L35 23 L31 23 L34 29" stroke="#c8a028" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M32 18 L35 23 L31 23 L34 29" stroke="#ffd700" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>`
+    };
+    const accSVG = accessories[acc] || accessories.none;
+
+    return `<svg width="${s}" height="${s}" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="18" cy="18" rx="10" ry="11" fill="${c.main}"/>
+      <ellipse cx="50" cy="18" rx="10" ry="11" fill="${c.main}"/>
+      <ellipse cx="18" cy="18" rx="6" ry="7" fill="${c.light}"/>
+      <ellipse cx="50" cy="18" rx="6" ry="7" fill="${c.light}"/>
+      <ellipse cx="34" cy="40" rx="24" ry="22" fill="${c.main}"/>
+      <ellipse cx="34" cy="42" rx="16" ry="15" fill="${c.light}"/>
+      <ellipse cx="24" cy="36" rx="9" ry="8" fill="#2e2e2e"/>
+      <ellipse cx="44" cy="36" rx="9" ry="8" fill="#2e2e2e"/>
+      ${exp !== 'sleepy' ? `
+        <circle cx="24" cy="36" r="5" fill="#f8f8f8"/>
+        <circle cx="44" cy="36" r="5" fill="#f8f8f8"/>
+        <circle cx="24.5" cy="37" r="3" fill="#1a1a1a"/>
+        <circle cx="44.5" cy="37" r="3" fill="#1a1a1a"/>
+        <circle cx="25.5" cy="35.8" r="1.1" fill="white"/>
+        <circle cx="45.5" cy="35.8" r="1.1" fill="white"/>
+      ` : `
+        <circle cx="24" cy="36" r="5" fill="#f8f8f8"/>
+        <circle cx="44" cy="36" r="5" fill="#f8f8f8"/>
+      `}
+      ${eyeExtras}
+      ${accSVG}
+      <ellipse cx="34" cy="47" rx="8" ry="5.5" fill="${c.light}"/>
+      <ellipse cx="34" cy="44.5" rx="3.5" ry="2.5" fill="#2e2e2e"/>
+      <ellipse cx="34" cy="23" rx="4" ry="5" fill="${c.dark}"/>
+      <ellipse cx="12" cy="46" rx="5" ry="4" fill="${c.cheek}"/>
+      <ellipse cx="56" cy="46" rx="5" ry="4" fill="${c.cheek}"/>
+      ${mouth}
+    </svg>`;
+  }
+
+  function renderRaccoon() {
+    const container = document.getElementById('raccoon-container');
+    if (container) container.innerHTML = buildRaccoonSVG('small', raccoonConfig);
+    const preview = document.getElementById('raccoon-preview-large');
+    if (preview) preview.innerHTML = buildRaccoonSVG('large', raccoonConfig);
+  }
+
+  // ---------- RACCOON CUSTOMISER ----------
+  document.getElementById('raccoon-container').addEventListener('click', () => {
+    document.getElementById('raccoon-customiser').style.display = 'flex';
+    renderRaccoon();
+    // Update active states
+    document.querySelectorAll('[data-acc]').forEach(el => el.classList.toggle('active', el.dataset.acc === raccoonConfig.accessory));
+    document.querySelectorAll('[data-col]').forEach(el => el.classList.toggle('active', el.dataset.col === raccoonConfig.colour));
+    document.querySelectorAll('[data-exp]').forEach(el => el.classList.toggle('active', el.dataset.exp === raccoonConfig.expression));
+  });
+
+  document.querySelectorAll('[data-acc]').forEach(el => {
+    el.addEventListener('click', () => {
+      raccoonConfig.accessory = el.dataset.acc;
+      document.querySelectorAll('[data-acc]').forEach(e => e.classList.toggle('active', e.dataset.acc === raccoonConfig.accessory));
+      renderRaccoon();
+    });
+  });
+
+  document.querySelectorAll('[data-col]').forEach(el => {
+    el.addEventListener('click', () => {
+      raccoonConfig.colour = el.dataset.col;
+      document.querySelectorAll('[data-col]').forEach(e => e.classList.toggle('active', e.dataset.col === raccoonConfig.colour));
+      renderRaccoon();
+    });
+  });
+
+  document.querySelectorAll('[data-exp]').forEach(el => {
+    el.addEventListener('click', () => {
+      raccoonConfig.expression = el.dataset.exp;
+      document.querySelectorAll('[data-exp]').forEach(e => e.classList.toggle('active', e.dataset.exp === raccoonConfig.expression));
+      renderRaccoon();
+    });
+  });
+
+  document.getElementById('raccoon-customiser-close').addEventListener('click', () => {
+    saveRaccoon();
+    renderRaccoon();
+    document.getElementById('raccoon-customiser').style.display = 'none';
+    toast('Raccoon saved 🦝');
+  });
+
+  // ---------- QUICK STATUS CHANGE ----------
+  let quickBookId = null;
+
+  function openQuickMenu(id) {
+    const b = books.find(x => x.id === id);
+    if (!b) return;
+    quickBookId = id;
+    document.getElementById('quick-menu-title').textContent = b.title;
+    document.getElementById('quick-menu').classList.add('open');
+    document.getElementById('quick-overlay').classList.add('open');
+  }
+
+  function closeQuickMenu() {
+    document.getElementById('quick-menu').classList.remove('open');
+    document.getElementById('quick-overlay').classList.remove('open');
+    quickBookId = null;
+  }
+
+  document.getElementById('quick-overlay').addEventListener('click', closeQuickMenu);
+
+  document.querySelectorAll('.quick-menu-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const action = btn.dataset.qs;
+      if (action === 'cancel') { closeQuickMenu(); return; }
+      if (action === 'edit') { closeQuickMenu(); editBook(quickBookId); return; }
+      const b = books.find(x => x.id === quickBookId);
+      if (!b) { closeQuickMenu(); return; }
+      const prev = b.status;
+      b.status = action;
+      if (action === 'reading' && !b.dateStarted) b.dateStarted = new Date().toISOString().slice(0,10);
+      if (action === 'finished' && !b.dateFinished) b.dateFinished = new Date().toISOString().slice(0,10);
+      saveBooks();
+      updateStreak();
+      closeQuickMenu();
+      renderLibrary();
+      if (action === 'finished' && prev !== 'finished') setTimeout(() => toast(pick(FINISHED_MESSAGES), true), 300);
+      else if (action === 'reading' && prev !== 'reading') setTimeout(() => toast(pick(READING_MESSAGES), true), 300);
+      else toast('Updated ✓');
+    });
+  });
+
+  // ---------- ANNIVERSARY REMINDERS ----------
+  function checkAnniversaries() {
+    const today = new Date().toISOString().slice(0,10); // YYYY-MM-DD
+    const todayMMDD = today.slice(5); // MM-DD
+    const thisYear = today.slice(0,4);
+    const anniversaries = books.filter(b => {
+      if (!b.dateFinished) return false;
+      const finishedMMDD = b.dateFinished.slice(5);
+      const finishedYear = b.dateFinished.slice(0,4);
+      return finishedMMDD === todayMMDD && finishedYear !== thisYear;
+    });
+    if (anniversaries.length === 0) return;
+    const section = document.getElementById('reading-now-section');
+    if (!section) return;
+    const existing = section.innerHTML;
+    const annHTML = anniversaries.map(b => {
+      const yearsAgo = parseInt(thisYear) - parseInt(b.dateFinished.slice(0,4));
+      return `<div class="anniversary-banner" onclick="document.getElementById('library-search').value='${b.title.replace(/'/g,'').slice(0,20)}'; document.getElementById('library-search').dispatchEvent(new Event('input'));">
+        <span style="font-size:24px;">🎂</span>
+        <p>
+          <strong>${yearsAgo === 1 ? '1 year ago today' : yearsAgo + ' years ago today'}</strong> you finished
+          <strong>${esc(b.title)}</strong>
+          ${b.rating ? ' · ' + '★'.repeat(b.rating) : ''}
+        </p>
+      </div>`;
+    }).join('');
+    section.innerHTML = annHTML + existing;
+  }
   function esc(s){ if(s==null) return ''; return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
@@ -728,9 +1130,8 @@
     document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === name));
     if (name === 'library') renderLibrary();
     if (name === 'stats') renderStats();
-    if (name === 'add' && !editingId) {
-      // make sure form is fresh
-    }
+    if (name === 'shelves') renderShelvesView();
+    if (name === 'add' && !editingId) { /* form is fresh */ }
     window.scrollTo(0, 0);
   }
 
@@ -738,10 +1139,159 @@
     t.addEventListener('click', () => switchView(t.dataset.view));
   });
 
+  // ---------- STREAK ----------
+  function updateStreak() {
+    const today = new Date().toISOString().slice(0,10);
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0,10);
+    if (streakData.lastDate === today) return; // already logged today
+    if (streakData.lastDate === yesterday) {
+      streakData.count++;
+    } else if (streakData.lastDate !== today) {
+      streakData.count = 1;
+    }
+    streakData.lastDate = today;
+    saveStreak();
+  }
+
+  function renderReadingNow() {
+    const section = document.getElementById('reading-now-section');
+    if (!section) return;
+    const reading = books.filter(b => b.status === 'reading');
+    if (reading.length === 0) { section.innerHTML = ''; return; }
+    section.innerHTML = `
+      <div style="font-size:12px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.08em; font-weight:500; margin-bottom:6px;">📖 Currently reading</div>
+      ${reading.map(b => {
+        const coverInitial = (b.title||'?').charAt(0).toUpperCase();
+        const coverHTML = b.cover ? `<img src="${esc(b.cover)}" alt="" onerror="this.parentElement.innerHTML='${esc(coverInitial)}'" />` : esc(coverInitial);
+        return `
+          <div class="reading-now">
+            <div class="reading-now-cover">${coverHTML}</div>
+            <div class="reading-now-body">
+              <p class="reading-now-title">${esc(b.title)}</p>
+              <p class="reading-now-author">${esc(b.author||'')}</p>
+            </div>
+            <button class="reading-now-btn finish-now-btn" data-id="${b.id}">Finished ✓</button>
+          </div>`;
+      }).join('')}
+    `;
+    section.querySelectorAll('.finish-now-btn').forEach(btn => {
+      btn.onclick = () => {
+        const b = books.find(x => x.id === btn.dataset.id);
+        if (!b) return;
+        b.status = 'finished';
+        b.dateFinished = new Date().toISOString().slice(0,10);
+        saveBooks();
+        updateStreak();
+        renderLibrary();
+        setTimeout(() => toast(pick(FINISHED_MESSAGES), true), 300);
+      };
+    });
+  }
+
+  function renderStreakGoal() {
+    const section = document.getElementById('streak-goal-section');
+    if (!section) return;
+    const thisYear = new Date().getFullYear();
+    const finishedThisYear = books.filter(b => b.status === 'finished' && (b.dateFinished||'').startsWith(thisYear+'')).length;
+    let html = '';
+    if (streakData.count > 0) {
+      html += `<div class="streak-banner">
+        <div class="streak-flame">🔥</div>
+        <div class="streak-text">
+          <h3>${streakData.count} day streak!</h3>
+          <p>Keep it up — you're on a roll</p>
+        </div>
+      </div>`;
+    }
+    if (readingGoal > 0) {
+      const pct = Math.min(100, Math.round(finishedThisYear / readingGoal * 100));
+      html += `<div class="goal-card">
+        <h3>Reading goal ${thisYear}</h3>
+        <div class="goal-bar-track"><div class="goal-bar-fill" style="width:${pct}%"></div></div>
+        <div class="goal-nums"><span>${finishedThisYear} of ${readingGoal} books</span><span>${pct}%</span></div>
+      </div>`;
+    } else {
+      html += `<div style="text-align:center; padding:8px 0 4px;">
+        <button id="set-goal-btn" style="background:transparent; border:1px dashed var(--line); border-radius:8px; padding:8px 16px; color:var(--ink-soft); font-size:13px; cursor:pointer; font-family:inherit;">🎯 Set a reading goal for ${thisYear}</button>
+      </div>`;
+    }
+    section.innerHTML = html;
+    const goalBtn = document.getElementById('set-goal-btn');
+    if (goalBtn) goalBtn.onclick = () => {
+      const n = parseInt(prompt('How many books do you want to read this year?'));
+      if (n > 0) { readingGoal = n; saveGoal(); renderStreakGoal(); }
+    };
+  }
+
+  // ---------- SHELVES ----------
+  function shelfSelectOptions(selectedId) {
+    return `<option value="">No shelf</option>` +
+      shelves.map(s => `<option value="${s.id}" ${s.id === selectedId ? 'selected' : ''}>${esc(s.name)}</option>`).join('');
+  }
+
+  function updateShelfSelects(shelfId) {
+    ['shelf-select','shelf-select-ao3'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = shelfSelectOptions(shelfId || '');
+    });
+  }
+
+  function renderShelvesView() {
+    const list = document.getElementById('shelves-list');
+    if (!list) return;
+    if (shelves.length === 0) {
+      list.innerHTML = `<div class="empty"><div class="empty-icon">❦</div><p>No shelves yet.</p><p style="color:var(--ink-faint); font-size:13px;">Create shelves like "Comfort reads", "Recommend to a friend", "Currently obsessed with"</p></div>`;
+      return;
+    }
+    list.innerHTML = shelves.map(s => {
+      const count = books.filter(b => b.shelfId === s.id).length;
+      return `<div class="book" style="margin-bottom:10px; cursor:pointer;" data-shelf-id="${s.id}">
+        <div class="book-cover" style="background:var(--accent); color:white; font-size:22px;">📚</div>
+        <div class="book-body">
+          <h3 class="book-title">${esc(s.name)}</h3>
+          <p class="book-author">${count} ${count === 1 ? 'book' : 'books'}</p>
+        </div>
+        <div class="book-actions">
+          <button class="icon-btn del-shelf" data-id="${s.id}" aria-label="Delete shelf">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+          </button>
+        </div>
+      </div>`;
+    }).join('');
+    list.querySelectorAll('[data-shelf-id]').forEach(el => {
+      el.onclick = (e) => {
+        if (e.target.closest('.del-shelf')) return;
+        currentShelfFilter = el.dataset.shelfId;
+        switchView('library');
+      };
+    });
+    list.querySelectorAll('.del-shelf').forEach(btn => {
+      btn.onclick = () => {
+        if (confirm('Delete this shelf? Books on it won\'t be deleted.')) {
+          shelves = shelves.filter(s => s.id !== btn.dataset.id);
+          books.forEach(b => { if (b.shelfId === btn.dataset.id) delete b.shelfId; });
+          saveShelves(); saveBooks(); renderShelvesView();
+        }
+      };
+    });
+  }
+
+  document.getElementById('new-shelf-btn').addEventListener('click', () => {
+    const name = prompt('Name your new shelf:');
+    if (!name || !name.trim()) return;
+    const shelf = { id: uid(), name: name.trim() };
+    shelves.push(shelf);
+    saveShelves();
+    renderShelvesView();
+    updateShelfSelects('');
+    toast('Shelf created ✓');
+  });
+
   // ---------- LIBRARY ----------
   function getFiltered() {
     let list = books.slice();
     if (filterStatus !== 'all') list = list.filter(b => b.status === filterStatus);
+    if (currentShelfFilter) list = list.filter(b => b.shelfId === currentShelfFilter);
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       list = list.filter(b => [b.title, b.author, b.fandom, b.ship, b.genre, b.tags, b.notes]
@@ -784,6 +1334,7 @@
     const coverHTML = b.cover
       ? `<img src="${esc(b.cover)}" alt="" onerror="this.parentElement.innerHTML='${esc(coverInitial)}'" />`
       : esc(coverInitial);
+    const moodDisplay = (b.moods||[]).map(m => `<span class="mood-pill">${m}</span>`).join('');
 
     return `
       <article class="book">
@@ -792,6 +1343,7 @@
           <h3 class="book-title">${esc(b.title)}</h3>
           <p class="book-author">${esc(b.author || 'Unknown author')}</p>
           ${b.rating ? `<div class="stars">${renderStars(b.rating)}</div>` : ''}
+          ${moodDisplay ? `<div style="margin-top:4px; display:flex; gap:3px; flex-wrap:wrap;">${moodDisplay}</div>` : ''}
           <div class="book-meta">
             <span class="status-pill ${b.status||'want'}">${statusLabel(b.status)}</span>
             ${b.isAO3 ? '<span class="ao3-pill">AO3</span>' : ''}
@@ -805,12 +1357,16 @@
           </div>
           ${dates.length ? `<div class="book-dates">${dates.join(' · ')}</div>` : ''}
           ${b.notes ? `<div class="book-notes">${esc(b.notes)}</div>` : ''}
+          ${b.quote ? `<div class="quote-display">"${esc(b.quote)}"</div>` : ''}
         </div>
         <div class="book-actions">
           ${b.url ? `
             <a href="${esc(b.url)}" target="_blank" rel="noopener" class="icon-btn" aria-label="Open online" title="Open online">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>` : ''}
+          <button class="icon-btn share-rec-btn" data-id="${b.id}" aria-label="Share rec" title="Share rec">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          </button>
           <button class="icon-btn edit-book" data-id="${b.id}" aria-label="Edit">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
           </button>
@@ -823,6 +1379,20 @@
   }
 
   function renderLibrary() {
+    renderReadingNow();
+    renderStreakGoal();
+    // Shelf filter chips
+    const shelfRow = document.getElementById('shelf-row');
+    if (shelfRow) {
+      if (shelves.length > 0) {
+        shelfRow.style.display = 'flex';
+        shelfRow.innerHTML = `<button class="shelf-chip ${!currentShelfFilter?'active':''}" data-shelf="">All shelves</button>` +
+          shelves.map(s => `<button class="shelf-chip ${currentShelfFilter===s.id?'active':''}" data-shelf="${s.id}">${esc(s.name)}</button>`).join('');
+        shelfRow.querySelectorAll('.shelf-chip').forEach(c => {
+          c.onclick = () => { currentShelfFilter = c.dataset.shelf || null; renderLibrary(); };
+        });
+      } else { shelfRow.style.display = 'none'; }
+    }
     const list = getFiltered();
     const total = books.length;
     document.getElementById('book-count').textContent =
@@ -842,6 +1412,17 @@
     wrap.innerHTML = list.map(bookCardHTML).join('');
     wrap.querySelectorAll('.edit-book').forEach(b => b.onclick = () => editBook(b.dataset.id));
     wrap.querySelectorAll('.del-book').forEach(b => b.onclick = () => deleteBook(b.dataset.id));
+    wrap.querySelectorAll('.share-rec-btn').forEach(b => b.onclick = () => showShareRec(b.dataset.id));
+    // Long press for quick status menu
+    wrap.querySelectorAll('article.book').forEach(card => {
+      let pressTimer;
+      card.addEventListener('pointerdown', () => {
+        pressTimer = setTimeout(() => openQuickMenu(card.querySelector('.edit-book').dataset.id), 500);
+      });
+      card.addEventListener('pointerup', () => clearTimeout(pressTimer));
+      card.addEventListener('pointerleave', () => clearTimeout(pressTimer));
+      card.addEventListener('pointermove', () => clearTimeout(pressTimer));
+    });
   }
 
   document.getElementById('library-search').addEventListener('input', e => {
@@ -874,6 +1455,41 @@
     }
   }
 
+  // ---------- SHARE REC ----------
+  function showShareRec(id) {
+    const b = books.find(x => x.id === id);
+    if (!b) return;
+    document.getElementById('sr-title').textContent = b.title;
+    document.getElementById('sr-author').textContent = b.author || '';
+    document.getElementById('sr-stars').textContent = b.rating ? '★'.repeat(b.rating) + '☆'.repeat(5-b.rating) : '';
+    const tags = [];
+    if (b.fandom) tags.push(b.fandom);
+    if (b.ship) tags.push(b.ship);
+    if (b.genre) tags.push(b.genre);
+    (b.moods||[]).forEach(m => tags.push(m));
+    document.getElementById('sr-tags').innerHTML = tags.map(t => `<span class="share-rec-tag">${esc(t)}</span>`).join('');
+    const noteEl = document.getElementById('sr-note');
+    if (b.quote) { noteEl.textContent = '"' + b.quote + '"'; noteEl.style.display = 'block'; }
+    else if (b.notes) { noteEl.textContent = b.notes; noteEl.style.display = 'block'; }
+    else { noteEl.style.display = 'none'; }
+    document.getElementById('share-modal').style.display = 'flex';
+    document.getElementById('share-copy-btn').dataset.id = id;
+  }
+
+  document.getElementById('share-close-btn').addEventListener('click', () => {
+    document.getElementById('share-modal').style.display = 'none';
+  });
+
+  document.getElementById('share-copy-btn').addEventListener('click', () => {
+    const b = books.find(x => x.id === document.getElementById('share-copy-btn').dataset.id);
+    if (!b) return;
+    const stars = b.rating ? '★'.repeat(b.rating) + '☆'.repeat(5-b.rating) : '';
+    const tags = [b.fandom, b.ship, b.genre].filter(Boolean).join(' · ');
+    const note = b.quote ? `"${b.quote}"` : b.notes || '';
+    const text = `📚 ${b.title}${b.author ? ' by ' + b.author : ''}\n${stars}${tags ? '\n' + tags : ''}${note ? '\n\n' + note : ''}\n\n— Kelly's Fandom Bookshelf 🍃`;
+    navigator.clipboard.writeText(text).then(() => toast('Copied!')).catch(() => toast('Copy failed'));
+  });
+
   // ---------- FORM ----------
   function resetForm() {
     editingId = null;
@@ -899,6 +1515,12 @@
     document.getElementById('tags-input').value = '';
     document.getElementById('pages-input').value = '';
     document.getElementById('year-input').value = '';
+    // Moods and quote
+    formMoods = [];
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+    const qi = document.getElementById('quote-input'); if (qi) qi.value = '';
+    const qia = document.getElementById('quote-input-ao3'); if (qia) qia.value = '';
+    updateShelfSelects('');
     // AO3 fields
     document.getElementById('title-input-ao3').value = '';
     document.getElementById('author-input-ao3').value = '';
@@ -968,10 +1590,20 @@
     }
 
     formCover = b.cover || '';
+    formMoods = b.moods || [];
     updateCoverPreview(formCover, 'cover-preview', 'cover-clear-btn');
     updateCoverPreview(formCover, 'cover-preview-main', 'cover-clear-btn-main');
     setupCoverHandlers('cover-url-input', 'cover-upload-btn', 'cover-file-input', 'cover-preview', 'cover-clear-btn', true);
     setupCoverHandlers('cover-url-input-main', 'cover-upload-btn-main', 'cover-file-input-main', 'cover-preview-main', 'cover-clear-btn-main', false);
+    // Moods
+    document.querySelectorAll('.mood-btn').forEach(btn => {
+      btn.classList.toggle('selected', formMoods.includes(btn.dataset.mood));
+    });
+    // Quote
+    const qf = b.isAO3 ? 'quote-input-ao3' : 'quote-input';
+    const qel = document.getElementById(qf); if (qel) qel.value = b.quote || '';
+    // Shelf
+    updateShelfSelects(b.shelfId || '');
     updateRatingDisplay();
     switchView('add');
   }
@@ -992,6 +1624,19 @@
     document.getElementById('ao3-form-section').style.display = ao3 ? 'block' : 'none';
     document.getElementById('title-input').placeholder = ao3 ? 'Fic title' : 'Start typing to find it…';
     closeAllSuggestions();
+  });
+
+  // Mood tags
+  document.addEventListener('click', e => {
+    if (e.target.classList.contains('mood-btn')) {
+      const mood = e.target.dataset.mood;
+      if (formMoods.includes(mood)) {
+        formMoods = formMoods.filter(m => m !== mood);
+      } else {
+        formMoods.push(mood);
+      }
+      document.querySelectorAll(`.mood-btn[data-mood="${mood}"]`).forEach(b => b.classList.toggle('selected', formMoods.includes(mood)));
+    }
   });
 
   // Rating
@@ -1102,53 +1747,41 @@
   setupLibraryAutocomplete('fandom-input', 'fandom-suggestions', 'fandom');
   setupLibraryAutocomplete('ship-input', 'ship-suggestions', 'ship');
 
-  // ---------- AO3 DIRECT BROWSER FETCH ----------
-  // Her browser fetches AO3 directly — no server needed, no blocking
-  // Works because it's her own browser making a normal page visit
+  // ---------- AO3 BOOKMARKLET RECEIVER ----------
+  // When she taps the bookmarklet on an AO3 page, it redirects here with
+  // the fic data encoded in the URL as ?ao3=<base64 JSON>
+  // We read it on page load and pre-fill the form
 
-  function parseAO3HTML(html) {
-    const get = (regex) => { const m = html.match(regex); return m ? decodeAO3Entities(m[1].replace(/<[^>]+>/g, '').trim()) : ''; };
-    const title = get(/<h2[^>]*class="[^"]*title[^"]*"[^>]*>([\s\S]*?)<\/h2>/);
-    const author = get(/<a[^>]*rel="author"[^>]*>([^<]+)<\/a>/);
-    const fandom = get(/<dd[^>]*class="fandom tags"[^>]*>[\s\S]*?<a[^>]*class="tag"[^>]*>([^<]+)<\/a>/);
-    const wordCount = get(/<dd[^>]*class="words"[^>]*>([0-9,]+)<\/dd>/);
-    const chaptersRaw = get(/<dd[^>]*class="chapters"[^>]*>([\s\S]*?)<\/dd>/);
-    const shipMatch = html.match(/<dd[^>]*class="relationship tags"[^>]*>[\s\S]*?<a[^>]*class="tag"[^>]*>([^<]+)<\/a>/);
-    const ship = shipMatch ? decodeAO3Entities(shipMatch[1].trim()) : '';
-    return {
-      title,
-      author,
-      fandom,
-      ship,
-      wordCount: wordCount.replace(/,/g, ''),
-      chapters: chaptersRaw,
-    };
-  }
-
-  function decodeAO3Entities(s) {
-    return s.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&nbsp;/g,' ');
-  }
-
-  async function fetchAO3Direct(workId) {
-    // Fetch through a CORS-friendly proxy that just passes through the request
-    // allorigins.win is a free CORS proxy — fetches from her browser so AO3 sees a normal visit
-    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://archiveofourown.org/works/' + workId + '?view_adult=true')}`;
-    toast('Fetching from AO3…');
+  function receiveBookmarkletData() {
+    const params = new URLSearchParams(window.location.search);
+    const raw = params.get('ao3');
+    if (!raw) return;
+    // Clean the URL so reloading doesn't re-trigger
+    window.history.replaceState({}, '', window.location.pathname);
     try {
-      const res = await fetch(proxyUrl);
-      if (!res.ok) throw new Error('proxy failed');
-      const data = await res.json();
-      const html = data.contents;
-      if (!html) throw new Error('empty response');
-      // Check if AO3 returned a login wall or error
-      if (html.includes('This work is only available to registered users')) {
-        toast('Log into AO3 first, then try again');
-        return null;
+      const work = JSON.parse(atob(raw));
+      // Switch to AO3 form
+      document.getElementById('is-ao3').checked = true;
+      document.getElementById('book-form-section').style.display = 'none';
+      document.getElementById('ao3-form-section').style.display = 'block';
+      switchView('add');
+      // Fill fields
+      const fill = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+      fill('title-input-ao3', work.title);
+      fill('author-input-ao3', work.author);
+      fill('fandom-input', work.fandom);
+      fill('ship-input', work.ship);
+      fill('words-input', work.wordCount);
+      fill('chapters-input', work.chapters);
+      fill('ao3-url', work.url);
+      const fetchBtn = document.getElementById('ao3-fetch-btn');
+      if (fetchBtn && work.url) {
+        const m = work.url.match(/works\/(\d+)/);
+        if (m) { fetchBtn.style.display = 'block'; fetchBtn.dataset.id = m[1]; }
       }
-      return parseAO3HTML(html);
-    } catch (err) {
-      toast('Could not fetch — paste the URL and fill in manually');
-      return null;
+      toast('Fic imported from AO3 ✓', true);
+    } catch(e) {
+      toast('Could not read bookmarklet data');
     }
   }
 
@@ -1157,36 +1790,16 @@
   document.getElementById('ao3-url').addEventListener('input', e => {
     const url = e.target.value.trim();
     const match = url.match(/archiveofourown\.org\/works\/(\d+)/);
-    if (!match) return;
-    const id = match[1];
-    clearTimeout(urlTimer);
-    // Show the fetch button
     const fetchBtn = document.getElementById('ao3-fetch-btn');
-    if (fetchBtn) { fetchBtn.style.display = 'block'; fetchBtn.dataset.id = id; }
+    if (!match) { if (fetchBtn) fetchBtn.style.display = 'none'; return; }
+    if (fetchBtn) { fetchBtn.style.display = 'block'; fetchBtn.dataset.id = match[1]; }
   });
 
-  // Fetch button click
+  // Fetch button — explains bookmarklet since proxies are all blocked
   document.addEventListener('click', async e => {
     if (e.target && e.target.id === 'ao3-fetch-btn') {
-      const id = e.target.dataset.id;
-      if (!id) return;
-      e.target.disabled = true;
-      e.target.textContent = 'Fetching…';
-      const work = await fetchAO3Direct(id);
-      e.target.disabled = false;
-      e.target.textContent = '↓ Pull info from AO3';
-      if (!work) return;
-      const fill = (inputId, val) => {
-        const el = document.getElementById(inputId);
-        if (el && !el.value && val) el.value = val;
-      };
-      fill('title-input-ao3', work.title);
-      fill('author-input-ao3', work.author);
-      fill('fandom-input', work.fandom);
-      fill('ship-input', work.ship);
-      fill('words-input', work.wordCount);
-      fill('chapters-input', work.chapters);
-      toast('Filled in from AO3 ✓');
+      // Show the bookmarklet instructions in a toast
+      toast('Use the bookmarklet while on AO3 to autofill — see Backup tab for setup', true, 5000);
     }
   });
 
@@ -1214,7 +1827,10 @@
       ship: document.getElementById('ship-input').value.trim(),
       wordCount: document.getElementById('words-input').value,
       chapters: document.getElementById('chapters-input').value.trim(),
-      cover: formCover || ''
+      cover: formCover || '',
+      moods: formMoods.slice(),
+      quote: document.getElementById('quote-input-ao3').value.trim(),
+      shelfId: document.getElementById('shelf-select-ao3').value || undefined
     } : {
       title,
       author: document.getElementById('author-input').value.trim(),
@@ -1228,7 +1844,10 @@
       tags: document.getElementById('tags-input').value.trim(),
       pages: document.getElementById('pages-input').value,
       year: document.getElementById('year-input').value,
-      cover: formCover || (lastSuggested ? lastSuggested.cover : '')
+      cover: formCover || (lastSuggested ? lastSuggested.cover : ''),
+      moods: formMoods.slice(),
+      quote: document.getElementById('quote-input').value.trim(),
+      shelfId: document.getElementById('shelf-select').value || undefined
     };
     if (editingId) {
       const idx = books.findIndex(b => b.id === editingId);
@@ -1249,8 +1868,10 @@
       data.dateAdded = new Date().toISOString().slice(0,10);
       books.push(data);
       if (data.status === 'finished') {
+        updateStreak();
         setTimeout(() => toast(pick(FINISHED_MESSAGES), true), 400);
       } else if (data.status === 'reading') {
+        updateStreak();
         setTimeout(() => toast(pick(READING_MESSAGES), true), 400);
       } else if (data.status === 'want') {
         setTimeout(() => toast(pick(WANT_MESSAGES), true), 400);
@@ -1372,9 +1993,12 @@
   // ---------- INIT ----------
   loadBooks();
   resetForm();
+  updateShelfSelects('');
+  renderRaccoon();
   renderLibrary();
+  checkAnniversaries();
+  receiveBookmarkletData();
 })();
 </script>
 </body>
 </html>
-
