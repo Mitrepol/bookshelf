@@ -237,6 +237,7 @@
 
   /* Share rec card */
   .share-rec-modal { position: fixed; inset: 0; background: rgba(46,32,24,0.7); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+  .share-rec-modal.hidden { display: none !important; }
   .share-rec-card { background: #3d2b1f; border-radius: 18px; padding: 24px; max-width: 320px; width: 100%; }
   .share-rec-title { font-family: 'Fraunces', serif; font-size: 20px; color: #f0e0c0; margin: 0 0 4px; font-weight: 400; }
   .share-rec-author { font-size: 13px; color: #b09880; margin: 0 0 12px; }
@@ -594,14 +595,22 @@
 
   <!-- BACKUP -->
   <div class="view" id="view-backup">
-    <p class="backup-text">Your shelf lives in this browser. To keep it safe, export now and then — you'll get a small file you can save anywhere.</p>
+    <div id="backup-nudge"></div>
+    <p class="backup-text">Your shelf is automatically snapshotted every time you save a book — a silent second copy always kept in reserve. Export now and then for a file you can keep anywhere.</p>
     <div class="btn-row">
       <button class="btn btn-secondary" id="export-btn">Export backup</button>
       <button class="btn btn-secondary" id="import-btn">Import backup</button>
     </div>
     <input type="file" id="import-file" accept="application/json" style="display:none;" />
 
-    <div class="tip-box">
+    <div class="section-h" style="margin-top:1.25rem;">Emergency restore</div>
+    <p class="backup-text" style="margin-bottom:0.75rem;">If something goes wrong, restore from the last automatic snapshot taken the moment you saved a book.</p>
+    <div id="snapshot-info" style="font-size:13px; color:var(--ink-soft); margin-bottom:8px;"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" id="restore-snapshot-btn">Restore from snapshot</button>
+    </div>
+
+    <div class="tip-box" style="margin-top:1rem;">
       <strong>Add to home screen:</strong> tap the menu in Chrome (three dots) → "Add to Home screen". The app will open in its own window like any other app, with no browser bars.
     </div>
 
@@ -615,9 +624,12 @@
 
   <!-- SHELVES VIEW -->
   <div class="view" id="view-shelves">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-      <span style="font-size:13px; color:var(--ink-soft);">Your custom shelves</span>
-      <button class="btn" id="new-shelf-btn" style="width:auto; padding:8px 16px; font-size:13px;">+ New shelf</button>
+    <div class="form-section">
+      <h3>New shelf</h3>
+      <div class="field" style="display:flex; gap:8px; margin-bottom:0;">
+        <input type="text" id="new-shelf-input" placeholder="e.g. Comfort reads, Favourites…" style="flex:1;" />
+        <button class="btn" id="new-shelf-btn" style="width:auto; padding:10px 16px; font-size:14px; flex-shrink:0;">Add</button>
+      </div>
     </div>
     <div id="shelves-list"></div>
     <div class="ornament">❦</div>
@@ -628,7 +640,7 @@
 <div class="toast" id="toast"></div>
 
 <!-- SHARE REC MODAL -->
-<div class="share-rec-modal" id="share-modal" style="display:none;">
+<div class="share-rec-modal hidden" id="share-modal">
   <div>
     <div class="share-rec-card" id="share-card">
       <div class="share-rec-title" id="sr-title"></div>
@@ -738,6 +750,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const STREAK_KEY = 'bookshelf-streak-v1';
   const GOAL_KEY = 'bookshelf-goal-v1';
   const RACCOON_KEY = 'bookshelf-raccoon-v1';
+  const SNAPSHOT_KEY = 'bookshelf-snapshot-v1';
+  const LAST_EXPORT_KEY = 'bookshelf-last-export-v1';
   let books = [];
   let shelves = [];
   let streakData = { lastDate: null, count: 0 };
@@ -748,6 +762,11 @@ document.addEventListener('DOMContentLoaded', function() {
   let formRating = 0;
   let formCover = '';
   let formMoods = [];
+
+  // Core utilities — defined first so everything below can use them
+  function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+  function esc(s){ if(s==null) return ''; return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
   function updateCoverPreview(src, previewId, clearBtnId) {
     const preview = document.getElementById(previewId);
@@ -826,7 +845,22 @@ document.addEventListener('DOMContentLoaded', function() {
     try { const r = localStorage.getItem(RACCOON_KEY); if (r) raccoonConfig = JSON.parse(r); } catch(e) {}
   }
   function saveBooks() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(books)); } catch(e) { toast('Could not save — storage full?'); }
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(books));
+      // Silent rolling snapshot — always a recent second copy
+      const snapshot = { books, savedAt: new Date().toISOString() };
+      localStorage.setItem(SNAPSHOT_KEY, JSON.stringify(snapshot));
+    } catch(e) { toast('Could not save — storage full?'); }
+  }
+  function getLastExportDays() {
+    try {
+      const d = localStorage.getItem(LAST_EXPORT_KEY);
+      if (!d) return 999;
+      return Math.floor((Date.now() - new Date(d).getTime()) / 86400000);
+    } catch(e) { return 999; }
+  }
+  function markExported() {
+    try { localStorage.setItem(LAST_EXPORT_KEY, new Date().toISOString()); } catch(e) {}
   }
   function saveShelves() {
     try { localStorage.setItem(SHELVES_KEY, JSON.stringify(shelves)); } catch(e) {}
@@ -1026,6 +1060,7 @@ document.addEventListener('DOMContentLoaded', function() {
       renderLibrary();
       if (action === 'finished' && prev !== 'finished') setTimeout(() => toast(pick(FINISHED_MESSAGES), true), 300);
       else if (action === 'reading' && prev !== 'reading') setTimeout(() => toast(pick(READING_MESSAGES), true), 300);
+      else if (action === 'want' && prev !== 'want') { launchSparkles(); setTimeout(() => toast(pick(WANT_MESSAGES), true), 300); }
       else toast('Updated ✓');
     });
   });
@@ -1058,9 +1093,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }).join('');
     section.innerHTML = annHTML + existing;
   }
-  function esc(s){ if(s==null) return ''; return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
   const FINISHED_MESSAGES = [
     "You finished it! I love you so much! 🥺💚",
     "Look at you go! Another one done. I'm so proud of you! ✨",
@@ -1093,8 +1125,56 @@ document.addEventListener('DOMContentLoaded', function() {
     "Oooh good choice! Platform 9¾ of great books right there! 🚂⚡",
     "Filed away for later! Harry, Ron and Hermione would want to read it too! 💚",
     "On the list! Nearly as magical as a Hogwarts acceptance letter! ✉️⚡",
-    "Saved! Dobby is very happy you found such an interesting book! 🧦📚"
+    "Saved! Dobby is very happy you found such an interesting book! 🧦📚",
+    "Ooh adding that to the pile! Your future self will thank you! 📚💫",
+    "Saved for a rainy day! Perfect reading weather incoming 🌧️📖",
+    "One more for the ever-growing list… no judgement here! 😄📚",
+    "Brilliant choice! That one's been waiting for you! ✨",
+    "On the shelf it goes! So many books, so little time 💚",
+    "Oooh you've got good taste! Can't wait to see what you think! 👀📖",
+    "Added! The raccoon approves of your reading choices 🦝✨",
+    "Your to-read pile grows ever taller… beautifully so! 📚🌟",
+    "Filed! A book collector's work is never done 💚📚",
+    "Ooh interesting pick! The pages are basically calling your name already! 📖💫"
   ];
+
+  // ---------- SPARKLE ANIMATION ----------
+  function launchSparkles() {
+    const colours = ['#d4a85a','#7a9a7a','#e8c898','#f0e0c0','#a8d8a8','#ffd700','#c8e8c8'];
+    const symbols = ['✦','★','✿','♥','✨','◆','⬟'];
+    const count = 22;
+    for (let i = 0; i < count; i++) {
+      setTimeout(() => {
+        const el = document.createElement('div');
+        const size = 10 + Math.random() * 14;
+        el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        el.style.cssText = `
+          position: fixed;
+          z-index: 9999;
+          pointer-events: none;
+          font-size: ${size}px;
+          color: ${colours[Math.floor(Math.random() * colours.length)]};
+          left: ${10 + Math.random() * 80}vw;
+          top: ${20 + Math.random() * 50}vh;
+          opacity: 1;
+          transition: transform 1.2s ease-out, opacity 1.2s ease-out;
+          transform: translateY(0) rotate(0deg) scale(1);
+          text-shadow: 0 0 6px currentColor;
+        `;
+        document.body.appendChild(el);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            const drift = (Math.random() - 0.5) * 120;
+            const rise = 80 + Math.random() * 120;
+            const spin = (Math.random() - 0.5) * 360;
+            el.style.transform = `translateY(-${rise}px) translateX(${drift}px) rotate(${spin}deg) scale(0.3)`;
+            el.style.opacity = '0';
+          });
+        });
+        setTimeout(() => el.remove(), 1400);
+      }, i * 55);
+    }
+  }
 
   const HEADER_QUOTES = [
     "✦ &nbsp;A reader lives a thousand lives…",
@@ -1132,6 +1212,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (name === 'library') renderLibrary();
     if (name === 'stats') renderStats();
     if (name === 'shelves') renderShelvesView();
+    if (name === 'backup') { renderBackupNudge(); renderSnapshotInfo(); }
     if (name === 'add' && !editingId) { /* form is fresh */ }
     window.scrollTo(0, 0);
   }
@@ -1278,14 +1359,20 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   document.getElementById('new-shelf-btn').addEventListener('click', () => {
-    const name = prompt('Name your new shelf:');
-    if (!name || !name.trim()) return;
-    const shelf = { id: uid(), name: name.trim() };
+    const input = document.getElementById('new-shelf-input');
+    const name = input ? input.value.trim() : '';
+    if (!name) { toast('Please type a shelf name first'); return; }
+    const shelf = { id: uid(), name };
     shelves.push(shelf);
     saveShelves();
+    input.value = '';
     renderShelvesView();
     updateShelfSelects('');
     toast('Shelf created ✓');
+  });
+
+  document.getElementById('new-shelf-input') && document.getElementById('new-shelf-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('new-shelf-btn').click();
   });
 
   // ---------- LIBRARY ----------
@@ -1473,12 +1560,18 @@ document.addEventListener('DOMContentLoaded', function() {
     if (b.quote) { noteEl.textContent = '"' + b.quote + '"'; noteEl.style.display = 'block'; }
     else if (b.notes) { noteEl.textContent = b.notes; noteEl.style.display = 'block'; }
     else { noteEl.style.display = 'none'; }
-    document.getElementById('share-modal').style.display = 'flex';
+    document.getElementById('share-modal').classList.remove('hidden');
     document.getElementById('share-copy-btn').dataset.id = id;
   }
 
   document.getElementById('share-close-btn').addEventListener('click', () => {
-    document.getElementById('share-modal').style.display = 'none';
+    document.getElementById('share-modal').classList.add('hidden');
+  });
+
+  document.getElementById('share-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('share-modal')) {
+      document.getElementById('share-modal').classList.add('hidden');
+    }
   });
 
   document.getElementById('share-copy-btn').addEventListener('click', () => {
@@ -1487,9 +1580,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const stars = b.rating ? '★'.repeat(b.rating) + '☆'.repeat(5-b.rating) : '';
     const tags = [b.fandom, b.ship, b.genre].filter(Boolean).join(' · ');
     const note = b.quote ? `"${b.quote}"` : b.notes || '';
-    const text = `📚 ${b.title}${b.author ? ' by ' + b.author : ''}\n${stars}${tags ? '\n' + tags : ''}${note ? '\n\n' + note : ''}\n\n— Kelly's Fandom Bookshelf 🍃`;
-    navigator.clipboard.writeText(text).then(() => toast('Copied!')).catch(() => toast('Copy failed'));
+    const text = `📚 ${b.title}${b.author ? ' by ' + b.author : ''}\n${stars}${tags ? '\n' + tags : ''}${note ? '\n\n' + note : ''}${b.url ? '\n\n🔗 ' + b.url : ''}\n\n— Kelly's Fandom Bookshelf 🍃`;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => toast('Copied! ✓')).catch(() => fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
+    }
   });
+
+  function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try { document.execCommand('copy'); toast('Copied! ✓'); }
+    catch(e) { toast('Copy failed — try long-pressing the text'); }
+    document.body.removeChild(ta);
+  }
 
   // ---------- FORM ----------
   function resetForm() {
@@ -1875,6 +1983,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateStreak();
         setTimeout(() => toast(pick(READING_MESSAGES), true), 400);
       } else if (data.status === 'want') {
+        launchSparkles();
         setTimeout(() => toast(pick(WANT_MESSAGES), true), 400);
       } else {
         toast('Added to shelf ✓');
@@ -1947,6 +2056,36 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ---------- BACKUP ----------
+  // ---------- BACKUP NUDGE ----------
+  function renderBackupNudge() {
+    const nudge = document.getElementById('backup-nudge');
+    if (!nudge) return;
+    const days = getLastExportDays();
+    if (days < 14) { nudge.innerHTML = ''; return; }
+    const msg = days >= 999
+      ? "You haven't exported a backup yet — tap below to save one now."
+      : `It's been ${days} days since your last backup — worth saving a fresh one!`;
+    nudge.innerHTML = `
+      <div class="anniversary-banner" id="nudge-banner" style="margin-bottom:1rem; cursor:pointer;">
+        <span style="font-size:22px;">💾</span>
+        <p><strong>Backup reminder</strong><br>${msg}</p>
+      </div>`;
+    document.getElementById('nudge-banner').onclick = () => document.getElementById('export-btn').click();
+  }
+
+  // ---------- SNAPSHOT INFO ----------
+  function renderSnapshotInfo() {
+    const el = document.getElementById('snapshot-info');
+    if (!el) return;
+    try {
+      const raw = localStorage.getItem(SNAPSHOT_KEY);
+      if (!raw) { el.textContent = 'No snapshot yet — save a book to create one.'; return; }
+      const snap = JSON.parse(raw);
+      const d = new Date(snap.savedAt);
+      el.textContent = `Last snapshot: ${d.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'})} at ${d.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'})} · ${(snap.books||[]).length} books`;
+    } catch(e) { el.textContent = 'Snapshot info unavailable'; }
+  }
+
   document.getElementById('export-btn').addEventListener('click', () => {
     const blob = new Blob([JSON.stringify(books, null, 2)], {type:'application/json'});
     const url = URL.createObjectURL(blob);
@@ -1955,7 +2094,9 @@ document.addEventListener('DOMContentLoaded', function() {
     a.download = `bookshelf-${new Date().toISOString().slice(0,10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    toast('Backup exported');
+    markExported();
+    renderBackupNudge();
+    toast('Backup exported ✓');
   });
   document.getElementById('import-btn').addEventListener('click', () => {
     document.getElementById('import-file').click();
@@ -1978,6 +2119,22 @@ document.addEventListener('DOMContentLoaded', function() {
       } catch { toast('That file doesn\'t look right'); }
     };
     r.readAsText(file);
+  });
+  document.getElementById('restore-snapshot-btn').addEventListener('click', () => {
+    try {
+      const raw = localStorage.getItem(SNAPSHOT_KEY);
+      if (!raw) { toast('No snapshot found yet'); return; }
+      const snap = JSON.parse(raw);
+      if (!Array.isArray(snap.books) || snap.books.length === 0) { toast('Snapshot is empty'); return; }
+      const d = new Date(snap.savedAt).toLocaleString('en-GB');
+      if (confirm(`Restore ${snap.books.length} books from snapshot taken ${d}?\n\nThis will replace your current library.`)) {
+        books = snap.books;
+        saveBooks();
+        renderLibrary();
+        switchView('library');
+        toast('Restored from snapshot ✓');
+      }
+    } catch(e) { toast('Could not read snapshot'); }
   });
   document.getElementById('clear-btn').addEventListener('click', () => {
     if (confirm('Delete EVERY book on your shelf? This cannot be undone.')) {
