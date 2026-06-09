@@ -336,15 +336,21 @@
     </div>
     <div class="sort-wrap">
       <span id="book-count">0 books</span>
-      <select class="sort-select" id="sort-select">
-        <option value="added-desc">Recently added</option>
-        <option value="added-asc">Oldest added</option>
-        <option value="finished-desc">Recently finished</option>
-        <option value="started-desc">Recently started</option>
-        <option value="rating-desc">Highest rated</option>
-        <option value="title-asc">Title A–Z</option>
-        <option value="author-asc">Author A–Z</option>
-      </select>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <button id="shelves-btn" style="background:transparent; border:0.5px solid var(--line); border-radius:6px; padding:3px 8px; font-size:12px; color:var(--ink-soft); cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:4px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="4" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/><rect x="2" y="17" width="20" height="4" rx="1"/></svg>
+          Shelves
+        </button>
+        <select class="sort-select" id="sort-select">
+          <option value="added-desc">Recently added</option>
+          <option value="added-asc">Oldest added</option>
+          <option value="finished-desc">Recently finished</option>
+          <option value="started-desc">Recently started</option>
+          <option value="rating-desc">Highest rated</option>
+          <option value="title-asc">Title A–Z</option>
+          <option value="author-asc">Author A–Z</option>
+        </select>
+      </div>
     </div>
     <div id="book-list"></div>
   </div>
@@ -701,6 +707,18 @@
   </div>
 </div>
 
+<!-- Shelves bottom sheet -->
+<div class="quick-menu-overlay" id="shelves-overlay"></div>
+<div class="quick-menu" id="shelves-sheet">
+  <p class="quick-menu-title">My Shelves</p>
+  <div style="display:flex; gap:8px; margin-bottom:12px;">
+    <input type="text" id="shelves-new-input" placeholder="New shelf name…" style="flex:1; padding:9px 12px; font-size:14px;" />
+    <button id="shelves-new-btn" style="background:var(--accent); color:white; border:none; border-radius:8px; padding:9px 14px; font-size:14px; font-weight:500; cursor:pointer; font-family:inherit; white-space:nowrap;">Add</button>
+  </div>
+  <div id="shelves-sheet-list"></div>
+  <button class="quick-menu-opt" id="shelves-close-btn" style="color:var(--ink-soft); margin-top:4px;">Close</button>
+</div>
+
 <!-- Raccoon customiser -->
 <div class="raccoon-customiser" id="raccoon-customiser" style="display:none;">
   <div class="raccoon-customiser-panel">
@@ -750,10 +768,6 @@
   <button class="tab" data-view="add">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
     Add
-  </button>
-  <button class="tab" data-view="shelves">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="4" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/><rect x="2" y="17" width="20" height="4" rx="1"/></svg>
-    Shelves
   </button>
   <button class="tab" data-view="stats">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
@@ -1404,7 +1418,6 @@ window.addEventListener('error', function(e) {
     document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === name));
     if (name === 'library') renderLibrary();
     if (name === 'stats') renderStats();
-    if (name === 'shelves') renderShelvesView();
     if (name === 'backup') { renderBackupNudge(); renderSnapshotInfo(); }
     if (name === 'discover') renderDiscover();
     if (name === 'add' && !editingId) { /* form is fresh */ }
@@ -1799,21 +1812,75 @@ window.addEventListener('error', function(e) {
     });
   }
 
-  document.getElementById('new-shelf-btn').addEventListener('click', () => {
-    const input = document.getElementById('new-shelf-input');
+  // ---------- SHELVES BOTTOM SHEET ----------
+  function openShelvesSheet() {
+    renderShelvesSheet();
+    document.getElementById('shelves-sheet').classList.add('open');
+    document.getElementById('shelves-overlay').classList.add('open');
+  }
+  function closeShelvesSheet() {
+    document.getElementById('shelves-sheet').classList.remove('open');
+    document.getElementById('shelves-overlay').classList.remove('open');
+  }
+
+  function renderShelvesSheet() {
+    const list = document.getElementById('shelves-sheet-list');
+    if (!list) return;
+    if (shelves.length === 0) {
+      list.innerHTML = `<p style="font-size:13px; color:var(--ink-soft); text-align:center; padding:8px 0 4px;">No shelves yet — create one above</p>`;
+      return;
+    }
+    list.innerHTML = shelves.map(s => {
+      const count = books.filter(b => b.shelfId === s.id).length;
+      const isActive = currentShelfFilter === s.id;
+      return `<div style="display:flex; align-items:center; gap:8px; padding:8px 0; border-bottom:0.5px solid var(--line-soft);">
+        <button class="quick-menu-opt sheet-shelf-pick" data-id="${s.id}" style="flex:1; margin:0; justify-content:flex-start; background:${isActive ? 'var(--bg-alt)' : 'transparent'}; border:none; font-weight:${isActive ? '500' : '400'};">
+          ${isActive ? '✓ ' : ''}${esc(s.name)} <span style="color:var(--ink-faint); font-size:12px; margin-left:4px;">${count}</span>
+        </button>
+        <button class="del-shelf-sheet icon-btn" data-id="${s.id}" aria-label="Delete shelf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+        </button>
+      </div>`;
+    }).join('');
+    list.querySelectorAll('.sheet-shelf-pick').forEach(btn => {
+      btn.onclick = () => {
+        currentShelfFilter = currentShelfFilter === btn.dataset.id ? null : btn.dataset.id;
+        closeShelvesSheet();
+        renderLibrary();
+      };
+    });
+    list.querySelectorAll('.del-shelf-sheet').forEach(btn => {
+      btn.onclick = () => {
+        if (confirm('Delete this shelf? Books on it won\'t be deleted.')) {
+          shelves = shelves.filter(s => s.id !== btn.dataset.id);
+          books.forEach(b => { if (b.shelfId === btn.dataset.id) delete b.shelfId; });
+          saveShelves(); saveBooks();
+          renderShelvesSheet();
+          renderLibrary();
+        }
+      };
+    });
+  }
+
+  document.getElementById('shelves-btn').addEventListener('click', openShelvesSheet);
+  document.getElementById('shelves-overlay').addEventListener('click', closeShelvesSheet);
+  document.getElementById('shelves-close-btn').addEventListener('click', closeShelvesSheet);
+
+  document.getElementById('shelves-new-btn').addEventListener('click', () => {
+    const input = document.getElementById('shelves-new-input');
     const name = input ? input.value.trim() : '';
     if (!name) { toast('Please type a shelf name first'); return; }
     const shelf = { id: uid(), name };
     shelves.push(shelf);
     saveShelves();
     input.value = '';
-    renderShelvesView();
+    renderShelvesSheet();
     updateShelfSelects('');
     toast('Shelf created ✓');
   });
 
-  document.getElementById('new-shelf-input') && document.getElementById('new-shelf-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') document.getElementById('new-shelf-btn').click();
+  document.getElementById('shelves-new-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('shelves-new-btn').click();
   });
 
   // ---------- LIBRARY ----------
