@@ -870,6 +870,72 @@ window.addEventListener('error', function(e) {
     } catch(e) { console.warn('Supabase delete error:', e.message); }
   }
 
+  async function loadFromSupabase() {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/books?user_id=eq.kelly&order=date_added.desc`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      if (!res.ok) return false;
+      const rows = await res.json();
+      if (!Array.isArray(rows) || rows.length === 0) return false;
+      // Convert rows back to book objects
+      const remoteBooks = rows.map(r => ({
+        id: r.id,
+        title: r.title || '',
+        author: r.author || '',
+        status: r.status || 'want',
+        rating: r.rating || 0,
+        notes: r.notes || '',
+        quote: r.quote || '',
+        isAO3: r.is_ao3 || false,
+        fandom: r.fandom || '',
+        ship: r.ship || '',
+        wordCount: r.word_count || '',
+        chapters: r.chapters || '',
+        url: r.url || '',
+        genre: r.genre || '',
+        tags: r.tags || '',
+        pages: r.pages || '',
+        year: r.year || '',
+        moods: (() => { try { return JSON.parse(r.moods || '[]'); } catch(e) { return []; } })(),
+        shelfId: r.shelf_id || undefined,
+        dateAdded: r.date_added || '',
+        dateStarted: r.date_started || '',
+        dateFinished: r.date_finished || '',
+        cover: books.find(b => b.id === r.id)?.cover || '' // preserve local covers
+      }));
+      // Merge: remote is source of truth, but keep local covers (not stored remotely)
+      books = remoteBooks;
+      saveBooks();
+      return true;
+    } catch(e) {
+      console.warn('Supabase load error:', e.message);
+      return false;
+    }
+  }
+
+  async function bulkSyncToSupabase() {
+    // Push all local books up to Supabase at once
+    if (books.length === 0) return;
+    try {
+      const rows = books.map(bookToRow);
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/books`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'resolution=merge-duplicates'
+        },
+        body: JSON.stringify(rows)
+      });
+      return res.ok;
+    } catch(e) { return false; }
+  }
+
   function updateCoverPreview(src, previewId, clearBtnId) {
     const preview = document.getElementById(previewId);
     const clearBtn = document.getElementById(clearBtnId);
@@ -2549,6 +2615,21 @@ window.addEventListener('error', function(e) {
   renderLibrary();
   checkAnniversaries();
   receiveBookmarkletData();
+
+  // Silently sync with Supabase in the background
+  (async () => {
+    const loaded = await loadFromSupabase();
+    if (loaded) {
+      // Remote had data — refresh the UI silently
+      renderLibrary();
+      renderStreakGoal();
+      renderReadingNow();
+      checkAnniversaries();
+    } else if (books.length > 0) {
+      // No remote data yet — push everything local up
+      bulkSyncToSupabase();
+    }
+  })();
 })();
 }); // DOMContentLoaded
 </script>
