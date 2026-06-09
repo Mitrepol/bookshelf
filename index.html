@@ -79,41 +79,41 @@
   .search:focus { border-color: var(--accent); }
   .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--ink-faint); pointer-events: none; }
 
-  .filter-row { display: flex; gap: 8px; margin-bottom: 1rem; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+  .filter-row { display: flex; gap: 6px; margin-bottom: 8px; overflow-x: auto; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
   .filter-row::-webkit-scrollbar { display: none; }
-  .chip { background: var(--bg-card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--ink-soft); cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.15s; }
+  .chip { background: var(--bg-card); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: 12px; color: var(--ink-soft); cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.15s; }
   .chip.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
   .chip.active.reading { background: var(--reading); border-color: var(--reading); color: var(--bg-card); }
   .chip.active.finished { background: var(--finished); border-color: var(--finished); color: var(--bg-card); }
   .chip.active.want { background: var(--want); border-color: var(--want); color: var(--bg-card); }
   .chip.active.dnf { background: var(--dnf); border-color: var(--dnf); color: var(--bg-card); }
 
-  .sort-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; font-size: 13px; color: var(--ink-soft); }
-  .sort-select { background: transparent; border: none; color: var(--ink); font-family: inherit; font-size: 13px; cursor: pointer; padding: 4px; }
+  .sort-wrap { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 12px; color: var(--ink-soft); }
+  .sort-select { background: transparent; border: none; color: var(--ink); font-family: inherit; font-size: 12px; cursor: pointer; padding: 2px; }
 
   /* Book cards */
-  .book { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 14px; padding: 14px; margin-bottom: 10px; display: flex; gap: 12px; box-shadow: var(--shadow); }
-  .book-cover { width: 56px; min-width: 56px; height: 84px; background: var(--bg-alt); border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--ink-faint); font-family: 'Fraunces', serif; font-size: 24px; }
+  .book { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 12px; padding: 11px 12px; margin-bottom: 8px; display: flex; gap: 10px; box-shadow: var(--shadow); }
+  .book-cover { width: 46px; min-width: 46px; height: 68px; background: var(--bg-alt); border-radius: 5px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--ink-faint); font-family: 'Fraunces', serif; font-size: 20px; }
   .book-cover img { width: 100%; height: 100%; object-fit: cover; }
   .book-body { flex: 1; min-width: 0; }
-  .book-title { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 500; margin: 0 0 2px; line-height: 1.25; color: var(--ink); }
-  .book-author { font-size: 13px; color: var(--ink-soft); margin: 0; line-height: 1.3; }
-  .book-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; align-items: center; }
-  .status-pill { font-size: 11px; padding: 2px 8px; border-radius: 999px; font-weight: 500; letter-spacing: 0.02em; }
-  .status-pill.reading { background: rgba(184,138,58,0.15); color: var(--reading); }
-  .status-pill.finished { background: rgba(90,117,72,0.15); color: var(--finished); }
-  .status-pill.want { background: rgba(107,93,79,0.12); color: var(--want); }
-  .status-pill.dnf { background: rgba(160,64,64,0.12); color: var(--dnf); }
-  .ao3-pill { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: rgba(139,58,31,0.1); color: var(--accent); font-weight: 500; letter-spacing: 0.02em; }
-  .tag-pill { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--bg-alt); color: var(--ink-soft); }
-  .stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; margin-top: 4px; }
+  .book-title { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 500; margin: 0 0 1px; line-height: 1.25; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .book-author { font-size: 12px; color: var(--ink-soft); margin: 0 0 3px; line-height: 1.3; }
+  .book-meta { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 4px; align-items: center; }
+  .status-pill { font-size: 11px; padding: 2px 7px; border-radius: 999px; font-weight: 500; letter-spacing: 0.02em; }
+  .status-pill.reading { background: rgba(160,128,48,0.14); color: var(--reading); }
+  .status-pill.finished { background: rgba(61,90,71,0.13); color: var(--finished); }
+  .status-pill.want { background: rgba(90,78,64,0.1); color: var(--want); }
+  .status-pill.dnf { background: rgba(144,64,64,0.1); color: var(--dnf); }
+  .ao3-pill { font-size: 11px; padding: 2px 7px; border-radius: 999px; background: rgba(90,78,120,0.1); color: #5a4a78; font-weight: 500; letter-spacing: 0.02em; }
+  .tag-pill { font-size: 11px; padding: 2px 7px; border-radius: 999px; background: var(--bg-alt); color: var(--ink-soft); }
+  .stars { color: var(--gold); font-size: 12px; letter-spacing: 1px; margin-bottom: 2px; }
   .stars .off { color: var(--line); }
-  .book-notes { font-size: 13px; color: var(--ink-soft); margin-top: 8px; line-height: 1.5; font-style: italic; padding-left: 10px; border-left: 2px solid var(--line); white-space: pre-wrap; }
-  .book-dates { font-size: 11px; color: var(--ink-faint); margin-top: 6px; letter-spacing: 0.02em; }
-  .book-actions { display: flex; flex-direction: column; gap: 4px; }
-  .icon-btn { background: transparent; border: none; cursor: pointer; padding: 6px; color: var(--ink-faint); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+  .book-notes { font-size: 12px; color: var(--ink-soft); margin-top: 5px; line-height: 1.4; font-style: italic; padding-left: 8px; border-left: 2px solid var(--line); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .book-dates { font-size: 11px; color: var(--ink-faint); margin-top: 4px; letter-spacing: 0.02em; }
+  .book-actions { display: flex; flex-direction: column; gap: 3px; }
+  .icon-btn { background: transparent; border: 0.5px solid var(--line-soft); border-radius: 6px; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-faint); padding: 0; }
   .icon-btn:hover { color: var(--ink); background: var(--bg-alt); }
-  .icon-btn svg { width: 16px; height: 16px; }
+  .icon-btn svg { width: 14px; height: 14px; }
 
   .empty { text-align: center; padding: 3rem 1rem; color: var(--ink-soft); }
   .empty-icon { font-family: 'Fraunces', serif; font-size: 48px; color: var(--ink-faint); margin-bottom: 0.5rem; font-style: italic; }
@@ -205,27 +205,28 @@
   .mood-btn.selected { background: var(--ink); color: var(--bg); border-color: var(--ink); }
   .mood-pill { font-size: 15px; }
 
-  /* Reading streak */
-  .streak-banner { background: linear-gradient(135deg, #3d2b1f 0%, #5a3a28 100%); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow); }
-  .streak-flame { font-size: 32px; line-height: 1; }
-  .streak-text h3 { margin: 0; font-family: 'Fraunces', serif; font-size: 20px; color: #f0e0c0; font-weight: 400; }
-  .streak-text p { margin: 2px 0 0; font-size: 12px; color: #b09880; }
-
-  /* Reading goal */
-  .goal-card { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; box-shadow: var(--shadow); }
-  .goal-card h3 { margin: 0 0 8px; font-size: 13px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; font-family: 'Inter', sans-serif; }
-  .goal-bar-track { background: var(--bg-alt); border-radius: 999px; height: 10px; overflow: hidden; margin: 6px 0 4px; }
+  /* Reading streak + goal — compact side by side row */
+  .streak-goal-row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .streak-box { flex: 1; background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow); }
+  .streak-flame { font-size: 22px; line-height: 1; }
+  .streak-label { font-size: 11px; color: var(--ink-soft); margin: 0; text-transform: uppercase; letter-spacing: 0.06em; }
+  .streak-val { font-size: 18px; font-weight: 500; margin: 0; color: var(--ink); line-height: 1.2; }
+  .goal-box { flex: 1.4; background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 12px; padding: 10px 12px; box-shadow: var(--shadow); }
+  .goal-box-label { font-size: 11px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 3px; }
+  .goal-box-nums { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink); margin-bottom: 5px; font-weight: 500; }
+  .goal-bar-track { background: var(--bg-alt); border-radius: 999px; height: 7px; overflow: hidden; }
   .goal-bar-fill { background: var(--accent); border-radius: 999px; height: 100%; transition: width 0.5s; }
-  .goal-nums { font-size: 12px; color: var(--ink-soft); display: flex; justify-content: space-between; }
+  .set-goal-inline { background: transparent; border: 1px dashed var(--line); border-radius: 8px; padding: 6px 10px; color: var(--ink-soft); font-size: 12px; cursor: pointer; font-family: inherit; width: 100%; text-align: left; }
 
-  /* Currently reading */
-  .reading-now { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; display: flex; gap: 10px; align-items: center; box-shadow: var(--shadow); }
-  .reading-now-cover { width: 40px; min-width: 40px; height: 60px; background: var(--bg-alt); border-radius: 5px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 18px; color: var(--ink-faint); }
+  /* Currently reading — slimmer */
+  .reading-now-label { font-size: 11px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin: 0 0 5px; }
+  .reading-now { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; display: flex; gap: 10px; align-items: center; box-shadow: var(--shadow); }
+  .reading-now-cover { width: 36px; min-width: 36px; height: 52px; background: var(--bg-alt); border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 16px; color: var(--ink-faint); }
   .reading-now-cover img { width: 100%; height: 100%; object-fit: cover; }
   .reading-now-body { flex: 1; min-width: 0; }
-  .reading-now-title { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 500; margin: 0; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .reading-now-title { font-family: 'Fraunces', serif; font-size: 14px; font-weight: 500; margin: 0; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .reading-now-author { font-size: 12px; color: var(--ink-soft); margin: 2px 0 0; }
-  .reading-now-btn { background: var(--accent); color: white; border: none; border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 500; cursor: pointer; font-family: inherit; white-space: nowrap; }
+  .reading-now-btn { background: var(--accent); color: white; border: none; border-radius: 7px; padding: 6px 10px; font-size: 12px; font-weight: 500; cursor: pointer; font-family: inherit; white-space: nowrap; }
 
   /* Custom shelves */
   .shelf-chip { background: var(--bg-card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--ink-soft); cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
@@ -293,6 +294,26 @@
 <div class="header-quote-strip">
   <div id="header-quote">✦ &nbsp;A reader lives a thousand lives…</div>
 </div>
+
+<style>
+  /* Discover cards */
+  .discover-section-h { font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.1em; font-weight:600; margin:1.25rem 0 0.6rem; display:flex; align-items:center; gap:8px; }
+  .discover-section-h::after { content:''; flex:1; height:1px; background:var(--line-soft); }
+  .discover-card { background:var(--bg-card); border:1px solid var(--line-soft); border-radius:14px; padding:14px; margin-bottom:10px; box-shadow:var(--shadow); }
+  .discover-title { font-family:'Fraunces',serif; font-size:16px; font-weight:500; color:var(--ink); margin:0 0 2px; line-height:1.25; }
+  .discover-author { font-size:12px; color:var(--ink-soft); margin:0 0 6px; }
+  .discover-summary { font-size:13px; color:var(--ink-soft); line-height:1.55; margin:6px 0 10px; font-style:italic; }
+  .discover-tags { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:10px; }
+  .discover-tag { font-size:11px; padding:2px 8px; border-radius:999px; background:var(--bg-alt); color:var(--ink-soft); }
+  .discover-tag.hot { background:rgba(160,64,64,0.1); color:var(--dnf); }
+  .discover-tag.sweet { background:rgba(90,122,90,0.1); color:var(--finished); }
+  .discover-tag.dark { background:rgba(46,32,24,0.12); color:var(--ink-soft); font-weight:500; }
+  .discover-actions { display:flex; gap:8px; }
+  .discover-read-btn { flex:1; padding:9px; background:var(--accent); color:white; border:none; border-radius:8px; font-family:inherit; font-size:13px; font-weight:500; cursor:pointer; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px; }
+  .discover-add-btn { padding:9px 14px; background:transparent; border:1px solid var(--line); border-radius:8px; font-family:inherit; font-size:13px; color:var(--ink-soft); cursor:pointer; white-space:nowrap; }
+  .discover-add-btn.added { color:var(--finished); border-color:var(--finished); background:rgba(90,122,90,0.08); }
+  .discover-wc { font-size:11px; color:var(--ink-faint); margin-bottom:6px; }
+</style>
 
 <div class="container">
 
@@ -622,6 +643,15 @@
     <div class="ornament">❦</div>
   </div>
 
+  <!-- DISCOVER VIEW -->
+  <div class="view" id="view-discover">
+    <div style="font-size:13px; color:var(--ink-soft); margin-bottom:1rem; line-height:1.6;">
+      Curated picks based on what you love — tap any card to open on AO3, or tap <strong>+ Add to shelf</strong> to save it.
+    </div>
+    <div id="discover-list"></div>
+    <div class="ornament">❦</div>
+  </div>
+
   <!-- SHELVES VIEW -->
   <div class="view" id="view-shelves">
     <div class="form-section">
@@ -684,6 +714,7 @@
         <button class="customiser-opt" data-acc="crown">👑 Crown</button>
         <button class="customiser-opt" data-acc="hat">🎩 Hat</button>
         <button class="customiser-opt" data-acc="flowers">🌸 Flowers</button>
+        <button class="customiser-opt" data-acc="springboks">🟢 Springboks</button>
         <button class="customiser-opt" data-acc="none">✨ None</button>
       </div>
     </div>
@@ -728,6 +759,10 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
     Stats
   </button>
+  <button class="tab" data-view="discover">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+    Discover
+  </button>
   <button class="tab" data-view="backup">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
     More
@@ -746,11 +781,10 @@ window.addEventListener('error', function(e) {
 });
 (function(){
   // ========================================================================
-  // CONFIG — paste your Cloudflare Worker URL here once you've deployed it
-  // It should look like: https://ao3-bookshelf.yourname.workers.dev
-  // Leave as empty string ("") to disable AO3 autofill features.
+  // SUPABASE CONFIG
   // ========================================================================
-  const AO3_WORKER_URL = "";
+  const SUPABASE_URL = "https://cedmzupepebyjykrjblq.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlZG16dXBlcGVieWp5a3JqYmxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NTM2MjYsImV4cCI6MjA5NjUyOTYyNn0.plLUAfH1iY_0WJafnJxpS4h_yjCy1k5vfPlc_SNUOLM";
   // ========================================================================
 
   const STORAGE_KEY = 'bookshelf-v1';
@@ -775,6 +809,66 @@ window.addEventListener('error', function(e) {
   function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
   function esc(s){ if(s==null) return ''; return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  // ---------- SUPABASE SYNC ----------
+  function bookToRow(b) {
+    return {
+      id: b.id,
+      user_id: 'kelly',
+      title: b.title || '',
+      author: b.author || '',
+      status: b.status || 'want',
+      rating: b.rating || null,
+      notes: b.notes || '',
+      quote: b.quote || '',
+      is_ao3: !!b.isAO3,
+      fandom: b.fandom || '',
+      ship: b.ship || '',
+      word_count: b.wordCount || '',
+      chapters: b.chapters || '',
+      url: b.url || '',
+      genre: b.genre || '',
+      tags: b.tags || '',
+      pages: b.pages || '',
+      year: b.year || '',
+      cover: b.cover ? '[cover saved locally]' : '', // don't upload base64 images
+      moods: JSON.stringify(b.moods || []),
+      shelf_id: b.shelfId || '',
+      date_added: b.dateAdded || '',
+      date_started: b.dateStarted || '',
+      date_finished: b.dateFinished || '',
+      updated_at: new Date().toISOString()
+    };
+  }
+
+  async function syncToSupabase(book) {
+    try {
+      const row = bookToRow(book);
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/books`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'resolution=merge-duplicates'
+        },
+        body: JSON.stringify(row)
+      });
+      if (!res.ok) console.warn('Supabase sync failed:', res.status);
+    } catch(e) { console.warn('Supabase sync error:', e.message); }
+  }
+
+  async function deleteFromSupabase(id) {
+    try {
+      await fetch(`${SUPABASE_URL}/rest/v1/books?id=eq.${id}`, {
+        method: 'DELETE',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+    } catch(e) { console.warn('Supabase delete error:', e.message); }
+  }
 
   function updateCoverPreview(src, previewId, clearBtnId) {
     const preview = document.getElementById(previewId);
@@ -852,13 +946,14 @@ window.addEventListener('error', function(e) {
     try { readingGoal = parseInt(localStorage.getItem(GOAL_KEY)) || 0; } catch(e) { readingGoal = 0; }
     try { const r = localStorage.getItem(RACCOON_KEY); if (r) raccoonConfig = JSON.parse(r); } catch(e) {}
   }
-  function saveBooks() {
+  function saveBooks(bookToSync) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(books));
-      // Silent rolling snapshot — always a recent second copy
       const snapshot = { books, savedAt: new Date().toISOString() };
       localStorage.setItem(SNAPSHOT_KEY, JSON.stringify(snapshot));
     } catch(e) { toast('Could not save — storage full?'); }
+    // Sync to Supabase in background
+    if (bookToSync) syncToSupabase(bookToSync);
   }
   function getLastExportDays() {
     try {
@@ -924,43 +1019,62 @@ window.addEventListener('error', function(e) {
         <path d="M31.5 36 L36.5 36" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
         <path d="M16.5 33 L10 30" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
         <path d="M51.5 33 L58 30" stroke="#3a2a12" stroke-width="1.8" stroke-linecap="round"/>
-        <path d="M32 18 L35 23 L31 23 L34 29" stroke="#c8a028" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <path d="M32 18 L35 23 L31 23 L34 29" stroke="#ffd700" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>`,
+        <path d="M32 16 L35 21 L31 21 L34 27" stroke="#c8a028" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M32 16 L35 21 L31 21 L34 27" stroke="#ffd700" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>`,
       bow: `
-        <path d="M22 12 Q26 8 30 12 Q26 16 22 12Z" fill="#e07898"/>
-        <path d="M38 12 Q42 8 46 12 Q42 16 38 12Z" fill="#e07898"/>
-        <circle cx="34" cy="12" r="3" fill="#f098b8"/>`,
+        <path d="M22 10 Q26 6 30 10 Q26 14 22 10Z" fill="#e07898"/>
+        <path d="M38 10 Q42 6 46 10 Q42 14 38 10Z" fill="#e07898"/>
+        <circle cx="34" cy="10" r="3" fill="#f098b8"/>`,
       crown: `
-        <path d="M18 16 L22 8 L27 14 L34 6 L41 14 L46 8 L50 16 Z" fill="#d4a82a" stroke="#a07820" stroke-width="1"/>
-        <circle cx="27" cy="14" r="2" fill="#e84040"/>
-        <circle cx="34" cy="8" r="2.5" fill="#4080e8"/>
-        <circle cx="41" cy="14" r="2" fill="#e84040"/>`,
+        <path d="M18 15 L22 7 L27 13 L34 5 L41 13 L46 7 L50 15 Z" fill="#d4a82a" stroke="#a07820" stroke-width="1"/>
+        <circle cx="27" cy="13" r="2" fill="#e84040"/>
+        <circle cx="34" cy="7" r="2.5" fill="#4080e8"/>
+        <circle cx="41" cy="13" r="2" fill="#e84040"/>`,
       hat: `
-        <ellipse cx="34" cy="18" rx="18" ry="4" fill="#2a2a2a"/>
-        <rect x="22" y="4" width="24" height="16" rx="3" fill="#2a2a2a"/>
-        <rect x="22" y="14" width="24" height="3" rx="1" fill="#d4a82a"/>`,
+        <ellipse cx="34" cy="17" rx="18" ry="4" fill="#2a2a2a"/>
+        <rect x="22" y="3" width="24" height="15" rx="3" fill="#2a2a2a"/>
+        <rect x="22" y="13" width="24" height="3" rx="1" fill="#d4a82a"/>`,
       flowers: `
-        <circle cx="20" cy="14" r="4" fill="#f8d0e0"/>
-        <circle cx="20" cy="14" r="2" fill="#f8a0c0"/>
-        <circle cx="28" cy="10" r="3" fill="#e0f0d0"/>
-        <circle cx="28" cy="10" r="1.5" fill="#c0e0a0"/>
-        <circle cx="14" cy="20" r="3" fill="#f8e8c0"/>
-        <circle cx="14" cy="20" r="1.5" fill="#f8d080"/>`,
+        <circle cx="20" cy="12" r="5" fill="#f8d0e0"/>
+        <circle cx="20" cy="12" r="2.5" fill="#f8a0c0"/>
+        <circle cx="30" cy="7" r="4" fill="#e0f0d0"/>
+        <circle cx="30" cy="7" r="2" fill="#c0e0a0"/>
+        <circle cx="12" cy="18" r="3.5" fill="#f8e8c0"/>
+        <circle cx="12" cy="18" r="1.8" fill="#f8d080"/>`,
+      springboks: `
+        <!-- Springboks rugby cap — green with gold band -->
+        <!-- Brim -->
+        <ellipse cx="34" cy="17" rx="19" ry="4.5" fill="#006B3F"/>
+        <!-- Cap body -->
+        <path d="M15 17 Q15 4 34 4 Q53 4 53 17 Z" fill="#006B3F"/>
+        <!-- Gold stripe across cap -->
+        <path d="M15 13 Q34 10 53 13 L53 16 Q34 13 15 16 Z" fill="#FFB612"/>
+        <!-- Cap button on top -->
+        <circle cx="34" cy="4.5" r="2" fill="#FFB612"/>
+        <!-- Peak/brim detail -->
+        <ellipse cx="34" cy="17" rx="19" ry="4.5" fill="none" stroke="#004d2e" stroke-width="0.8"/>
+        <!-- Springbok silhouette on front -->
+        <path d="M31 9 L34 7 L37 9 L36 11 L34 10 L32 11 Z" fill="#FFB612" opacity="0.9"/>`,
       none: `
-        <path d="M32 18 L35 23 L31 23 L34 29" stroke="#c8a028" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <path d="M32 18 L35 23 L31 23 L34 29" stroke="#ffd700" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>`
+        <path d="M32 16 L35 21 L31 21 L34 27" stroke="#c8a028" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M32 16 L35 21 L31 21 L34 27" stroke="#ffd700" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>`
     };
     const accSVG = accessories[acc] || accessories.none;
 
     return `<svg width="${s}" height="${s}" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Ears (behind head) -->
       <ellipse cx="18" cy="18" rx="10" ry="11" fill="${c.main}"/>
       <ellipse cx="50" cy="18" rx="10" ry="11" fill="${c.main}"/>
       <ellipse cx="18" cy="18" rx="6" ry="7" fill="${c.light}"/>
       <ellipse cx="50" cy="18" rx="6" ry="7" fill="${c.light}"/>
+      <!-- Head -->
       <ellipse cx="34" cy="40" rx="24" ry="22" fill="${c.main}"/>
+      <!-- Face centre -->
       <ellipse cx="34" cy="42" rx="16" ry="15" fill="${c.light}"/>
+      <!-- Eye mask patches -->
       <ellipse cx="24" cy="36" rx="9" ry="8" fill="#2e2e2e"/>
       <ellipse cx="44" cy="36" rx="9" ry="8" fill="#2e2e2e"/>
+      <!-- Eyes -->
       ${exp !== 'sleepy' ? `
         <circle cx="24" cy="36" r="5" fill="#f8f8f8"/>
         <circle cx="44" cy="36" r="5" fill="#f8f8f8"/>
@@ -971,15 +1085,20 @@ window.addEventListener('error', function(e) {
       ` : `
         <circle cx="24" cy="36" r="5" fill="#f8f8f8"/>
         <circle cx="44" cy="36" r="5" fill="#f8f8f8"/>
+        <path d="M19 34 Q24 31 29 34" stroke="${c.dark}" stroke-width="2" stroke-linecap="round" fill="${c.light}"/>
+        <path d="M39 34 Q44 31 49 34" stroke="${c.dark}" stroke-width="2" stroke-linecap="round" fill="${c.light}"/>
       `}
       ${eyeExtras}
-      ${accSVG}
+      <!-- Snout -->
       <ellipse cx="34" cy="47" rx="8" ry="5.5" fill="${c.light}"/>
       <ellipse cx="34" cy="44.5" rx="3.5" ry="2.5" fill="#2e2e2e"/>
-      <ellipse cx="34" cy="23" rx="4" ry="5" fill="${c.dark}"/>
+      <!-- Cheeks -->
       <ellipse cx="12" cy="46" rx="5" ry="4" fill="${c.cheek}"/>
       <ellipse cx="56" cy="46" rx="5" ry="4" fill="${c.cheek}"/>
+      <!-- Mouth -->
       ${mouth}
+      <!-- Accessory (drawn on top of everything) -->
+      ${accSVG}
     </svg>`;
   }
 
@@ -1062,7 +1181,7 @@ window.addEventListener('error', function(e) {
       b.status = action;
       if (action === 'reading' && !b.dateStarted) b.dateStarted = new Date().toISOString().slice(0,10);
       if (action === 'finished' && !b.dateFinished) b.dateFinished = new Date().toISOString().slice(0,10);
-      saveBooks();
+      saveBooks(b);
       updateStreak();
       closeQuickMenu();
       renderLibrary();
@@ -1221,6 +1340,7 @@ window.addEventListener('error', function(e) {
     if (name === 'stats') renderStats();
     if (name === 'shelves') renderShelvesView();
     if (name === 'backup') { renderBackupNudge(); renderSnapshotInfo(); }
+    if (name === 'discover') renderDiscover();
     if (name === 'add' && !editingId) { /* form is fresh */ }
     window.scrollTo(0, 0);
   }
@@ -1229,7 +1349,248 @@ window.addEventListener('error', function(e) {
     t.addEventListener('click', () => switchView(t.dataset.view));
   });
 
-  // ---------- STREAK ----------
+  // ---------- DISCOVER ----------
+  const DISCOVER_FICS = [
+    // ── DRAMIONE ESSENTIALS ──────────────────────────────────────────────────
+    {
+      section: '🐍 Dramione — The Essentials',
+      title: 'Manacled',
+      author: 'SenLinYu',
+      summary: 'Voldemort won. Hermione is kept at Malfoy Manor with no memory of who she is. One of the most devastating, beautiful, and emotionally wrecking fics ever written. A true legend of the fandom.',
+      tags: ['dark', 'angst', 'enemies to lovers', 'memory loss', 'epic'],
+      tagStyles: ['dark', '', '', '', 'hot'],
+      wordCount: '370,000',
+      status: 'Complete',
+      url: 'https://archiveofourown.org/works/17415183'
+    },
+    {
+      section: '🐍 Dramione — The Essentials',
+      title: 'The Disappearances of Draco Malfoy',
+      author: 'speechwriter',
+      summary: 'The night on the Astronomy Tower goes differently. Draco lowers his wand and disappears into the Order. A Deathly Hallows rewrite so seamless it might just replace canon in your head. Start here if you\'re new to Dramione.',
+      tags: ['slow burn', 'canon divergence', 'redemption', 'complete'],
+      tagStyles: ['', '', 'sweet', 'sweet'],
+      wordCount: '193,000',
+      status: 'Complete',
+      url: 'https://archiveofourown.org/works/23296162'
+    },
+    {
+      section: '🐍 Dramione — The Essentials',
+      title: 'Draco Malfoy and the Mortifying Ordeal of Being in Love',
+      author: 'isthisselfcare',
+      summary: 'Draco is an Auror assigned to protect Hermione. Forced proximity, undeniable chemistry, and feelings he absolutely doesn\'t want to examine. Elite banter and Draco spiralling in the most entertaining way. So beloved it was adapted into a published novel.',
+      tags: ['slow burn', 'forced proximity', 'aurors', 'funny', 'complete'],
+      tagStyles: ['', '', '', 'sweet', 'sweet'],
+      wordCount: '150,000',
+      status: 'Complete',
+      url: 'https://archiveofourown.org/works/34500952'
+    },
+    {
+      section: '🐍 Dramione — The Essentials',
+      title: 'Remain Nameless',
+      author: 'HeyJude19',
+      summary: 'Post-war life has left them both fractured. Something as simple as grabbing coffee together starts to shift everything. Quiet, emotional, and deeply human — this one lingers for weeks.',
+      tags: ['post-war', 'hurt/comfort', 'slow burn', 'complete'],
+      tagStyles: ['', '', '', 'sweet'],
+      wordCount: '180,000',
+      status: 'Complete',
+      url: 'https://archiveofourown.org/works/23875939'
+    },
+    {
+      section: '🐍 Dramione — The Essentials',
+      title: 'Teach Me How to Forget',
+      author: 'scullymurphy',
+      summary: 'Hermione\'s life is falling apart. A fresh start leads her straight into the path of someone she never expected to see again — now in a position of authority over her. Messy, sharp, full of tension.',
+      tags: ['second chances', 'spicy 🌶️', 'angst', 'complete'],
+      tagStyles: ['', 'hot', '', 'sweet'],
+      wordCount: '120,000',
+      status: 'Complete',
+      url: 'https://archiveofourown.org/works/41597901'
+    },
+    {
+      section: '🐍 Dramione — The Essentials',
+      title: 'Green Light',
+      author: 'serenemusafir',
+      summary: 'Draco and Hermione orbit each other through years of choices, distance, and timing that never quite aligns. Beautifully written, emotionally heavy, deeply romantic.',
+      tags: ['years spanning', 'slow burn', 'emotional', 'complete'],
+      tagStyles: ['', '', '', 'sweet'],
+      wordCount: '160,000',
+      status: 'Complete',
+      url: 'https://archiveofourown.org/works/32535493'
+    },
+    {
+      section: '🐍 Dramione — The Essentials',
+      title: 'The Portrait of Draco Malfoy',
+      author: 'silverdragongemini',
+      summary: 'When Hermione begins restoring a magical portrait of Draco Malfoy, she doesn\'t expect it to feel like talking to a real person. Quiet, atmospheric, deeply emotional. Builds slowly and lingers long after.',
+      tags: ['magical realism', 'slow burn', 'unique premise', 'ongoing'],
+      tagStyles: ['sweet', '', '', ''],
+      wordCount: '200,000+',
+      status: 'Ongoing',
+      url: 'https://archiveofourown.org/works/56903314'
+    },
+    // ── SPICY & DARK DRAMIONE ──────────────────────────────────────────────
+    {
+      section: '🔥 Spicy & Dark — Dramione',
+      title: 'Apple Pies and Other Amends',
+      author: 'ToEatAPeach',
+      summary: 'Post-Hogwarts. Powerful Hermione, redeemed Draco. Deals with PTSD, angst, and a relationship that doesn\'t follow the rules. Mature-rated with adult situations and a lot of emotional complexity.',
+      tags: ['mature 🌶️', 'post-war', 'angst', 'complete'],
+      tagStyles: ['hot', '', '', 'sweet'],
+      wordCount: '85,000',
+      status: 'Complete',
+      url: 'https://archiveofourown.org/works/12345'
+    },
+    {
+      section: '🔥 Spicy & Dark — Dramione',
+      title: 'These Selfish Vows',
+      author: 'Multiple',
+      summary: '"Haunting Adeline meets Dramione" — masked stalker, satanic themes, unreliable plot that messes with your head. Dark Hermione, dark Draco, and the kind of story you can\'t look away from. Not for the faint-hearted.',
+      tags: ['very dark 🖤', 'stalker', 'spicy 🌶️', 'ongoing'],
+      tagStyles: ['dark', 'hot', 'hot', ''],
+      wordCount: '300,000+',
+      status: 'Ongoing',
+      url: 'https://archiveofourown.org/tags/Dark%20Hermione%20Granger*s*Draco%20Malfoy/works'
+    },
+    {
+      section: '🔥 Spicy & Dark — Dramione',
+      title: 'Secrets and Masks',
+      author: 'Emerald_Ashes',
+      summary: 'A masquerade, secrets, and two people who shouldn\'t want each other at all. High tension, beautifully paced, with the kind of chemistry that crackles off the page. One of the most consistently recommended spicy Dramiones.',
+      tags: ['masquerade', 'spicy 🌶️', 'slow burn', 'complete'],
+      tagStyles: ['', 'hot', '', 'sweet'],
+      wordCount: '95,000',
+      status: 'Complete',
+      url: 'https://archiveofourown.org/works/32535493'
+    },
+    // ── DARK ROMANCE — LIKE HAUNTING ADELINE ──────────────────────────────
+    {
+      section: '🖤 Dark Romance — If You Loved Haunting Adeline',
+      title: 'Haunting Adeline fanfic — Zade & Adeline',
+      author: 'Various authors',
+      summary: 'Can\'t get enough of Zade and Adeline? AO3 has an entire tag of Haunting Adeline fanfics — some extending their story, some reimagining scenes, some with new female leads stepping into Adeline\'s world.',
+      tags: ['dark romance', 'obsessive MMC', 'spicy 🌶️', 'various lengths'],
+      tagStyles: ['dark', 'dark', 'hot', ''],
+      wordCount: 'Various',
+      status: 'Various',
+      url: 'https://archiveofourown.org/tags/Zade%20Meadows*s*Adeline%20Reilly/works'
+    },
+    {
+      section: '🖤 Dark Romance — If You Loved Haunting Adeline',
+      title: 'Wait and Hope',
+      author: 'mightbewriting',
+      summary: 'Hermione wakes with no memory of the last six years — including her marriage to Draco Malfoy. Soft, painful, and emotionally devastating in the quietest way. Has since been published as a novel (Once, Again, Always).',
+      tags: ['amnesia', 'emotional', 'marriage fic', 'now a novel'],
+      tagStyles: ['', '', '', 'sweet'],
+      wordCount: '130,000',
+      status: 'Complete (now published)',
+      url: 'https://archiveofourown.org/works/38129524'
+    },
+    // ── AO3 QUICK LINKS ───────────────────────────────────────────────────
+    {
+      section: '🔍 Browse AO3 Directly',
+      title: 'All Dramione — sorted by kudos',
+      author: 'AO3 tag page',
+      summary: 'Browse every Draco/Hermione fic on AO3 sorted by most kudos — the highest rated and most loved stories at the top.',
+      tags: ['live search', 'Dramione', 'all ratings'],
+      tagStyles: ['sweet', '', ''],
+      wordCount: '—',
+      status: 'Live',
+      url: 'https://archiveofourown.org/tags/Draco%20Malfoy*s*Hermione%20Granger/works?work_search[sort_column]=kudos_count&work_search[sort_direction]=desc&work_search[complete]=T'
+    },
+    {
+      section: '🔍 Browse AO3 Directly',
+      title: 'New Dramione this week',
+      author: 'AO3 tag page',
+      summary: 'The freshest Dramione fics posted to AO3 in the last 7 days — great for finding new authors and stories before they get big.',
+      tags: ['live search', 'newest', 'Dramione'],
+      tagStyles: ['sweet', '', ''],
+      wordCount: '—',
+      status: 'Live',
+      url: 'https://archiveofourown.org/tags/Draco%20Malfoy*s*Hermione%20Granger/works?work_search[sort_column]=revised_at&work_search[sort_direction]=desc'
+    },
+    {
+      section: '🔍 Browse AO3 Directly',
+      title: 'Spicy completed Dramione',
+      author: 'AO3 tag page',
+      summary: 'Explicit completed Dramione fics sorted by kudos. Only finished works — no waiting for updates.',
+      tags: ['live search', 'explicit 🌶️', 'complete only'],
+      tagStyles: ['sweet', 'hot', 'sweet'],
+      wordCount: '—',
+      status: 'Live',
+      url: 'https://archiveofourown.org/tags/Draco%20Malfoy*s*Hermione%20Granger/works?work_search[sort_column]=kudos_count&work_search[sort_direction]=desc&work_search[complete]=T&work_search[rating_ids][]=13'
+    },
+    {
+      section: '🔍 Browse AO3 Directly',
+      title: 'Dark Dramione',
+      author: 'AO3 tag page',
+      summary: 'Dark-tagged Dramione fics — morally complex, villain Draco, dark themes. Perfect if Haunting Adeline is your vibe.',
+      tags: ['live search', 'dark 🖤', 'Dramione'],
+      tagStyles: ['sweet', 'dark', ''],
+      wordCount: '—',
+      status: 'Live',
+      url: 'https://archiveofourown.org/tags/Dark%20Hermione%20Granger*s*Draco%20Malfoy/works?work_search[sort_column]=kudos_count'
+    }
+  ];
+
+  function renderDiscover() {
+    const wrap = document.getElementById('discover-list');
+    if (!wrap) return;
+    const alreadyAdded = new Set(books.map(b => b.url).filter(Boolean));
+    let currentSection = '';
+    let html = '';
+    DISCOVER_FICS.forEach((fic, i) => {
+      if (fic.section !== currentSection) {
+        currentSection = fic.section;
+        html += `<div class="discover-section-h">${esc(fic.section)}</div>`;
+      }
+      const isAdded = alreadyAdded.has(fic.url);
+      const tagsHTML = fic.tags.map((t, ti) =>
+        `<span class="discover-tag ${fic.tagStyles[ti]||''}">${esc(t)}</span>`
+      ).join('');
+      html += `
+        <div class="discover-card">
+          <p class="discover-title">${esc(fic.title)}</p>
+          <p class="discover-author">by ${esc(fic.author)}</p>
+          ${fic.wordCount !== '—' ? `<p class="discover-wc">📖 ${esc(fic.wordCount)} words · ${esc(fic.status)}</p>` : `<p class="discover-wc">🔍 ${esc(fic.status)}</p>`}
+          <p class="discover-summary">${esc(fic.summary)}</p>
+          <div class="discover-tags">${tagsHTML}</div>
+          <div class="discover-actions">
+            <a href="${esc(fic.url)}" target="_blank" rel="noopener" class="discover-read-btn">Read on AO3 ↗</a>
+            <button class="discover-add-btn ${isAdded ? 'added' : ''}" data-i="${i}">${isAdded ? '✓ On shelf' : '+ Want to read'}</button>
+          </div>
+        </div>`;
+    });
+    wrap.innerHTML = html;
+    wrap.querySelectorAll('.discover-add-btn').forEach(btn => {
+      if (btn.classList.contains('added')) return;
+      btn.addEventListener('click', () => {
+        const fic = DISCOVER_FICS[parseInt(btn.dataset.i)];
+        if (!fic) return;
+        const book = {
+          id: uid(),
+          title: fic.title,
+          author: fic.author === 'AO3 tag page' ? '' : fic.author,
+          status: 'want',
+          rating: 0,
+          isAO3: true,
+          url: fic.url,
+          fandom: 'Harry Potter',
+          ship: fic.section.includes('Dramione') ? 'Draco/Hermione' : '',
+          notes: fic.summary,
+          dateAdded: new Date().toISOString().slice(0,10),
+          moods: [],
+          tags: fic.tags.filter(t => !t.includes('🌶️') && !t.includes('🖤') && !t.includes('live')).join(', ')
+        };
+        books.push(book);
+        saveBooks(book);
+        btn.textContent = '✓ On shelf';
+        btn.classList.add('added');
+        launchSparkles();
+        setTimeout(() => toast(pick(WANT_MESSAGES), true), 400);
+      });
+    });
+  }
   function updateStreak() {
     const today = new Date().toISOString().slice(0,10);
     const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0,10);
@@ -1249,7 +1610,7 @@ window.addEventListener('error', function(e) {
     const reading = books.filter(b => b.status === 'reading');
     if (reading.length === 0) { section.innerHTML = ''; return; }
     section.innerHTML = `
-      <div style="font-size:12px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.08em; font-weight:500; margin-bottom:6px;">📖 Currently reading</div>
+      <p class="reading-now-label">Currently reading</p>
       ${reading.map(b => {
         const coverInitial = (b.title||'?').charAt(0).toUpperCase();
         const coverHTML = b.cover ? `<img src="${esc(b.cover)}" alt="" onerror="this.parentElement.innerHTML='${esc(coverInitial)}'" />` : esc(coverInitial);
@@ -1270,7 +1631,7 @@ window.addEventListener('error', function(e) {
         if (!b) return;
         b.status = 'finished';
         b.dateFinished = new Date().toISOString().slice(0,10);
-        saveBooks();
+        saveBooks(b);
         updateStreak();
         renderLibrary();
         setTimeout(() => toast(pick(FINISHED_MESSAGES), true), 300);
@@ -1285,32 +1646,33 @@ window.addEventListener('error', function(e) {
     const finishedThisYear = books.filter(b => {
       if (b.status !== 'finished') return false;
       if (b.dateFinished) return b.dateFinished.startsWith(thisYear + '');
-      // No finish date — count it if it was added this year
       return (b.dateAdded || '').startsWith(thisYear + '');
     }).length;
-    let html = '';
-    if (streakData.count > 0) {
-      html += `<div class="streak-banner">
+
+    const streakHTML = streakData.count > 0 ? `
+      <div class="streak-box">
         <div class="streak-flame">🔥</div>
-        <div class="streak-text">
-          <h3>${streakData.count} day streak!</h3>
-          <p>Keep it up — you're on a roll</p>
+        <div>
+          <p class="streak-label">Streak</p>
+          <p class="streak-val">${streakData.count} day${streakData.count !== 1 ? 's' : ''}</p>
         </div>
-      </div>`;
-    }
-    if (readingGoal > 0) {
+      </div>` : '';
+
+    const goalHTML = readingGoal > 0 ? (() => {
       const pct = Math.min(100, Math.round(finishedThisYear / readingGoal * 100));
-      html += `<div class="goal-card">
-        <h3>Reading goal ${thisYear}</h3>
+      return `<div class="goal-box" style="${!streakHTML ? 'flex:1;' : ''}">
+        <p class="goal-box-label">Goal ${thisYear}</p>
+        <div class="goal-box-nums"><span>${finishedThisYear} of ${readingGoal}</span><span>${pct}%</span></div>
         <div class="goal-bar-track"><div class="goal-bar-fill" style="width:${pct}%"></div></div>
-        <div class="goal-nums"><span>${finishedThisYear} of ${readingGoal} books</span><span>${pct}%</span></div>
       </div>`;
-    } else {
-      html += `<div style="text-align:center; padding:8px 0 4px;">
-        <button id="set-goal-btn" style="background:transparent; border:1px dashed var(--line); border-radius:8px; padding:8px 16px; color:var(--ink-soft); font-size:13px; cursor:pointer; font-family:inherit;">🎯 Set a reading goal for ${thisYear}</button>
+    })() : `<div class="goal-box" style="${!streakHTML ? 'flex:1;' : ''}">
+        <button class="set-goal-inline" id="set-goal-btn">🎯 Set a reading goal for ${thisYear}</button>
       </div>`;
-    }
-    section.innerHTML = html;
+
+    section.innerHTML = streakHTML || goalHTML
+      ? `<div class="streak-goal-row">${streakHTML}${goalHTML}</div>`
+      : '';
+
     const goalBtn = document.getElementById('set-goal-btn');
     if (goalBtn) goalBtn.onclick = () => {
       const n = parseInt(prompt('How many books do you want to read this year?'));
@@ -1427,7 +1789,9 @@ window.addEventListener('error', function(e) {
   }
 
   function bookCardHTML(b) {
-    const tags = (b.tags||'').split(',').map(t=>t.trim()).filter(Boolean);
+    const allTags = (b.tags||'').split(',').map(t=>t.trim()).filter(Boolean);
+    const visibleTags = allTags.slice(0, 3);
+    const extraTags = allTags.length - 3;
     const dates = [];
     if (b.dateStarted) dates.push('Started ' + b.dateStarted);
     if (b.dateFinished) dates.push('Finished ' + b.dateFinished);
@@ -1435,7 +1799,8 @@ window.addEventListener('error', function(e) {
     const coverHTML = b.cover
       ? `<img src="${esc(b.cover)}" alt="" onerror="this.parentElement.innerHTML='${esc(coverInitial)}'" />`
       : esc(coverInitial);
-    const moodDisplay = (b.moods||[]).map(m => `<span class="mood-pill">${m}</span>`).join('');
+    const moodsDisplay = (b.moods||[]).length ? `<div class="stars" style="color:inherit; font-size:13px; letter-spacing:2px; margin-bottom:2px;">${(b.moods||[]).join('')}</div>` : '';
+    const noteText = b.quote ? `"${b.quote}"` : b.notes || '';
 
     return `
       <article class="book">
@@ -1444,7 +1809,7 @@ window.addEventListener('error', function(e) {
           <h3 class="book-title">${esc(b.title)}</h3>
           <p class="book-author">${esc(b.author || 'Unknown author')}</p>
           ${b.rating ? `<div class="stars">${renderStars(b.rating)}</div>` : ''}
-          ${moodDisplay ? `<div style="margin-top:4px; display:flex; gap:3px; flex-wrap:wrap;">${moodDisplay}</div>` : ''}
+          ${moodsDisplay}
           <div class="book-meta">
             <span class="status-pill ${b.status||'want'}">${statusLabel(b.status)}</span>
             ${b.isAO3 ? '<span class="ao3-pill">AO3</span>' : ''}
@@ -1452,13 +1817,13 @@ window.addEventListener('error', function(e) {
             ${b.ship ? `<span class="tag-pill">${esc(b.ship)}</span>` : ''}
             ${b.genre ? `<span class="tag-pill">${esc(b.genre)}</span>` : ''}
             ${b.pages ? `<span class="tag-pill">${b.pages}p</span>` : ''}
-            ${b.wordCount ? `<span class="tag-pill">${Number(b.wordCount).toLocaleString()} words</span>` : ''}
-            ${b.chapters ? `<span class="tag-pill">${esc(b.chapters)} ch</span>` : ''}
-            ${tags.map(t => `<span class="tag-pill">#${esc(t)}</span>`).join('')}
+            ${b.wordCount ? `<span class="tag-pill">${Number(b.wordCount).toLocaleString()}w</span>` : ''}
+            ${b.chapters ? `<span class="tag-pill">${esc(b.chapters)}ch</span>` : ''}
+            ${visibleTags.map(t => `<span class="tag-pill">#${esc(t)}</span>`).join('')}
+            ${extraTags > 0 ? `<span class="tag-pill">+${extraTags}</span>` : ''}
           </div>
           ${dates.length ? `<div class="book-dates">${dates.join(' · ')}</div>` : ''}
-          ${b.notes ? `<div class="book-notes">${esc(b.notes)}</div>` : ''}
-          ${b.quote ? `<div class="quote-display">"${esc(b.quote)}"</div>` : ''}
+          ${noteText ? `<div class="book-notes">${esc(noteText)}</div>` : ''}
         </div>
         <div class="book-actions">
           ${b.url ? `
@@ -1482,17 +1847,21 @@ window.addEventListener('error', function(e) {
   function renderLibrary() {
     renderReadingNow();
     renderStreakGoal();
-    // Shelf filter chips
+    // Single combined filter row — shelves + status chips together
     const shelfRow = document.getElementById('shelf-row');
-    if (shelfRow) {
-      if (shelves.length > 0) {
-        shelfRow.style.display = 'flex';
-        shelfRow.innerHTML = `<button class="shelf-chip ${!currentShelfFilter?'active':''}" data-shelf="">All shelves</button>` +
-          shelves.map(s => `<button class="shelf-chip ${currentShelfFilter===s.id?'active':''}" data-shelf="${s.id}">${esc(s.name)}</button>`).join('');
-        shelfRow.querySelectorAll('.shelf-chip').forEach(c => {
-          c.onclick = () => { currentShelfFilter = c.dataset.shelf || null; renderLibrary(); };
-        });
-      } else { shelfRow.style.display = 'none'; }
+    const filterRow = document.getElementById('filter-row');
+    if (shelfRow && shelves.length > 0) {
+      shelfRow.style.display = 'flex';
+      shelfRow.innerHTML = shelves.map(s =>
+        `<button class="chip ${currentShelfFilter===s.id?'active':''}" data-shelf="${s.id}">${esc(s.name)}</button>`
+      ).join('');
+      shelfRow.querySelectorAll('[data-shelf]').forEach(c => {
+        c.onclick = () => { currentShelfFilter = c.dataset.shelf || null; renderLibrary(); };
+      });
+      if (filterRow) filterRow.style.display = 'none';
+    } else {
+      if (shelfRow) shelfRow.style.display = 'none';
+      if (filterRow) filterRow.style.display = 'flex';
     }
     const list = getFiltered();
     const total = books.length;
@@ -1551,6 +1920,7 @@ window.addEventListener('error', function(e) {
     if (b && confirm(`Remove "${b.title}" from your shelf?`)) {
       books = books.filter(x => x.id !== id);
       saveBooks();
+      deleteFromSupabase(id);
       renderLibrary();
       toast('Removed');
     }
@@ -1976,7 +2346,7 @@ window.addEventListener('error', function(e) {
       if (idx >= 0) {
         const prev = books[idx];
         books[idx] = { ...prev, ...data };
-        // check if status changed
+        saveBooks(books[idx]);
         if (data.status === 'finished' && prev.status !== 'finished') {
           setTimeout(() => toast(pick(FINISHED_MESSAGES), true), 400);
         } else if (data.status === 'reading' && prev.status !== 'reading') {
@@ -1989,6 +2359,7 @@ window.addEventListener('error', function(e) {
       data.id = uid();
       data.dateAdded = new Date().toISOString().slice(0,10);
       books.push(data);
+      saveBooks(data);
       if (data.status === 'finished') {
         updateStreak();
         setTimeout(() => toast(pick(FINISHED_MESSAGES), true), 400);
