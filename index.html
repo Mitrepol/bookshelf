@@ -1847,21 +1847,27 @@ window.addEventListener('error', function(e) {
   function renderLibrary() {
     renderReadingNow();
     renderStreakGoal();
-    // Single combined filter row — shelves + status chips together
-    const shelfRow = document.getElementById('shelf-row');
+    // Status chips always visible
     const filterRow = document.getElementById('filter-row');
-    if (shelfRow && shelves.length > 0) {
-      shelfRow.style.display = 'flex';
-      shelfRow.innerHTML = shelves.map(s =>
-        `<button class="chip ${currentShelfFilter===s.id?'active':''}" data-shelf="${s.id}">${esc(s.name)}</button>`
-      ).join('');
-      shelfRow.querySelectorAll('[data-shelf]').forEach(c => {
-        c.onclick = () => { currentShelfFilter = c.dataset.shelf || null; renderLibrary(); };
-      });
-      if (filterRow) filterRow.style.display = 'none';
-    } else {
-      if (shelfRow) shelfRow.style.display = 'none';
-      if (filterRow) filterRow.style.display = 'flex';
+    if (filterRow) filterRow.style.display = 'flex';
+
+    // Shelf chips as an extra row above, only when shelves exist
+    const shelfRow = document.getElementById('shelf-row');
+    if (shelfRow) {
+      if (shelves.length > 0) {
+        shelfRow.style.display = 'flex';
+        shelfRow.innerHTML =
+          `<button class="chip ${!currentShelfFilter?'active':''}" data-shelf="">All shelves</button>` +
+          shelves.map(s =>
+            `<button class="chip ${currentShelfFilter===s.id?'active':''}" data-shelf="${s.id}">${esc(s.name)}</button>`
+          ).join('');
+        shelfRow.querySelectorAll('[data-shelf]').forEach(c => {
+          c.onclick = () => { currentShelfFilter = c.dataset.shelf || null; renderLibrary(); };
+        });
+      } else {
+        shelfRow.style.display = 'none';
+        currentShelfFilter = null;
+      }
     }
     const list = getFiltered();
     const total = books.length;
