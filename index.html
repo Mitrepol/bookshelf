@@ -315,6 +315,55 @@
   .discover-wc { font-size:11px; color:var(--ink-faint); margin-bottom:6px; }
 </style>
 
+<style>
+  /* PIN lock screen */
+  .pin-screen { position: fixed; inset: 0; background: #3d2b1f; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+  .pin-screen.hidden { display: none; }
+  .pin-raccoon { font-size: 52px; margin-bottom: 0.5rem; }
+  .pin-title { font-family: 'Fraunces', Georgia, serif; font-size: 24px; color: #f0e0c0; font-weight: 400; margin-bottom: 0.25rem; text-align: center; }
+  .pin-sub { font-size: 13px; color: #b09880; margin-bottom: 2rem; text-align: center; }
+  .pin-dots { display: flex; gap: 14px; margin-bottom: 2rem; }
+  .pin-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 0.15s; }
+  .pin-dot.filled { background: #d4a85a; }
+  .pin-dot.error { background: #e08080; }
+  .pin-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 280px; width: 100%; }
+  .pin-key { background: rgba(255,255,255,0.08); border: none; border-radius: 12px; height: 68px; font-size: 24px; font-weight: 400; color: #f0e0c0; cursor: pointer; font-family: 'Fraunces', serif; transition: background 0.1s; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
+  .pin-key:active { background: rgba(255,255,255,0.2); }
+  .pin-key.del { font-size: 18px; font-family: inherit; }
+  .pin-key.empty { background: transparent; cursor: default; }
+  .pin-error { font-size: 13px; color: #e08080; margin-top: 1rem; min-height: 20px; text-align: center; }
+  .pin-setup { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 1.5rem; text-align: center; cursor: pointer; text-decoration: underline; }
+</style>
+
+<!-- PIN lock screen -->
+<div class="pin-screen" id="pin-screen">
+  <div class="pin-raccoon">🦝</div>
+  <h1 class="pin-title" id="pin-title">Kelly's Fandom Bookshelf</h1>
+  <p class="pin-sub" id="pin-sub">Enter your PIN</p>
+  <div class="pin-dots" id="pin-dots">
+    <div class="pin-dot" id="dot-0"></div>
+    <div class="pin-dot" id="dot-1"></div>
+    <div class="pin-dot" id="dot-2"></div>
+    <div class="pin-dot" id="dot-3"></div>
+  </div>
+  <div class="pin-keypad">
+    <button class="pin-key" data-n="1">1</button>
+    <button class="pin-key" data-n="2">2</button>
+    <button class="pin-key" data-n="3">3</button>
+    <button class="pin-key" data-n="4">4</button>
+    <button class="pin-key" data-n="5">5</button>
+    <button class="pin-key" data-n="6">6</button>
+    <button class="pin-key" data-n="7">7</button>
+    <button class="pin-key" data-n="8">8</button>
+    <button class="pin-key" data-n="9">9</button>
+    <div class="pin-key empty"></div>
+    <button class="pin-key" data-n="0">0</button>
+    <button class="pin-key del" id="pin-del">⌫</button>
+  </div>
+  <div class="pin-error" id="pin-error"></div>
+  <p class="pin-setup" id="pin-reset" style="display:none;">Forgot PIN? Reset</p>
+</div>
+
 <div class="container">
 
   <!-- LIBRARY -->
@@ -794,8 +843,195 @@ window.addEventListener('error', function(e) {
   setTimeout(() => d.remove(), 8000);
 });
 (function(){
-  // ========================================================================
-  // SUPABASE CONFIG
+  // ---------- PIN LOCK ----------
+  const PIN_KEY = 'bookshelf-pin-v1';
+  const PIN_UNLOCKED_KEY = 'bookshelf-pin-unlocked-v1';
+  let pinEntry = '';
+  let pinMode = 'enter'; // 'setup' | 'confirm' | 'enter'
+  let pinSetupFirst = '';
+
+  function getStoredPin() {
+    return localStorage.getItem(PIN_KEY) || null;
+  }
+
+  async function savePinToSupabase(pin) {
+    try {
+      await fetch(`https://cedmzupepebyjykrjblq.supabase.co/rest/v1/settings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlZG16dXBlcGVieWp5a3JqYmxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NTM2MjYsImV4cCI6MjA5NjUyOTYyNn0.plLUAfH1iY_0WJafnJxpS4h_yjCy1k5vfPlc_SNUOLM',
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlZG16dXBlcGVieWp5a3JqYmxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NTM2MjYsImV4cCI6MjA5NjUyOTYyNn0.plLUAfH1iY_0WJafnJxpS4h_yjCy1k5vfPlc_SNUOLM`,
+          'Prefer': 'resolution=merge-duplicates'
+        },
+        body: JSON.stringify({ key: 'kelly_pin', value: pin, updated_at: new Date().toISOString() })
+      });
+    } catch(e) { console.warn('PIN sync failed:', e.message); }
+  }
+
+  function updatePinDots() {
+    const dots = document.getElementById('pin-dots');
+    if (!dots) return;
+    const len = pinEntry.length;
+    // Dynamically show as many dots as digits entered (min 4)
+    const total = Math.max(4, len);
+    dots.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'pin-dot' + (i < len ? ' filled' : '');
+      dots.appendChild(dot);
+    }
+  }
+
+  function shakeDots() {
+    const dots = document.getElementById('pin-dots');
+    if (!dots) return;
+    Array.from(dots.children).forEach(d => d.classList.add('error'));
+    dots.style.animation = 'shake 0.4s ease';
+    setTimeout(() => {
+      dots.style.animation = '';
+      Array.from(dots.children).forEach(d => d.classList.remove('error'));
+    }, 500);
+  }
+
+  function setPinError(msg) {
+    const el = document.getElementById('pin-error');
+    if (el) el.textContent = msg;
+  }
+
+  function unlockApp() {
+    const screen = document.getElementById('pin-screen');
+    if (screen) screen.classList.add('hidden');
+    // Mark as unlocked for this session
+    sessionStorage.setItem(PIN_UNLOCKED_KEY, '1');
+  }
+
+  function handlePinInput(digit) {
+    pinEntry += digit;
+    updatePinDots();
+    setPinError('');
+
+    if (pinMode === 'setup') {
+      // Just collecting — no min length enforced during entry
+      return;
+    }
+
+    if (pinMode === 'confirm') {
+      if (pinEntry.length === pinSetupFirst.length) {
+        if (pinEntry === pinSetupFirst) {
+          localStorage.setItem(PIN_KEY, pinEntry);
+          savePinToSupabase(pinEntry);
+          setPinError('');
+          unlockApp();
+        } else {
+          shakeDots();
+          setPinError('PINs don\'t match — try again');
+          pinEntry = '';
+          pinSetupFirst = '';
+          pinMode = 'setup';
+          document.getElementById('pin-title').textContent = 'Create your PIN';
+          document.getElementById('pin-sub').textContent = 'Choose any number of digits';
+          updatePinDots();
+        }
+      }
+      return;
+    }
+
+    if (pinMode === 'enter') {
+      const stored = getStoredPin();
+      if (pinEntry === stored) {
+        unlockApp();
+      } else if (pinEntry.length >= stored.length) {
+        shakeDots();
+        setPinError('Incorrect PIN');
+        pinEntry = '';
+        updatePinDots();
+      }
+    }
+  }
+
+  function handlePinDelete() {
+    if (pinEntry.length > 0) {
+      pinEntry = pinEntry.slice(0, -1);
+      updatePinDots();
+      setPinError('');
+    }
+  }
+
+  function handlePinConfirm() {
+    // Called when user taps a confirm button in setup mode
+    if (pinMode === 'setup') {
+      if (pinEntry.length < 1) { setPinError('Please enter at least 1 digit'); return; }
+      pinSetupFirst = pinEntry;
+      pinEntry = '';
+      pinMode = 'confirm';
+      document.getElementById('pin-title').textContent = 'Confirm your PIN';
+      document.getElementById('pin-sub').textContent = 'Enter it again to confirm';
+      updatePinDots();
+    }
+  }
+
+  function initPinScreen() {
+    const stored = getStoredPin();
+    const screen = document.getElementById('pin-screen');
+
+    // If already unlocked this session, skip
+    if (sessionStorage.getItem(PIN_UNLOCKED_KEY)) {
+      if (screen) screen.classList.add('hidden');
+      return;
+    }
+
+    if (!stored) {
+      // First time — setup mode
+      pinMode = 'setup';
+      document.getElementById('pin-title').textContent = 'Create your PIN';
+      document.getElementById('pin-sub').textContent = 'Choose any number of digits';
+      // Add a confirm button for setup
+      const keypad = document.querySelector('.pin-keypad');
+      if (keypad) {
+        const confirmBtn = document.createElement('button');
+        confirmBtn.className = 'pin-key';
+        confirmBtn.id = 'pin-confirm';
+        confirmBtn.style.cssText = 'grid-column: span 3; background: rgba(212,168,90,0.3); color: #d4a85a; font-size: 15px; font-family: inherit; height: 52px;';
+        confirmBtn.textContent = 'Set PIN ✓';
+        confirmBtn.addEventListener('click', handlePinConfirm);
+        keypad.appendChild(confirmBtn);
+      }
+    } else {
+      // Enter mode
+      pinMode = 'enter';
+      document.getElementById('pin-title').textContent = 'Kelly\'s Fandom Bookshelf';
+      document.getElementById('pin-sub').textContent = 'Enter your PIN';
+      const resetBtn = document.getElementById('pin-reset');
+      if (resetBtn) resetBtn.style.display = 'block';
+    }
+
+    // Wire up keypad
+    document.querySelectorAll('.pin-key[data-n]').forEach(btn => {
+      btn.addEventListener('click', () => handlePinInput(btn.dataset.n));
+    });
+    document.getElementById('pin-del').addEventListener('click', handlePinDelete);
+
+    // Reset PIN (in case she forgets)
+    const resetBtn = document.getElementById('pin-reset');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (confirm('Reset your PIN? You\'ll need to set a new one.')) {
+          localStorage.removeItem(PIN_KEY);
+          location.reload();
+        }
+      });
+    }
+  }
+
+  // Add shake animation to page
+  const shakeStyle = document.createElement('style');
+  shakeStyle.textContent = '@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)} }';
+  document.head.appendChild(shakeStyle);
+
+  initPinScreen();
+
+  // ---------- STORAGE KEYS ----------
   // ========================================================================
   const SUPABASE_URL = "https://cedmzupepebyjykrjblq.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlZG16dXBlcGVieWp5a3JqYmxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NTM2MjYsImV4cCI6MjA5NjUyOTYyNn0.plLUAfH1iY_0WJafnJxpS4h_yjCy1k5vfPlc_SNUOLM";
@@ -2853,17 +3089,11 @@ window.addEventListener('error', function(e) {
   // (delay so she's using the app before we ask permission)
   setTimeout(registerPush, 3000);
 
-  // Silently sync with Supabase in the background
+  // Supabase sync — push up only, never pull down
+  // This means her data stays on her phone and syncs TO Supabase
+  // but opening the URL on another device won't pull her data down
   (async () => {
-    const loaded = await loadFromSupabase();
-    if (loaded) {
-      // Remote had data — refresh the UI silently
-      renderLibrary();
-      renderStreakGoal();
-      renderReadingNow();
-      checkAnniversaries();
-    } else if (books.length > 0) {
-      // No remote data yet — push everything local up
+    if (books.length > 0) {
       bulkSyncToSupabase();
     }
   })();
