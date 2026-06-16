@@ -799,6 +799,7 @@ window.addEventListener('error', function(e) {
   // ========================================================================
   const SUPABASE_URL = "https://cedmzupepebyjykrjblq.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlZG16dXBlcGVieWp5a3JqYmxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NTM2MjYsImV4cCI6MjA5NjUyOTYyNn0.plLUAfH1iY_0WJafnJxpS4h_yjCy1k5vfPlc_SNUOLM";
+  const VAPID_PUBLIC_KEY = 'BK-Uzl8uGw6wPbtpKj3ufQnAnylfQzfU6Pqn-luE5EQFqynD5F6f-McYEmX00p03iBaNxEk8eKKXhxp6qK_ZGSE';
   // ========================================================================
 
   const STORAGE_KEY = 'bookshelf-v1';
@@ -2797,6 +2798,48 @@ window.addEventListener('error', function(e) {
     }
   });
 
+  // ---------- PUSH NOTIFICATIONS ----------
+  async function registerPush() {
+    if (!('serviceWorker' in navigator) || !('PushManager' in window)) return;
+    try {
+      const reg = await navigator.serviceWorker.register('/bookshelf/sw.js');
+      await navigator.serviceWorker.ready;
+      const existing = await reg.pushManager.getSubscription();
+      if (existing) return; // already registered
+
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') return;
+
+      const sub = await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+      });
+
+      const subJson = sub.toJSON();
+      await fetch(`${SUPABASE_URL}/rest/v1/push_subscriptions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'resolution=merge-duplicates'
+        },
+        body: JSON.stringify({
+          endpoint: subJson.endpoint,
+          p256dh: subJson.keys.p256dh,
+          auth: subJson.keys.auth
+        })
+      });
+    } catch(e) { console.warn('Push registration failed:', e.message); }
+  }
+
+  function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+    const rawData = atob(base64);
+    return Uint8Array.from([...rawData].map(c => c.charCodeAt(0)));
+  }
+
   // ---------- INIT ----------
   loadBooks();
   resetForm();
@@ -2805,6 +2848,10 @@ window.addEventListener('error', function(e) {
   renderLibrary();
   checkAnniversaries();
   receiveBookmarkletData();
+
+  // Register for push notifications after 3 seconds
+  // (delay so she's using the app before we ask permission)
+  setTimeout(registerPush, 3000);
 
   // Silently sync with Supabase in the background
   (async () => {
