@@ -31,7 +31,7 @@
 <div class="card">
   <div class="raccoon">🦝</div>
   <h1>Send Kelly a notification</h1>
-  <p class="sub">She'll get this on her phone instantly</p>
+  <p class="sub">She'll see this next time she opens the app</p>
 
   <label>Title</label>
   <input type="text" id="notif-title" value="Kelly's Fandom Bookshelf 🦝" />
@@ -51,12 +51,13 @@
 
   <hr class="divider" />
 
-  <button class="send-btn" id="send-btn">Send notification 📱</button>
+  <button class="send-btn" id="send-btn">Send message 💚</button>
   <div class="result" id="result"></div>
 </div>
 
 <script>
   const FUNCTION_URL = 'https://cedmzupepebyjykrjblq.supabase.co/functions/v1/swift-handler';
+  const SUPABASE_URL = 'https://cedmzupepebyjykrjblq.supabase.co';
   const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlZG16dXBlcGVieWp5a3JqYmxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NTM2MjYsImV4cCI6MjA5NjUyOTYyNn0.plLUAfH1iY_0WJafnJxpS4h_yjCy1k5vfPlc_SNUOLM';
 
   // Quick message buttons
@@ -83,27 +84,31 @@
     result.className = 'result';
 
     try {
-      const res = await fetch(FUNCTION_URL, {
+      // Save the message to Supabase — appears as a banner in her app
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/messages`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'apikey': ANON_KEY,
           'Authorization': `Bearer ${ANON_KEY}`
         },
-        body: JSON.stringify({ title, body })
+        body: JSON.stringify({ title, body, dismissed: false })
       });
 
-      const data = await res.json();
-
-      if (res.ok && data.sent > 0) {
+      if (res.ok) {
         result.className = 'result success';
-        result.textContent = `✓ Sent to ${data.sent} device${data.sent !== 1 ? 's' : ''}!`;
+        result.textContent = '✓ Message sent! She\'ll see it next time she opens the app 💚';
         document.getElementById('notif-body').value = '';
-      } else if (data.message === 'No subscriptions found') {
-        result.className = 'result error';
-        result.textContent = 'No devices registered yet — Kelly needs to open the app and allow notifications first';
+
+        // Also try the push notification (in case it works on her device)
+        fetch(FUNCTION_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${ANON_KEY}` },
+          body: JSON.stringify({ title, body })
+        }).catch(() => {});
       } else {
         result.className = 'result error';
-        result.textContent = `Something went wrong: ${JSON.stringify(data)}`;
+        result.textContent = 'Something went wrong saving the message';
       }
     } catch(e) {
       result.className = 'result error';
@@ -111,7 +116,7 @@
     }
 
     btn.disabled = false;
-    btn.textContent = 'Send notification 📱';
+    btn.textContent = 'Send message 💚';
   });
 </script>
 </body>
