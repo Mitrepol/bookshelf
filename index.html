@@ -3044,6 +3044,8 @@ window.addEventListener('error', function(e) {
   });
 
   // ---------- IN-APP MESSAGES ----------
+  let currentMessageId = null;
+
   async function checkMessages() {
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/messages?dismissed=eq.false&order=created_at.desc&limit=1`, {
@@ -3054,12 +3056,20 @@ window.addEventListener('error', function(e) {
       });
       if (!res.ok) return;
       const messages = await res.json();
-      if (!Array.isArray(messages) || messages.length === 0) return;
-
-      const msg = messages[0];
       const section = document.getElementById('message-banner-section');
       if (!section) return;
 
+      if (!Array.isArray(messages) || messages.length === 0) {
+        // No undismissed messages — clear any shown banner
+        if (currentMessageId) { section.innerHTML = ''; currentMessageId = null; }
+        return;
+      }
+
+      const msg = messages[0];
+      // Already showing this one — don't re-render
+      if (msg.id === currentMessageId) return;
+
+      currentMessageId = msg.id;
       section.innerHTML = `
         <div class="msg-banner">
           <button class="msg-banner-close" id="msg-close-btn">✕</button>
@@ -3071,9 +3081,10 @@ window.addEventListener('error', function(e) {
 
       document.getElementById('msg-close-btn').onclick = async () => {
         section.innerHTML = '';
-        // Mark as dismissed in Supabase
+        const dismissedId = currentMessageId;
+        currentMessageId = null;
         try {
-          await fetch(`${SUPABASE_URL}/rest/v1/messages?id=eq.${msg.id}`, {
+          await fetch(`${SUPABASE_URL}/rest/v1/messages?id=eq.${dismissedId}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -3086,6 +3097,9 @@ window.addEventListener('error', function(e) {
       };
     } catch(e) { console.warn('Message check failed:', e.message); }
   }
+
+  // Poll for new messages every 30 seconds while the app is open
+  setInterval(checkMessages, 30000);
 
   // ---------- PUSH NOTIFICATIONS ----------
   async function registerPush() {
