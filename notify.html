@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Send Kelly a notification</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #3d2b1f; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+  .card { background: #faf6ee; border-radius: 18px; padding: 2rem; max-width: 420px; width: 100%; }
+  .raccoon { font-size: 48px; text-align: center; margin-bottom: 0.5rem; }
+  h1 { font-family: Georgia, serif; font-size: 22px; font-weight: 400; text-align: center; color: #3d2b1f; margin-bottom: 0.25rem; }
+  .sub { font-size: 13px; color: #8a7a62; text-align: center; margin-bottom: 1.5rem; }
+  label { display: block; font-size: 12px; color: #6a5040; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; margin-bottom: 6px; }
+  input, textarea { width: 100%; padding: 11px 14px; border: 1px solid #d4c4a8; border-radius: 10px; font-family: inherit; font-size: 15px; color: #2e2018; background: #fff; outline: none; margin-bottom: 14px; }
+  input:focus, textarea:focus { border-color: #5a7a5a; }
+  textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
+  .quick-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .quick-btn { background: #e8dcc8; border: none; border-radius: 999px; padding: 5px 12px; font-size: 12px; color: #6a5040; cursor: pointer; font-family: inherit; transition: background 0.15s; }
+  .quick-btn:hover { background: #d4c4a8; }
+  .send-btn { width: 100%; padding: 13px; background: #3d5a47; color: white; border: none; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer; transition: opacity 0.15s; }
+  .send-btn:hover { opacity: 0.9; }
+  .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .result { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 13px; text-align: center; display: none; }
+  .result.success { background: #eaf3de; color: #3b6d11; display: block; }
+  .result.error { background: #fcebeb; color: #791f1f; display: block; }
+  .divider { border: none; border-top: 1px solid #e0d0b8; margin: 1.25rem 0; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="raccoon">🦝</div>
+  <h1>Send Kelly a notification</h1>
+  <p class="sub">She'll get this on her phone instantly</p>
+
+  <label>Title</label>
+  <input type="text" id="notif-title" value="Kelly's Fandom Bookshelf 🦝" />
+
+  <label>Message</label>
+  <textarea id="notif-body" placeholder="Type your message here…"></textarea>
+
+  <label>Quick messages</label>
+  <div class="quick-btns">
+    <button class="quick-btn" data-msg="You haven't logged a read in a while — your streak misses you! 🔥">Streak reminder</button>
+    <button class="quick-btn" data-msg="New fic recommendations have been added to your Discover tab! ✨">New recs added</button>
+    <button class="quick-btn" data-msg="It's been a while since your last backup — tap to export 💾">Backup reminder</button>
+    <button class="quick-btn" data-msg="Hey love, what are you reading this weekend? 📖💚">Weekend check-in</button>
+    <button class="quick-btn" data-msg="Just thinking of you 💚 Happy reading!">Thinking of you</button>
+    <button class="quick-btn" data-msg="Your reading goal is so close! One more book to hit your target 🎯">Goal reminder</button>
+  </div>
+
+  <hr class="divider" />
+
+  <button class="send-btn" id="send-btn">Send notification 📱</button>
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+  const FUNCTION_URL = 'https://cedmzupepebyjykrjblq.supabase.co/functions/v1/swift-handler';
+  const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlZG16dXBlcGVieWp5a3JqYmxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NTM2MjYsImV4cCI6MjA5NjUyOTYyNn0.plLUAfH1iY_0WJafnJxpS4h_yjCy1k5vfPlc_SNUOLM';
+
+  // Quick message buttons
+  document.querySelectorAll('.quick-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.getElementById('notif-body').value = btn.dataset.msg;
+    });
+  });
+
+  document.getElementById('send-btn').addEventListener('click', async () => {
+    const title = document.getElementById('notif-title').value.trim();
+    const body = document.getElementById('notif-body').value.trim();
+    const result = document.getElementById('result');
+    const btn = document.getElementById('send-btn');
+
+    if (!body) {
+      result.className = 'result error';
+      result.textContent = 'Please type a message first';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    result.className = 'result';
+
+    try {
+      const res = await fetch(FUNCTION_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${ANON_KEY}`
+        },
+        body: JSON.stringify({ title, body })
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.sent > 0) {
+        result.className = 'result success';
+        result.textContent = `✓ Sent to ${data.sent} device${data.sent !== 1 ? 's' : ''}!`;
+        document.getElementById('notif-body').value = '';
+      } else if (data.message === 'No subscriptions found') {
+        result.className = 'result error';
+        result.textContent = 'No devices registered yet — Kelly needs to open the app and allow notifications first';
+      } else {
+        result.className = 'result error';
+        result.textContent = `Something went wrong: ${JSON.stringify(data)}`;
+      }
+    } catch(e) {
+      result.className = 'result error';
+      result.textContent = `Error: ${e.message}`;
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Send notification 📱';
+  });
+</script>
+</body>
+</html>
