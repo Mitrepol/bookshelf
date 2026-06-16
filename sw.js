@@ -1,4 +1,4 @@
-// Service Worker for Kelly's Fandom Bookshelf
+// Service Worker for Kelly's Fandom Bookshelf v2
 // Handles push notifications
 
 self.addEventListener('push', event => {
