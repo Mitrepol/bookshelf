@@ -3056,9 +3056,29 @@ window.addEventListener('error', function(e) {
         });
       }
 
-      // Always save to Supabase — ensures it's there even if previously deleted
+      // Always save to Supabase using getKey() for correct raw format
       if (sub) {
-        const subJson = sub.toJSON();
+        const endpoint = sub.endpoint;
+
+        // Get raw key bytes directly — most reliable method
+        const p256dhBuffer = await sub.getKey('p256dh');
+        const authBuffer = await sub.getKey('auth');
+
+        if (!p256dhBuffer || !authBuffer) {
+          console.error('Could not get subscription keys');
+          return;
+        }
+
+        // Convert to base64url (no padding, url-safe)
+        const toBase64Url = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)))
+          .replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+
+        const p256dh = toBase64Url(p256dhBuffer);
+        const auth = toBase64Url(authBuffer);
+
+        console.log('p256dh decoded length:', new Uint8Array(p256dhBuffer).length, '(should be 65)');
+        console.log('auth decoded length:', new Uint8Array(authBuffer).length, '(should be 16)');
+
         await fetch(`${SUPABASE_URL}/rest/v1/push_subscriptions`, {
           method: 'POST',
           headers: {
@@ -3067,11 +3087,7 @@ window.addEventListener('error', function(e) {
             'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
             'Prefer': 'resolution=merge-duplicates'
           },
-          body: JSON.stringify({
-            endpoint: subJson.endpoint,
-            p256dh: subJson.keys?.p256dh,
-            auth: subJson.keys?.auth
-          })
+          body: JSON.stringify({ endpoint, p256dh, auth })
         });
       }
     } catch(e) {
