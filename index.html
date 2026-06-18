@@ -110,7 +110,7 @@
   .tag-pill { font-size: 11px; padding: 2px 7px; border-radius: 999px; background: var(--bg-alt); color: var(--ink-soft); }
   .stars { color: var(--gold); font-size: 12px; letter-spacing: 1px; margin-bottom: 2px; }
   .stars .off { color: var(--line); }
-  .book-notes { font-size: 12px; color: var(--ink-soft); margin-top: 5px; line-height: 1.4; font-style: italic; padding-left: 8px; border-left: 2px solid var(--line); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .book-notes { font-size: 13px; color: var(--ink-soft); margin-top: 6px; line-height: 1.5; font-style: italic; padding-left: 8px; border-left: 2px solid var(--line); white-space: pre-wrap; overflow-wrap: break-word; }
   .book-dates { font-size: 11px; color: var(--ink-faint); margin-top: 4px; letter-spacing: 0.02em; }
   .book-actions { display: flex; flex-direction: column; gap: 3px; }
   .icon-btn { background: transparent; border: 0.5px solid var(--line-soft); border-radius: 6px; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-faint); padding: 0; }
@@ -177,16 +177,13 @@
   .cover-clear { font-size: 12px; color: var(--dnf); background: transparent; border: none; cursor: pointer; padding: 4px 0; font-family: inherit; display: none; }
 
   /* Stats */
-  /* stacked swipable deck */
-  .stat-deck { position: relative; width: 220px; height: 220px; margin: 8px auto 1.25rem; touch-action: none; user-select: none; }
-  .stat-deck-hint { text-align: center; font-size: 12px; color: var(--ink-faint); margin: 0 0 1rem; letter-spacing: 0.05em; }
-  .stat-card { position: absolute; inset: 0; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--bg-card); border: 1px solid var(--gold); border-radius: 20px; padding: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.35); cursor: grab; transition: transform 0.45s cubic-bezier(.22,.61,.36,1), opacity 0.45s ease, filter 0.45s ease; will-change: transform, opacity; }
-  .stat-card.dragging { transition: none; cursor: grabbing; }
-  .stat-card .stat-pip { position: absolute; bottom: 12px; left: 0; right: 0; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.12em; }
-  .stat-label { font-size: 11px; color: var(--ink-soft); margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
-  .stat-num { font-family: 'Fraunces', serif; font-size: 40px; margin: 0; color: var(--ink); font-weight: 400; line-height: 1; }
-  .stat-num.small { font-size: 30px; }
-  .stat-sub { font-size: 11px; color: var(--ink-faint); margin: 2px 0 0; }
+  /* laid-out grid of square stat cards */
+  .stat-deck { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9px; margin: 8px 0 1.25rem; }
+  .stat-card { box-sizing: border-box; aspect-ratio: 1 / 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--bg-card); border: 1px solid var(--gold); border-radius: 14px; padding: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+  .stat-label { font-size: 9.5px; color: var(--ink-soft); margin: 0 0 3px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; line-height: 1.2; }
+  .stat-num { font-family: 'Fraunces', serif; font-size: 24px; margin: 0; color: var(--ink); font-weight: 400; line-height: 1; }
+  .stat-num.small { font-size: 18px; }
+  .stat-sub { font-size: 9.5px; color: var(--ink-faint); margin: 2px 0 0; }
   .section-h { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin: 1.5rem 0 0.75rem; }
   .ranked-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 14px; }
   .ranked-row:last-child { border-bottom: none; }
@@ -2570,13 +2567,6 @@ window.addEventListener('error', function(e) {
           </div>
           ${dates.length ? `<div class="book-dates">${dates.join(' · ')}</div>` : ''}
           ${noteText ? `<div class="book-notes">${esc(noteText)}</div>` : ''}
-          ${b.spotifyUrl ? `
-            <div class="soundtrack-bar" data-spotify="${esc(b.spotifyUrl)}" data-id="${b.id}">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="#1ed760"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-              <span class="soundtrack-bar-text">🎵 Reading soundtrack</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1ed760" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
-            <div class="soundtrack-embed" id="soundtrack-embed-${b.id}"></div>` : ''}
         </div>
         <div class="book-actions">
           ${b.url ? `
@@ -2642,26 +2632,6 @@ window.addEventListener('error', function(e) {
     wrap.querySelectorAll('.edit-book').forEach(b => b.onclick = () => editBook(b.dataset.id));
     wrap.querySelectorAll('.del-book').forEach(b => b.onclick = () => deleteBook(b.dataset.id));
     wrap.querySelectorAll('.share-rec-btn').forEach(b => b.onclick = () => showShareRec(b.dataset.id));
-    wrap.querySelectorAll('.soundtrack-bar').forEach(bar => {
-      bar.onclick = () => {
-        const embedDiv = document.getElementById('soundtrack-embed-' + bar.dataset.id);
-        if (!embedDiv) return;
-        const isOpen = embedDiv.classList.contains('open');
-        // close all others first
-        wrap.querySelectorAll('.soundtrack-embed.open').forEach(d => {
-          d.classList.remove('open');
-          d.innerHTML = '';
-        });
-        wrap.querySelectorAll('.soundtrack-bar svg:last-child').forEach(a => a.style.transform = '');
-        if (!isOpen) {
-          const embedUrl = spotifyEmbedUrl(bar.dataset.spotify);
-          if (!embedUrl) { toast('Could not load Spotify link'); return; }
-          embedDiv.innerHTML = `<iframe src="${embedUrl}" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:12px;"></iframe>`;
-          embedDiv.classList.add('open');
-          bar.querySelector('svg:last-child').style.transform = 'rotate(180deg)';
-        }
-      };
-    });
     // Long press for quick status menu
     wrap.querySelectorAll('article.book').forEach(card => {
       let pressTimer;
@@ -3224,6 +3194,16 @@ window.addEventListener('error', function(e) {
       return (b.dateAdded || '').startsWith(thisYear + '');
     }).length;
     const totalPages = finished.reduce((s,b) => s + (parseInt(b.pages)||0), 0);
+    const totalWords = finished.reduce((s,b) => s + (parseInt(b.wordCount)||0), 0);
+    const rated = books.filter(b => b.rating);
+    const avgRating = rated.length ? (rated.reduce((s,b)=>s+b.rating,0)/rated.length).toFixed(1) : '—';
+    const thisMonth = new Date().getMonth();
+    const finishedThisMonth = finished.filter(b => {
+      const d = b.dateFinished || b.dateAdded || '';
+      if (!d) return false;
+      const bd = new Date(d);
+      return bd.getFullYear() === thisYear && bd.getMonth() === thisMonth;
+    }).length;
 
     const byYear = {};
     finished.forEach(b => {
@@ -3247,15 +3227,17 @@ window.addEventListener('error', function(e) {
     const topAuthors = Object.entries(authors).filter(([_,n])=>n>1).sort((a,b)=>b[1]-a[1]).slice(0,6);
 
     document.getElementById('stats-content').innerHTML = `
-      <div class="stat-deck" id="stat-deck">
-        <div class="stat-card"><p class="stat-label">On the shelf</p><p class="stat-num">${total}</p><span class="stat-pip"></span></div>
-        <div class="stat-card"><p class="stat-label">Finished in ${thisYear}</p><p class="stat-num">${finishedThisYear}</p><span class="stat-pip"></span></div>
-        <div class="stat-card"><p class="stat-label">Reading now</p><p class="stat-num">${reading}</p><span class="stat-pip"></span></div>
-        <div class="stat-card"><p class="stat-label">To read</p><p class="stat-num">${want}</p><span class="stat-pip"></span></div>
-        <div class="stat-card"><p class="stat-label">Pages read</p><p class="stat-num small">${totalPages.toLocaleString()}</p><span class="stat-pip"></span></div>
-        <div class="stat-card"><p class="stat-label">Finished total</p><p class="stat-num">${finished.length}</p>${dnf>0?`<p class="stat-sub">${dnf} DNF</p>`:''}<span class="stat-pip"></span></div>
+      <div class="stat-deck">
+        <div class="stat-card"><p class="stat-label">On the shelf</p><p class="stat-num">${total}</p></div>
+        <div class="stat-card"><p class="stat-label">Finished in ${thisYear}</p><p class="stat-num">${finishedThisYear}</p></div>
+        <div class="stat-card"><p class="stat-label">Reading now</p><p class="stat-num">${reading}</p></div>
+        <div class="stat-card"><p class="stat-label">To read</p><p class="stat-num">${want}</p></div>
+        <div class="stat-card"><p class="stat-label">Pages read</p><p class="stat-num small">${totalPages.toLocaleString()}</p></div>
+        <div class="stat-card"><p class="stat-label">Finished total</p><p class="stat-num">${finished.length}</p>${dnf>0?`<p class="stat-sub">${dnf} DNF</p>`:''}</div>
+        <div class="stat-card"><p class="stat-label">Words read</p><p class="stat-num small">${totalWords.toLocaleString()}</p></div>
+        <div class="stat-card"><p class="stat-label">Avg rating</p><p class="stat-num">${avgRating}</p><p class="stat-sub">${rated.length} rated</p></div>
+        <div class="stat-card"><p class="stat-label">Finished this month</p><p class="stat-num">${finishedThisMonth}</p></div>
       </div>
-      <p class="stat-deck-hint">↓ swipe down to flip through</p>
       ${yearRows.length ? `
         <div class="section-h">By year</div>
         ${yearRows.map(([y,n]) => `<div class="ranked-row"><span class="ranked-name">${y}</span><span class="ranked-count">${n} ${n===1?'book':'books'}</span></div>`).join('')}
@@ -3270,83 +3252,8 @@ window.addEventListener('error', function(e) {
       ` : ''}
       <button class="recap-trigger-btn" id="recap-trigger-btn">✦ Generate this month's reading recap</button>
     `;
-    initStatDeck();
     const recapBtn = document.getElementById('recap-trigger-btn');
     if (recapBtn) recapBtn.onclick = () => showMonthRecap();
-  }
-
-  // Stacked, swipe-down stat deck with effects
-  function initStatDeck() {
-    const deck = document.getElementById('stat-deck');
-    if (!deck) return;
-    let cards = Array.from(deck.querySelectorAll('.stat-card'));
-    const n = cards.length;
-    if (!n) return;
-
-    function layout() {
-      cards.forEach((c, i) => {
-        const lift = i === 0 ? 0 : 14 * i;
-        const scale = 1 - Math.min(i, 4) * 0.05;
-        const fade = i > 4 ? 0 : 1 - i * 0.12;
-        c.style.zIndex = String(n - i);
-        c.style.transform = `translateY(${lift}px) scale(${scale})`;
-        c.style.opacity = i > 4 ? '0' : String(fade);
-        c.style.filter = i === 0 ? 'none' : `brightness(${1 - i * 0.06})`;
-        c.classList.remove('dragging');
-        const pip = c.querySelector('.stat-pip');
-        if (pip) pip.textContent = i === 0 ? cards.map((_, k) => k === 0 ? '\u25CF' : '\u25CB').join(' ') : '';
-      });
-    }
-    layout();
-
-    function cycle() {
-      const t = cards.shift();
-      cards.push(t);
-      cards.forEach(c => deck.appendChild(c));
-      layout();
-    }
-
-    let startY = 0, dragging = false, top = null;
-
-    function onDown(e) {
-      top = cards[0];
-      startY = (e.touches ? e.touches[0].clientY : e.clientY);
-      dragging = true;
-      top.classList.add('dragging');
-    }
-    function onMove(e) {
-      if (!dragging) return;
-      const y = (e.touches ? e.touches[0].clientY : e.clientY);
-      let dy = y - startY;
-      if (dy < 0) dy = dy * 0.3;
-      const rot = dy * 0.04;
-      const sc = 1 + Math.min(dy, 200) * 0.0005;
-      top.style.transform = `translateY(${dy}px) rotate(${rot}deg) scale(${sc})`;
-      top.style.opacity = String(Math.max(0.2, 1 - dy / 320));
-      if (e.cancelable) e.preventDefault();
-    }
-    function onUp() {
-      if (!dragging) return;
-      dragging = false;
-      const top0 = top;
-      const m = /translateY\(([-\d.]+)px\)/.exec(top0.style.transform);
-      const dy = m ? parseFloat(m[1]) : 0;
-      top0.classList.remove('dragging');
-      if (dy > 90) {
-        top0.style.transform = `translateY(440px) rotate(${dy*0.05}deg) scale(0.8)`;
-        top0.style.opacity = '0';
-        setTimeout(cycle, 280);
-      } else {
-        layout();
-      }
-    }
-
-    deck.addEventListener('mousedown', onDown);
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
-    deck.addEventListener('touchstart', onDown, { passive: true });
-    deck.addEventListener('touchmove', onMove, { passive: false });
-    deck.addEventListener('touchend', onUp);
   }
 
   // ---------- MONTHLY RECAP ----------
