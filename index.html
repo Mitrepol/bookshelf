@@ -10,52 +10,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f0e8d8;
-    --bg-alt: #e8dcc8;
-    --bg-card: #faf6ee;
-    --ink: #2e2018;
-    --ink-soft: #6a5040;
-    --ink-faint: #a89080;
-    --line: #d4c4a8;
-    --line-soft: #e0d0b8;
-    --accent: #5a7a5a;
-    --accent-soft: #7a9a7a;
-    --gold: #a08030;
-    --reading: #a08030;
-    --finished: #5a7a5a;
-    --want: #6a5040;
-    --dnf: #904040;
-    --shadow: 0 1px 2px rgba(46,32,24,0.05), 0 4px 12px rgba(46,32,24,0.04);
+    --bg: #0e1a14;
+    --bg-alt: #16241c;
+    --bg-card: #13201a;
+    --ink: #eafff4;
+    --ink-soft: #a8d8c4;
+    --ink-faint: #6f9a86;
+    --line: #2a3d33;
+    --line-soft: #1e2e26;
+    --accent: #4dffb0;
+    --accent-soft: #2ee89a;
+    --gold: #d4b86a;
+    --reading: #d4b86a;
+    --finished: #4dffb0;
+    --want: #9ab8a8;
+    --dnf: #e08080;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.25);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #f0e8d8;
-      --bg-alt: #e8dcc8;
-      --bg-card: #faf6ee;
-      --ink: #2e2018;
-      --ink-soft: #6a5040;
-      --ink-faint: #a89080;
-      --line: #d4c4a8;
-      --line-soft: #e0d0b8;
-      --accent: #5a7a5a;
-      --accent-soft: #7a9a7a;
-      --gold: #a08030;
-      --reading: #a08030;
-      --finished: #5a7a5a;
-      --want: #6a5040;
-      --dnf: #904040;
-      --shadow: 0 1px 2px rgba(46,32,24,0.05), 0 4px 12px rgba(46,32,24,0.04);
+      --bg: #0e1a14;
+      --bg-alt: #16241c;
+      --bg-card: #13201a;
+      --ink: #e8f0ea;
+      --ink-soft: #9ab8a8;
+      --ink-faint: #6a8678;
+      --line: #2a3d33;
+      --line-soft: #1e2e26;
+      --accent: #4dffb0;
+      --accent-soft: #2ee89a;
+      --gold: #d4b86a;
+      --reading: #d4b86a;
+      --finished: #4dffb0;
+      --want: #9ab8a8;
+      --dnf: #e08080;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.25);
     }
   }
-  /* Header banner — fixed warm cream, same in light and dark, inspired by Goodreads */
-  .header-banner { background: #3d2b1f; border-bottom: 2px solid #2a1e15; padding: 0.85rem 1.25rem 1rem; margin-bottom: 0; }
-  .header-quote-strip { background: #f4ede0; border-bottom: 1px solid #d4c4a8; padding: 0.55rem 1.25rem; }
-  .header-quote-strip div { max-width: 720px; margin: 0 auto; font-size: 13px; color: #8a7460; font-family: 'Fraunces', serif; font-style: italic; transition: opacity 0.4s; }
+  /* Header banner — deep green with gold trim, matching dark theme */
+  .header-banner { background: linear-gradient(180deg, #0a140f 0%, #11201a 100%); border-bottom: 1px solid var(--gold); padding: 0.85rem 1.25rem 1rem; margin-bottom: 0; }
+  .header-quote-strip { background: #0a140f; border-bottom: 1px solid var(--line); padding: 0.55rem 1.25rem; }
+  .header-quote-strip div { max-width: 720px; margin: 0 auto; font-size: 13px; color: var(--ink-faint); font-family: 'Fraunces', serif; font-style: italic; transition: opacity 0.4s; }
   /* spacing between banner and first card on every view */
   .view.active { padding-top: 1.1rem; }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Inter', -apple-system, sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
-  body { min-height: 100vh; padding-bottom: 80px; }
+  body { min-height: 100vh; padding-bottom: 80px; background: linear-gradient(180deg, #0a140f 0%, #11201a 100%); background-attachment: fixed; }
   h1, h2, h3, .display { font-family: 'Fraunces', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
   .header { padding: 1.5rem 1.25rem 0.75rem; }
   .header h1 { font-size: 32px; margin: 0; line-height: 1.1; font-weight: 400; }
@@ -75,9 +75,11 @@
 
   /* Search & filters */
   .search-wrap { position: relative; margin: 0.5rem 0 1rem; }
-  .search { width: 100%; padding: 12px 14px 12px 40px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; font-family: inherit; font-size: 15px; color: var(--ink); outline: none; transition: border-color 0.15s; }
-  .search:focus { border-color: var(--accent); }
-  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--ink-faint); pointer-events: none; }
+  .search { width: 100%; padding: 12px 14px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; font-family: inherit; font-size: 15px; color: var(--ink); outline: none; transition: border-color 0.15s; text-align: center; }
+  .search::placeholder { color: var(--ink-faint); text-align: center; }
+  .search:focus { border-color: var(--accent); text-align: left; }
+  .search:focus::placeholder { text-align: left; }
+  .search-icon { display: none; }
 
   .filter-row { display: flex; gap: 6px; margin-bottom: 8px; overflow-x: auto; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
   .filter-row::-webkit-scrollbar { display: none; }
@@ -92,7 +94,7 @@
   .sort-select { background: transparent; border: none; color: var(--ink); font-family: inherit; font-size: 12px; cursor: pointer; padding: 2px; }
 
   /* Book cards */
-  .book { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 12px; padding: 11px 12px; margin-bottom: 8px; display: flex; gap: 10px; box-shadow: var(--shadow); }
+  .book { background: var(--bg-card); border: 1px solid var(--gold); border-radius: 12px; padding: 11px 12px; margin-bottom: 8px; display: flex; gap: 10px; box-shadow: var(--shadow); }
   .book-cover { width: 46px; min-width: 46px; height: 68px; background: var(--bg-alt); border-radius: 5px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--ink-faint); font-family: 'Fraunces', serif; font-size: 20px; }
   .book-cover img { width: 100%; height: 100%; object-fit: cover; }
   .book-body { flex: 1; min-width: 0; }
@@ -121,7 +123,7 @@
   .empty .primary { color: var(--accent); font-weight: 500; cursor: pointer; }
 
   /* Form */
-  .form-section { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 14px; padding: 1.25rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
+  .form-section { background: var(--bg-card); border: 1px solid var(--gold); border-radius: 14px; padding: 1.25rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
   .form-section h3 { font-size: 13px; margin: 0 0 1rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; font-family: 'Inter', sans-serif; }
   .field { margin-bottom: 14px; position: relative; }
   .field:last-child { margin-bottom: 0; }
@@ -158,7 +160,7 @@
   .clear-rating { font-size: 12px; color: var(--ink-faint); background: transparent; border: none; cursor: pointer; padding: 4px 8px; margin-left: 8px; font-family: inherit; }
 
   /* Buttons */
-  .btn { width: 100%; padding: 13px; background: var(--accent); color: white; border: none; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer; letter-spacing: 0.02em; }
+  .btn { width: 100%; padding: 13px; background: var(--accent-soft); color: white; border: none; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer; letter-spacing: 0.02em; }
   .btn:hover { opacity: 0.92; }
   .btn-secondary { background: transparent; border: 1px solid var(--line); color: var(--ink); }
   .btn-danger { background: transparent; border: 1px solid var(--dnf); color: var(--dnf); }
@@ -175,11 +177,15 @@
   .cover-clear { font-size: 12px; color: var(--dnf); background: transparent; border: none; cursor: pointer; padding: 4px 0; font-family: inherit; display: none; }
 
   /* Stats */
-  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
-  .stat-card { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 12px; padding: 14px; box-shadow: var(--shadow); }
+  /* stacked swipable deck */
+  .stat-deck { position: relative; width: 220px; height: 220px; margin: 8px auto 1.25rem; touch-action: none; user-select: none; }
+  .stat-deck-hint { text-align: center; font-size: 12px; color: var(--ink-faint); margin: 0 0 1rem; letter-spacing: 0.05em; }
+  .stat-card { position: absolute; inset: 0; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--bg-card); border: 1px solid var(--gold); border-radius: 20px; padding: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.35); cursor: grab; transition: transform 0.45s cubic-bezier(.22,.61,.36,1), opacity 0.45s ease, filter 0.45s ease; will-change: transform, opacity; }
+  .stat-card.dragging { transition: none; cursor: grabbing; }
+  .stat-card .stat-pip { position: absolute; bottom: 12px; left: 0; right: 0; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.12em; }
   .stat-label { font-size: 11px; color: var(--ink-soft); margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
-  .stat-num { font-family: 'Fraunces', serif; font-size: 28px; margin: 0; color: var(--ink); font-weight: 400; line-height: 1; }
-  .stat-num.small { font-size: 22px; }
+  .stat-num { font-family: 'Fraunces', serif; font-size: 40px; margin: 0; color: var(--ink); font-weight: 400; line-height: 1; }
+  .stat-num.small { font-size: 30px; }
   .stat-sub { font-size: 11px; color: var(--ink-faint); margin: 2px 0 0; }
   .section-h { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin: 1.5rem 0 0.75rem; }
   .ranked-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 14px; }
@@ -201,8 +207,8 @@
 
   /* Mood tags */
   .mood-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-  .mood-btn { background: var(--bg-alt); border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 15px; cursor: pointer; transition: all 0.15s; font-family: inherit; }
-  .mood-btn.selected { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .mood-btn { background: var(--bg-alt); border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: 15px; cursor: pointer; transition: all 0.15s; font-family: inherit; color: var(--gold); }
+  .mood-btn.selected { background: var(--gold); color: var(--bg-card); border-color: var(--gold); }
   .mood-pill { font-size: 15px; }
 
   /* Reading streak + goal — compact side by side row */
@@ -220,7 +226,7 @@
 
   /* Currently reading — slimmer */
   .reading-now-label { font-size: 11px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin: 0 0 5px; }
-  .reading-now { background: var(--bg-card); border: 1px solid var(--line-soft); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; display: flex; gap: 10px; align-items: center; box-shadow: var(--shadow); }
+  .reading-now { background: var(--bg-card); border: 1px solid var(--gold); border-radius: 12px; padding: 10px 12px; margin-bottom: 8px; display: flex; gap: 10px; align-items: center; box-shadow: var(--shadow); }
   .reading-now-cover { width: 36px; min-width: 36px; height: 52px; background: var(--bg-alt); border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 16px; color: var(--ink-faint); }
   .reading-now-cover img { width: 100%; height: 100%; object-fit: cover; }
   .reading-now-body { flex: 1; min-width: 0; }
@@ -237,20 +243,112 @@
   .quote-display { border-left: 3px solid var(--gold); padding: 6px 10px; margin-top: 8px; font-size: 13px; color: var(--ink-soft); font-style: italic; line-height: 1.5; }
 
   /* Share rec card */
-  .share-rec-modal { position: fixed; inset: 0; background: rgba(46,32,24,0.7); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+  /* ── Spotify soundtrack ── */
+  .soundtrack-bar { display: flex; align-items: center; gap: 8px; margin-top: 7px; padding: 7px 10px; background: rgba(30,215,96,0.08); border: 1px solid rgba(30,215,96,0.2); border-radius: 10px; cursor: pointer; transition: background 0.15s; }
+  .soundtrack-bar:hover { background: rgba(30,215,96,0.13); }
+  .soundtrack-bar svg { flex-shrink: 0; }
+  .soundtrack-bar-text { font-size: 12px; color: #1ed760; font-weight: 500; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .soundtrack-embed { margin-top: 6px; border-radius: 12px; overflow: hidden; display: none; }
+  .soundtrack-embed.open { display: block; }
+  .soundtrack-embed iframe { display: block; border-radius: 12px; }
+
+  /* ── Reading time estimator ── */
+  .reading-eta { font-size: 12px; color: var(--gold); margin: 3px 0 0; display: flex; align-items: center; gap: 4px; }
+  .reading-eta svg { flex-shrink: 0; }
+
+  /* ── Monthly recap card ── */
+  .recap-trigger-btn { width: 100%; margin-top: 1rem; padding: 13px; background: linear-gradient(135deg, rgba(212,168,90,0.15) 0%, rgba(212,168,90,0.05) 100%); border: 1px solid rgba(212,168,90,0.4); border-radius: 12px; color: var(--gold); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; letter-spacing: 0.04em; transition: background 0.2s; }
+  .recap-trigger-btn:hover { background: linear-gradient(135deg, rgba(212,168,90,0.22) 0%, rgba(212,168,90,0.1) 100%); }
+
+  .recap-modal { position: fixed; inset: 0; background: rgba(5,10,8,0.92); z-index: 210; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; gap: 16px; backdrop-filter: blur(8px); }
+  .recap-modal.hidden { display: none !important; }
+
+  .recap-card {
+    position: relative; width: 300px; height: 580px; flex-shrink: 0;
+    background: #080f0a; border-radius: 22px; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    padding: 0 0 28px;
+    box-shadow: 0 0 0 1px rgba(212,168,90,0.35), 0 24px 60px rgba(0,0,0,0.7);
+  }
+  .recap-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 140% 60% at 50% 100%, rgba(212,168,90,0.22) 0%, transparent 65%),
+                radial-gradient(ellipse 80% 40% at 50% 0%, rgba(90,160,120,0.1) 0%, transparent 60%),
+                linear-gradient(180deg, #060d08 0%, #080f0a 100%);
+    pointer-events: none;
+  }
+  .recap-card::after {
+    content: ''; position: absolute; inset: 14px; border-radius: 12px;
+    border: 1px solid rgba(212,168,90,0.2); pointer-events: none; z-index: 1;
+  }
+  .recap-month-label { position: absolute; top: 26px; left: 0; right: 0; text-align: center; font-size: 11px; color: rgba(212,168,90,0.55); letter-spacing: 0.2em; text-transform: uppercase; z-index: 2; }
+  .recap-bg-num { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -58%); font-family: 'Fraunces', serif; font-size: 200px; font-weight: 700; color: rgba(212,168,90,0.05); line-height: 1; pointer-events: none; z-index: 0; }
+  .recap-content { position: relative; z-index: 2; width: 100%; padding: 0 26px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0; }
+  .recap-count { font-family: 'Fraunces', serif; font-size: 64px; color: #f5ecd8; font-weight: 400; line-height: 1; margin-bottom: 4px; }
+  .recap-count-label { font-size: 11px; color: #9a8870; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 18px; }
+  .recap-divider { width: 40px; height: 1px; background: linear-gradient(90deg, transparent, #d4a85a, transparent); margin: 0 auto 16px; }
+  .recap-quote { font-size: 13px; color: #c8b898; font-style: italic; line-height: 1.6; margin: 0 0 16px; }
+  .recap-quote-author { font-size: 11px; color: #7a6a52; letter-spacing: 0.06em; margin: -10px 0 16px; }
+  .recap-mood-row { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 0; }
+  .recap-mood-tag { background: rgba(212,168,90,0.12); color: #d4a85a; font-size: 11px; padding: 4px 11px; border-radius: 999px; border: 1px solid rgba(212,168,90,0.28); }
+  .recap-footer { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; font-size: 10px; color: rgba(212,168,90,0.35); letter-spacing: 0.15em; text-transform: uppercase; z-index: 2; }
+  .recap-actions { display: flex; gap: 10px; width: 300px; }
+  .recap-actions button { flex: 1; padding: 12px; border-radius: 12px; border: none; cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 600; transition: opacity 0.15s; }
+  .recap-close-btn { background: rgba(255,255,255,0.08); color: #f0e0c0; }
+  .recap-dl-btn { background: linear-gradient(135deg, #d4a85a 0%, #b8863a 100%); color: #080f0a; }
+  .recap-dl-btn:disabled { opacity: 0.6; cursor: default; }
+
+  /* ── Share / Instagram modal ── */
+  .share-rec-modal { position: fixed; inset: 0; background: rgba(5,10,8,0.88); z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; gap: 16px; backdrop-filter: blur(6px); }
   .share-rec-modal.hidden { display: none !important; }
-  .share-rec-card { background: #3d2b1f; border-radius: 18px; padding: 24px; max-width: 320px; width: 100%; }
-  .share-rec-title { font-family: 'Fraunces', serif; font-size: 20px; color: #f0e0c0; margin: 0 0 4px; font-weight: 400; }
-  .share-rec-author { font-size: 13px; color: #b09880; margin: 0 0 12px; }
-  .share-rec-stars { color: #d4a85a; font-size: 16px; margin-bottom: 8px; }
-  .share-rec-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-  .share-rec-tag { background: rgba(240,224,192,0.15); color: #d4c8a8; font-size: 11px; padding: 3px 10px; border-radius: 999px; }
-  .share-rec-note { font-size: 13px; color: #c8b898; font-style: italic; line-height: 1.5; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
-  .share-rec-footer { font-size: 11px; color: #8a7a62; margin-top: 12px; text-align: right; }
-  .share-rec-actions { display: flex; gap: 8px; margin-top: 14px; }
-  .share-rec-actions button { flex: 1; padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 500; }
-  .share-close { background: rgba(255,255,255,0.1); color: #f0e0c0; }
-  .share-copy { background: #d4a85a; color: #2e1808; }
+  /* the card that gets screenshotted — portrait story ratio */
+  .share-rec-card {
+    position: relative; width: 300px; height: 580px; flex-shrink: 0;
+    background: #080f0a;
+    border-radius: 22px; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    padding: 0 0 28px;
+    box-shadow: 0 0 0 1px rgba(212,168,90,0.35), 0 24px 60px rgba(0,0,0,0.7);
+  }
+  /* decorative gradient wash behind content */
+  .share-rec-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 120% 70% at 50% 110%, rgba(212,168,90,0.18) 0%, transparent 65%),
+                linear-gradient(180deg, #0a150e 0%, #060d08 100%);
+    pointer-events: none;
+  }
+  /* gold corner ornament lines */
+  .share-rec-card::after {
+    content: ''; position: absolute; inset: 14px; border-radius: 12px;
+    border: 1px solid rgba(212,168,90,0.22); pointer-events: none;
+  }
+  .sr-cover-wrap { position: relative; z-index: 2; width: 130px; height: 195px; border-radius: 10px; overflow: hidden; margin-bottom: 18px; box-shadow: 0 8px 30px rgba(0,0,0,0.6); flex-shrink: 0; background: #1a2a20; display: flex; align-items: center; justify-content: center; }
+  .sr-cover-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .sr-cover-wrap.has-cover { overflow: visible; border-radius: 10px; box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 0 2px #d4a85a, 0 0 0 5px rgba(212,168,90,0.15), 0 0 18px 4px rgba(212,168,90,0.25); }
+  .sr-cover-wrap.has-cover img { border-radius: 10px; }
+  .sr-cover-initial { font-family: 'Fraunces', serif; font-size: 52px; color: rgba(212,168,90,0.4); }
+  .sr-bg-letter {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%);
+    font-family: 'Fraunces', serif; font-size: 220px; font-weight: 700;
+    color: rgba(212,168,90,0.06); line-height: 1; pointer-events: none; user-select: none;
+    letter-spacing: -8px;
+  }
+  .sr-content { position: relative; z-index: 2; width: 100%; padding: 0 26px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0; }
+  .share-rec-stars { color: #d4a85a; font-size: 22px; letter-spacing: 3px; margin-bottom: 14px; }
+  .share-rec-title { font-family: 'Fraunces', serif; font-size: 26px; color: #f5ecd8; font-weight: 400; line-height: 1.2; margin: 0 0 6px; }
+  .share-rec-author { font-size: 12px; color: #9a8870; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 16px; }
+  .share-rec-divider { width: 40px; height: 1px; background: linear-gradient(90deg, transparent, #d4a85a, transparent); margin: 0 auto 16px; }
+  .share-rec-note { font-size: 13px; color: #c8b898; font-style: italic; line-height: 1.6; margin: 0 0 18px; }
+  .share-rec-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin: 0 0 0; }
+  .share-rec-tag { background: rgba(212,168,90,0.12); color: #d4a85a; font-size: 11px; padding: 4px 11px; border-radius: 999px; border: 1px solid rgba(212,168,90,0.28); letter-spacing: 0.04em; }
+  .share-rec-footer { position: absolute; top: 26px; left: 0; right: 0; text-align: center; font-size: 11px; color: rgba(212,168,90,0.5); letter-spacing: 0.18em; text-transform: uppercase; z-index: 2; }
+  /* action row below the card */
+  .share-rec-actions { display: flex; gap: 10px; width: 300px; }
+  .share-rec-actions button { flex: 1; padding: 12px; border-radius: 12px; border: none; cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 600; transition: opacity 0.15s; }
+  .share-rec-actions button:active { opacity: 0.75; }
+  .share-close { background: rgba(255,255,255,0.08); color: #f0e0c0; }
+  .share-copy { background: linear-gradient(135deg, #d4a85a 0%, #b8863a 100%); color: #080f0a; }
+  .share-copy:disabled { opacity: 0.6; cursor: default; }
 
   /* Quick status menu */
   .quick-menu { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-card); border-top: 1px solid var(--line); border-radius: 18px 18px 0 0; padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom)); z-index: 150; transform: translateY(100%); transition: transform 0.25s ease; }
@@ -263,32 +361,122 @@
   .quick-menu-overlay.open { display: block; }
 
   /* Anniversary banner */
-  .anniversary-banner { background: linear-gradient(135deg, #5a3a28 0%, #3d2b1f 100%); border-radius: 14px; padding: 12px 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow); cursor: pointer; }
+  .anniversary-banner { background: linear-gradient(135deg, #1a2e24 0%, #11201a 100%); border-radius: 14px; padding: 12px 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow); cursor: pointer; }
   .anniversary-banner p { margin: 0; font-size: 13px; color: #f0e0c0; line-height: 1.5; }
   .anniversary-banner strong { color: #d4a85a; }
 
   /* Raccoon customiser */
-  .raccoon-customiser { position: fixed; inset: 0; background: rgba(46,32,24,0.7); z-index: 200; display: flex; align-items: flex-end; justify-content: center; }
-  .raccoon-customiser-panel { background: var(--bg-card); border-radius: 18px 18px 0 0; padding: 1.25rem; width: 100%; max-width: 480px; padding-bottom: calc(1.25rem + env(safe-area-inset-bottom)); }
-  .raccoon-customiser-panel h3 { margin: 0 0 1rem; font-family: 'Fraunces', serif; font-weight: 400; font-size: 20px; }
+  .raccoon-customiser { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: flex; align-items: flex-end; justify-content: center; }
+  .raccoon-customiser-panel { background: #0e1a14; border: 1px solid var(--gold); border-radius: 18px 18px 0 0; padding: 1.25rem; width: 100%; max-width: 480px; padding-bottom: calc(1.25rem + env(safe-area-inset-bottom)); }
+  .raccoon-customiser-panel h3 { margin: 0 0 1rem; font-family: 'Fraunces', serif; font-weight: 400; font-size: 20px; color: var(--gold); }
   .customiser-section { margin-bottom: 1rem; }
-  .customiser-label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin-bottom: 8px; }
+  .customiser-label { font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 8px; opacity: 0.8; }
   .customiser-opts { display: flex; gap: 8px; flex-wrap: wrap; }
-  .customiser-opt { background: var(--bg-alt); border: 2px solid var(--line); border-radius: 10px; padding: 8px 14px; font-size: 14px; cursor: pointer; font-family: inherit; transition: all 0.15s; }
-  .customiser-opt.active { border-color: var(--accent); background: var(--accent); color: white; }
+  .customiser-opt { background: #13201a; border: 1.5px solid #2a3d33; border-radius: 10px; padding: 8px 14px; font-size: 14px; cursor: pointer; font-family: inherit; transition: all 0.15s; color: var(--gold); }
+  .customiser-opt.active { border-color: var(--accent); background: var(--accent); color: #0a140f; }
   .colour-opt { width: 36px; height: 36px; border-radius: 50%; border: 3px solid transparent; cursor: pointer; transition: all 0.15s; }
   .colour-opt.active { border-color: var(--ink); transform: scale(1.15); }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
 <div class="header-banner">
-  <div style="display:flex; align-items:center; gap:14px; max-width:720px; margin:0 auto;">
+  <div style="display:flex; align-items:center; gap:14px; max-width:720px; margin:0 auto; position:relative;">
     <div id="raccoon-container" style="cursor:pointer; flex-shrink:0;" title="Tap to customise your raccoon"></div>
-    <div>
+    <div style="flex:1;">
       <h1 style="font-family:'Fraunces',Georgia,serif; font-size:26px; margin:0; line-height:1.15; font-weight:400; color:#f0e0c0;">Kelly's <em style="font-style:italic; color:#d4a85a;">Fandom</em><br>Bookshelf</h1>
       <p style="font-size:12px; color:#b09880; margin:0.3rem 0 0; letter-spacing:0.02em;">Every fic deserves to be remembered 🍃 <span style="opacity:0.6; font-size:11px;">(tap raccoon to customise)</span></p>
     </div>
+    <!-- Chamber of Secrets door medallion — original artwork inspired by the reference -->
+    <svg width="66" height="66" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;" aria-label="Chamber of Secrets">
+      <defs>
+        <linearGradient id="snakeG" x1="0" y1="0" x2="66" y2="66" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#4dffb0"/>
+          <stop offset="100%" stop-color="#1a9a6a"/>
+        </linearGradient>
+        <radialGradient id="bgG" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#0e2018"/>
+          <stop offset="100%" stop-color="#081008"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Outer stone ring -->
+      <circle cx="33" cy="33" r="32" fill="#0a1a10" stroke="#d4b86a" stroke-width="1"/>
+
+      <!-- Stone blocks around the ring -->
+      <g stroke="#d4b86a" stroke-width="0.8" opacity="0.7">
+        <path d="M33 1 L30 6 L36 6 Z"/>
+        <path d="M33 65 L30 60 L36 60 Z"/>
+        <path d="M1 33 L6 30 L6 36 Z"/>
+        <path d="M65 33 L60 30 L60 36 Z"/>
+        <path d="M8 9 L11 13 L15 10 Z"/>
+        <path d="M58 9 L55 13 L51 10 Z"/>
+        <path d="M8 57 L11 53 L15 56 Z"/>
+        <path d="M58 57 L55 53 L51 56 Z"/>
+      </g>
+
+      <!-- Inner dark chamber -->
+      <circle cx="33" cy="33" r="26" fill="url(#bgG)" stroke="#2a3d33" stroke-width="0.5"/>
+
+      <!-- Dotted inner ring -->
+      <circle cx="33" cy="33" r="24" fill="none" stroke="#4dffb0" stroke-width="0.4" stroke-dasharray="1 3" opacity="0.5"/>
+
+      <!-- Spoke lines like the door segments -->
+      <g stroke="#2a4030" stroke-width="0.6" opacity="0.6">
+        <line x1="33" y1="9" x2="33" y2="57"/>
+        <line x1="9" y1="33" x2="57" y2="33"/>
+        <line x1="15" y1="15" x2="51" y2="51"/>
+        <line x1="51" y1="15" x2="15" y2="51"/>
+      </g>
+
+      <!-- Main coiled snake body — thick sweeping S through the disc -->
+      <path d="M14 22 C 18 14, 30 12, 36 18 C 42 24, 40 34, 33 37 C 26 40, 16 38, 14 44 C 12 50, 20 56, 30 54"
+            stroke="url(#snakeG)" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+      <!-- Snake belly line -->
+      <path d="M14 22 C 18 14, 30 12, 36 18 C 42 24, 40 34, 33 37 C 26 40, 16 38, 14 44 C 12 50, 20 56, 30 54"
+            stroke="#0e2018" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+
+      <!-- Second smaller snake curling opposite direction -->
+      <path d="M52 24 C 56 32, 52 42, 44 44 C 38 46, 32 44, 30 54"
+            stroke="url(#snakeG)" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.8"/>
+
+      <!-- Head of main snake top-left -->
+      <ellipse cx="14" cy="21" rx="6" ry="4" fill="#2ee89a" transform="rotate(-30 14 21)"/>
+      <ellipse cx="14" cy="21" rx="4" ry="2.5" fill="#1a9a6a" transform="rotate(-30 14 21)" opacity="0.6"/>
+      <!-- Eye -->
+      <circle cx="16" cy="19" r="1.4" fill="#d4b86a"/>
+      <circle cx="16.3" cy="19.2" r="0.55" fill="#081008"/>
+      <circle cx="15.8" cy="18.8" r="0.35" fill="white" opacity="0.7"/>
+      <!-- Tongue -->
+      <path d="M12 18 L8 15 M8 15 L6 13.5 M8 15 L6 16.5" stroke="#e06060" stroke-width="1.1" stroke-linecap="round"/>
+
+      <!-- Head of second snake top-right -->
+      <ellipse cx="52" cy="23" rx="5.5" ry="3.5" fill="#2ee89a" transform="rotate(20 52 23)"/>
+      <ellipse cx="52" cy="23" rx="3.5" ry="2" fill="#1a9a6a" transform="rotate(20 52 23)" opacity="0.6"/>
+      <!-- Eye -->
+      <circle cx="54" cy="21.5" r="1.2" fill="#d4b86a"/>
+      <circle cx="54.3" cy="21.7" r="0.5" fill="#081008"/>
+      <!-- Tongue -->
+      <path d="M55 20 L59 17 M59 17 L61 16 M59 17 L61 18" stroke="#e06060" stroke-width="1" stroke-linecap="round"/>
+
+      <!-- Scale dots on body -->
+      <g fill="#4dffb0" opacity="0.3">
+        <circle cx="24" cy="16" r="1"/>
+        <circle cx="31" cy="14" r="0.8"/>
+        <circle cx="38" cy="19" r="0.8"/>
+        <circle cx="40" cy="27" r="1"/>
+        <circle cx="36" cy="34" r="0.8"/>
+        <circle cx="27" cy="38" r="1"/>
+        <circle cx="19" cy="40" r="0.8"/>
+        <circle cx="16" cy="46" r="0.8"/>
+        <circle cx="22" cy="52" r="1"/>
+      </g>
+
+      <!-- Gold centre medallion dot -->
+      <circle cx="33" cy="33" r="3" fill="none" stroke="#d4b86a" stroke-width="1" opacity="0.6"/>
+      <circle cx="33" cy="33" r="1" fill="#d4b86a" opacity="0.5"/>
+    </svg>
   </div>
 </div>
 <div class="header-quote-strip">
@@ -297,9 +485,9 @@
 
 <style>
   /* Discover cards */
-  .discover-section-h { font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.1em; font-weight:600; margin:1.25rem 0 0.6rem; display:flex; align-items:center; gap:8px; }
-  .discover-section-h::after { content:''; flex:1; height:1px; background:var(--line-soft); }
-  .discover-card { background:var(--bg-card); border:1px solid var(--line-soft); border-radius:14px; padding:14px; margin-bottom:10px; box-shadow:var(--shadow); }
+  .discover-section-h { font-family:'Fraunces',serif; font-size:18px; color:var(--gold); text-transform:uppercase; letter-spacing:0.12em; font-weight:600; margin:1.6rem 0 0.8rem; display:flex; align-items:center; gap:10px; }
+  .discover-section-h::after { content:''; flex:1; height:1px; background:var(--gold); opacity:0.5; }
+  .discover-card { background:var(--bg-card); border:1px solid var(--gold); border-radius:14px; padding:14px; margin-bottom:10px; box-shadow:var(--shadow); }
   .discover-title { font-family:'Fraunces',serif; font-size:16px; font-weight:500; color:var(--ink); margin:0 0 2px; line-height:1.25; }
   .discover-author { font-size:12px; color:var(--ink-soft); margin:0 0 6px; }
   .discover-summary { font-size:13px; color:var(--ink-soft); line-height:1.55; margin:6px 0 10px; font-style:italic; }
@@ -309,13 +497,13 @@
   .discover-tag.sweet { background:rgba(90,122,90,0.1); color:var(--finished); }
   .discover-tag.dark { background:rgba(46,32,24,0.12); color:var(--ink-soft); font-weight:500; }
   .discover-actions { display:flex; gap:8px; }
-  .discover-read-btn { flex:1; padding:9px; background:var(--accent); color:white; border:none; border-radius:8px; font-family:inherit; font-size:13px; font-weight:500; cursor:pointer; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px; }
+  .discover-read-btn { flex:1; padding:9px; background:#1a4a38; color:#4dffb0; border: 1px solid #2a6048; border-radius:8px; font-family:inherit; font-size:13px; font-weight:500; cursor:pointer; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px; }
   .discover-add-btn { padding:9px 14px; background:transparent; border:1px solid var(--line); border-radius:8px; font-family:inherit; font-size:13px; color:var(--ink-soft); cursor:pointer; white-space:nowrap; }
   .discover-add-btn.added { color:var(--finished); border-color:var(--finished); background:rgba(90,122,90,0.08); }
   .discover-wc { font-size:11px; color:var(--ink-faint); margin-bottom:6px; }
 
   /* In-app message banner */
-  .msg-banner { background: linear-gradient(135deg, #5a3a28 0%, #3d2b1f 100%); border-radius: 0 0 16px 16px; padding: 16px 18px; margin: 0 -1px 12px; box-shadow: var(--shadow); position: relative; animation: msgSlide 0.4s ease; }
+  .msg-banner { background: linear-gradient(135deg, #1a2e24 0%, #11201a 100%); border-radius: 0 0 16px 16px; padding: 16px 18px; margin: 0 -1px 12px; box-shadow: var(--shadow); position: relative; animation: msgSlide 0.4s ease; }
   @keyframes msgSlide { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
   .msg-banner-label { font-size: 11px; color: #d4a85a; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin: 0 0 4px; }
   .msg-banner-title { font-family: 'Fraunces', serif; font-size: 18px; color: #f0e0c0; font-weight: 400; margin: 0 0 4px; }
@@ -325,7 +513,7 @@
 
 <style>
   /* PIN lock screen */
-  .pin-screen { position: fixed; inset: 0; background: #3d2b1f; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+  .pin-screen { position: fixed; inset: 0; background: linear-gradient(180deg, #0a140f 0%, #11201a 100%); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
   .pin-screen.hidden { display: none; }
   .pin-raccoon { font-size: 52px; margin-bottom: 0.5rem; }
   .pin-title { font-family: 'Fraunces', Georgia, serif; font-size: 24px; color: #f0e0c0; font-weight: 400; margin-bottom: 0.25rem; text-align: center; }
@@ -465,6 +653,11 @@
         <div class="field">
           <label for="quote-input">Favourite quote</label>
           <textarea id="quote-input" placeholder="A line you loved…" style="min-height:60px;"></textarea>
+          <label for="spotify-input" style="margin-top:8px; display:flex; align-items:center; gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#1ed760"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            Reading soundtrack
+          </label>
+          <input type="url" id="spotify-input" placeholder="Spotify song or playlist URL…" autocomplete="off" />
         </div>
         <div class="field">
           <label>Mood tags</label>
@@ -602,6 +795,11 @@
         <div class="field">
           <label for="quote-input-ao3">Favourite quote</label>
           <textarea id="quote-input-ao3" placeholder="A line you loved…" style="min-height:60px;"></textarea>
+          <label for="spotify-input-ao3" style="margin-top:8px; display:flex; align-items:center; gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#1ed760"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            Reading soundtrack
+          </label>
+          <input type="url" id="spotify-input-ao3" placeholder="Spotify song or playlist URL…" autocomplete="off" />
         </div>
         <div class="field">
           <label>Mood tags</label>
@@ -734,20 +932,44 @@
 <div class="toast" id="toast"></div>
 
 <!-- SHARE REC MODAL -->
+<!-- Monthly recap modal -->
+<div class="recap-modal hidden" id="recap-modal">
+  <div class="recap-card" id="recap-card">
+    <div class="recap-month-label" id="rc-month-label"></div>
+    <div class="recap-bg-num" id="rc-bg-num"></div>
+    <div class="recap-content">
+      <div class="recap-count" id="rc-count"></div>
+      <div class="recap-count-label">books finished</div>
+      <div class="recap-divider"></div>
+      <div class="recap-quote" id="rc-quote"></div>
+      <div class="recap-quote-author" id="rc-quote-author"></div>
+      <div class="recap-mood-row" id="rc-moods"></div>
+    </div>
+    <div class="recap-footer">Kelly's Fandom Bookshelf 🍃</div>
+  </div>
+  <div class="recap-actions">
+    <button class="recap-close-btn" id="recap-close-btn">✕ Close</button>
+    <button class="recap-dl-btn" id="recap-dl-btn">⬇ Save for Instagram</button>
+  </div>
+</div>
+
 <div class="share-rec-modal hidden" id="share-modal">
-  <div>
-    <div class="share-rec-card" id="share-card">
+  <div class="share-rec-card" id="share-card">
+    <div class="share-rec-footer">Kelly's Fandom Bookshelf 🍃</div>
+    <div class="sr-bg-letter" id="sr-bg-letter"></div>
+    <div class="sr-content">
+      <div class="sr-cover-wrap" id="sr-cover-wrap"></div>
+      <div class="share-rec-stars" id="sr-stars"></div>
       <div class="share-rec-title" id="sr-title"></div>
       <div class="share-rec-author" id="sr-author"></div>
-      <div class="share-rec-stars" id="sr-stars"></div>
+      <div class="share-rec-divider"></div>
+      <div class="share-rec-note" id="sr-note"></div>
       <div class="share-rec-tags" id="sr-tags"></div>
-      <div class="share-rec-note" id="sr-note" style="display:none;"></div>
-      <div class="share-rec-footer">Kelly's Fandom Bookshelf 🍃</div>
     </div>
-    <div class="share-rec-actions">
-      <button class="share-close" id="share-close-btn">Close</button>
-      <button class="share-copy" id="share-copy-btn">Copy as text</button>
-    </div>
+  </div>
+  <div class="share-rec-actions">
+    <button class="share-close" id="share-close-btn">✕ Close</button>
+    <button class="share-copy" id="share-copy-btn">⬇ Save for Instagram</button>
   </div>
 </div>
 
@@ -2052,22 +2274,44 @@ window.addEventListener('error', function(e) {
     saveStreak();
   }
 
+  function calcAvgPagesPerDay() {
+    // use books with both dateStarted+dateFinished and pages
+    const samples = books.filter(b =>
+      b.status === 'finished' && b.dateStarted && b.dateFinished && parseInt(b.pages) > 0
+    );
+    if (!samples.length) return null;
+    const rates = samples.map(b => {
+      const days = Math.max(1, (new Date(b.dateFinished) - new Date(b.dateStarted)) / 86400000);
+      return parseInt(b.pages) / days;
+    });
+    return rates.reduce((a,v) => a+v, 0) / rates.length;
+  }
+
   function renderReadingNow() {
     const section = document.getElementById('reading-now-section');
     if (!section) return;
     const reading = books.filter(b => b.status === 'reading');
     if (reading.length === 0) { section.innerHTML = ''; return; }
+    const avgPpd = calcAvgPagesPerDay();
     section.innerHTML = `
       <p class="reading-now-label">Currently reading</p>
       ${reading.map(b => {
         const coverInitial = (b.title||'?').charAt(0).toUpperCase();
         const coverHTML = b.cover ? `<img src="${esc(b.cover)}" alt="" onerror="this.parentElement.innerHTML='${esc(coverInitial)}'" />` : esc(coverInitial);
+        // ETA calculation
+        let etaHTML = '';
+        if (avgPpd && parseInt(b.pages) > 0) {
+          const daysLeft = Math.ceil(parseInt(b.pages) / avgPpd);
+          const label = daysLeft <= 1 ? 'finish today' : daysLeft <= 7 ? `~${daysLeft} days to finish` : `~${Math.ceil(daysLeft/7)} weeks to finish`;
+          etaHTML = `<p class="reading-eta"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${label}</p>`;
+        }
         return `
           <div class="reading-now">
             <div class="reading-now-cover">${coverHTML}</div>
             <div class="reading-now-body">
               <p class="reading-now-title">${esc(b.title)}</p>
               <p class="reading-now-author">${esc(b.author||'')}</p>
+              ${etaHTML}
             </div>
             <button class="reading-now-btn finish-now-btn" data-id="${b.id}">Finished ✓</button>
           </div>`;
@@ -2326,6 +2570,13 @@ window.addEventListener('error', function(e) {
           </div>
           ${dates.length ? `<div class="book-dates">${dates.join(' · ')}</div>` : ''}
           ${noteText ? `<div class="book-notes">${esc(noteText)}</div>` : ''}
+          ${b.spotifyUrl ? `
+            <div class="soundtrack-bar" data-spotify="${esc(b.spotifyUrl)}" data-id="${b.id}">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#1ed760"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+              <span class="soundtrack-bar-text">🎵 Reading soundtrack</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1ed760" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="soundtrack-embed" id="soundtrack-embed-${b.id}"></div>` : ''}
         </div>
         <div class="book-actions">
           ${b.url ? `
@@ -2391,6 +2642,26 @@ window.addEventListener('error', function(e) {
     wrap.querySelectorAll('.edit-book').forEach(b => b.onclick = () => editBook(b.dataset.id));
     wrap.querySelectorAll('.del-book').forEach(b => b.onclick = () => deleteBook(b.dataset.id));
     wrap.querySelectorAll('.share-rec-btn').forEach(b => b.onclick = () => showShareRec(b.dataset.id));
+    wrap.querySelectorAll('.soundtrack-bar').forEach(bar => {
+      bar.onclick = () => {
+        const embedDiv = document.getElementById('soundtrack-embed-' + bar.dataset.id);
+        if (!embedDiv) return;
+        const isOpen = embedDiv.classList.contains('open');
+        // close all others first
+        wrap.querySelectorAll('.soundtrack-embed.open').forEach(d => {
+          d.classList.remove('open');
+          d.innerHTML = '';
+        });
+        wrap.querySelectorAll('.soundtrack-bar svg:last-child').forEach(a => a.style.transform = '');
+        if (!isOpen) {
+          const embedUrl = spotifyEmbedUrl(bar.dataset.spotify);
+          if (!embedUrl) { toast('Could not load Spotify link'); return; }
+          embedDiv.innerHTML = `<iframe src="${embedUrl}" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:12px;"></iframe>`;
+          embedDiv.classList.add('open');
+          bar.querySelector('svg:last-child').style.transform = 'rotate(180deg)';
+        }
+      };
+    });
     // Long press for quick status menu
     wrap.querySelectorAll('article.book').forEach(card => {
       let pressTimer;
@@ -2434,25 +2705,50 @@ window.addEventListener('error', function(e) {
     }
   }
 
+  // ---------- SPOTIFY EMBED ----------
+  function spotifyEmbedUrl(url) {
+    if (!url) return '';
+    // https://open.spotify.com/track/ID or /playlist/ID or /album/ID
+    const m = url.match(/spotify\.com\/(track|playlist|album|episode)\/([A-Za-z0-9]+)/);
+    if (m) return `https://open.spotify.com/embed/${m[1]}/${m[2]}?utm_source=generator&theme=0`;
+    // spotify:track:ID URI format
+    const u = url.match(/spotify:(track|playlist|album|episode):([A-Za-z0-9]+)/);
+    if (u) return `https://open.spotify.com/embed/${u[1]}/${u[2]}?utm_source=generator&theme=0`;
+    return '';
+  }
+
   // ---------- SHARE REC ----------
   function showShareRec(id) {
     const b = books.find(x => x.id === id);
     if (!b) return;
     document.getElementById('sr-title').textContent = b.title;
-    document.getElementById('sr-author').textContent = b.author || '';
+    document.getElementById('sr-author').textContent = b.isAO3 ? (b.author ? 'by ' + b.author : '') : (b.author ? 'by ' + b.author : '');
     document.getElementById('sr-stars').textContent = b.rating ? '★'.repeat(b.rating) + '☆'.repeat(5-b.rating) : '';
-    const tags = [];
-    if (b.fandom) tags.push(b.fandom);
-    if (b.ship) tags.push(b.ship);
-    if (b.genre) tags.push(b.genre);
-    (b.moods||[]).forEach(m => tags.push(m));
-    document.getElementById('sr-tags').innerHTML = tags.map(t => `<span class="share-rec-tag">${esc(t)}</span>`).join('');
+    const bgLetter = document.getElementById('sr-bg-letter');
+    const coverWrap = document.getElementById('sr-cover-wrap');
+    const initial = (b.title||'?').charAt(0).toUpperCase();
+    if (b.cover) {
+      bgLetter.textContent = '';
+      coverWrap.classList.add('has-cover');
+      coverWrap.innerHTML = `<img src="${b.cover}" alt="" crossorigin="anonymous" />`;
+    } else {
+      bgLetter.textContent = initial;
+      coverWrap.classList.remove('has-cover');
+      coverWrap.innerHTML = `<span class="sr-cover-initial">${initial}</span>`;
+    }
+    // moods only for tags (not fandom/ship to keep card clean)
+    const moodTags = (b.moods||[]);
+    const extraTags = [b.genre].filter(Boolean);
+    const allTags = [...moodTags, ...extraTags];
+    document.getElementById('sr-tags').innerHTML = allTags.map(t => `<span class="share-rec-tag">${esc(t)}</span>`).join('');
     const noteEl = document.getElementById('sr-note');
-    if (b.quote) { noteEl.textContent = '"' + b.quote + '"'; noteEl.style.display = 'block'; }
-    else if (b.notes) { noteEl.textContent = b.notes; noteEl.style.display = 'block'; }
-    else { noteEl.style.display = 'none'; }
+    const noteText = b.quote ? `"${b.quote}"` : (b.notes ? b.notes.slice(0,160) + (b.notes.length>160?'…':'') : '');
+    noteEl.textContent = noteText;
+    noteEl.style.display = noteText ? 'block' : 'none';
     document.getElementById('share-modal').classList.remove('hidden');
     document.getElementById('share-copy-btn').dataset.id = id;
+    document.getElementById('share-copy-btn').disabled = false;
+    document.getElementById('share-copy-btn').textContent = '⬇ Save for Instagram';
   }
 
   document.getElementById('share-close-btn').addEventListener('click', () => {
@@ -2465,17 +2761,39 @@ window.addEventListener('error', function(e) {
     }
   });
 
-  document.getElementById('share-copy-btn').addEventListener('click', () => {
-    const b = books.find(x => x.id === document.getElementById('share-copy-btn').dataset.id);
+  document.getElementById('share-copy-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('share-copy-btn');
+    const b = books.find(x => x.id === btn.dataset.id);
     if (!b) return;
-    const stars = b.rating ? '★'.repeat(b.rating) + '☆'.repeat(5-b.rating) : '';
-    const tags = [b.fandom, b.ship, b.genre].filter(Boolean).join(' · ');
-    const note = b.quote ? `"${b.quote}"` : b.notes || '';
-    const text = `📚 ${b.title}${b.author ? ' by ' + b.author : ''}\n${stars}${tags ? '\n' + tags : ''}${note ? '\n\n' + note : ''}${b.url ? '\n\n🔗 ' + b.url : ''}\n\n— Kelly's Fandom Bookshelf 🍃`;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(() => toast('Copied! ✓')).catch(() => fallbackCopy(text));
-    } else {
-      fallbackCopy(text);
+    btn.disabled = true;
+    btn.textContent = 'Generating…';
+    try {
+      const card = document.getElementById('share-card');
+      // temporarily remove border-radius for cleaner screenshot then restore
+      const canvas = await html2canvas(card, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#080f0a',
+        logging: false,
+        width: card.offsetWidth,
+        height: card.offsetHeight
+      });
+      const link = document.createElement('a');
+      const slug = (b.title||'book').replace(/[^a-z0-9]/gi,'_').slice(0,30).toLowerCase();
+      link.download = `kellys_bookshelf_${slug}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      toast('Saved! 📸 Share to your story ✨');
+      btn.textContent = '✓ Saved!';
+      setTimeout(() => {
+        btn.textContent = '⬇ Save for Instagram';
+        btn.disabled = false;
+      }, 2500);
+    } catch(e) {
+      console.error(e);
+      toast('Could not save image — try a screenshot instead');
+      btn.textContent = '⬇ Save for Instagram';
+      btn.disabled = false;
     }
   });
 
@@ -2520,6 +2838,8 @@ window.addEventListener('error', function(e) {
     document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
     const qi = document.getElementById('quote-input'); if (qi) qi.value = '';
     const qia = document.getElementById('quote-input-ao3'); if (qia) qia.value = '';
+    const spi = document.getElementById('spotify-input'); if (spi) spi.value = '';
+    const spia = document.getElementById('spotify-input-ao3'); if (spia) spia.value = '';
     updateShelfSelects('');
     // AO3 fields
     document.getElementById('title-input-ao3').value = '';
@@ -2602,6 +2922,9 @@ window.addEventListener('error', function(e) {
     // Quote
     const qf = b.isAO3 ? 'quote-input-ao3' : 'quote-input';
     const qel = document.getElementById(qf); if (qel) qel.value = b.quote || '';
+    // Spotify
+    const sf = b.isAO3 ? 'spotify-input-ao3' : 'spotify-input';
+    const sel = document.getElementById(sf); if (sel) sel.value = b.spotifyUrl || '';
     // Shelf
     updateShelfSelects(b.shelfId || '');
     updateRatingDisplay();
@@ -2830,7 +3153,8 @@ window.addEventListener('error', function(e) {
       cover: formCover || '',
       moods: formMoods.slice(),
       quote: document.getElementById('quote-input-ao3').value.trim(),
-      shelfId: document.getElementById('shelf-select-ao3').value || undefined
+      shelfId: document.getElementById('shelf-select-ao3').value || undefined,
+      spotifyUrl: document.getElementById('spotify-input-ao3').value.trim()
     } : {
       title,
       author: document.getElementById('author-input').value.trim(),
@@ -2847,7 +3171,8 @@ window.addEventListener('error', function(e) {
       cover: formCover || (lastSuggested ? lastSuggested.cover : ''),
       moods: formMoods.slice(),
       quote: document.getElementById('quote-input').value.trim(),
-      shelfId: document.getElementById('shelf-select').value || undefined
+      shelfId: document.getElementById('shelf-select').value || undefined,
+      spotifyUrl: document.getElementById('spotify-input').value.trim()
     };
     if (editingId) {
       const idx = books.findIndex(b => b.id === editingId);
@@ -2899,9 +3224,6 @@ window.addEventListener('error', function(e) {
       return (b.dateAdded || '').startsWith(thisYear + '');
     }).length;
     const totalPages = finished.reduce((s,b) => s + (parseInt(b.pages)||0), 0);
-    const totalWords = finished.reduce((s,b) => s + (parseInt(b.wordCount)||0), 0);
-    const rated = books.filter(b => b.rating);
-    const avgRating = rated.length ? (rated.reduce((s,b)=>s+b.rating,0)/rated.length).toFixed(1) : '—';
 
     const byYear = {};
     finished.forEach(b => {
@@ -2925,16 +3247,15 @@ window.addEventListener('error', function(e) {
     const topAuthors = Object.entries(authors).filter(([_,n])=>n>1).sort((a,b)=>b[1]-a[1]).slice(0,6);
 
     document.getElementById('stats-content').innerHTML = `
-      <div class="stat-grid">
-        <div class="stat-card"><p class="stat-label">On the shelf</p><p class="stat-num">${total}</p></div>
-        <div class="stat-card"><p class="stat-label">Finished in ${thisYear}</p><p class="stat-num">${finishedThisYear}</p></div>
-        <div class="stat-card"><p class="stat-label">Reading now</p><p class="stat-num">${reading}</p></div>
-        <div class="stat-card"><p class="stat-label">To read</p><p class="stat-num">${want}</p></div>
-        <div class="stat-card"><p class="stat-label">Pages read</p><p class="stat-num small">${totalPages.toLocaleString()}</p></div>
-        <div class="stat-card"><p class="stat-label">AO3 words</p><p class="stat-num small">${totalWords.toLocaleString()}</p></div>
-        <div class="stat-card"><p class="stat-label">Avg rating</p><p class="stat-num">${avgRating}</p><p class="stat-sub">${rated.length} rated</p></div>
-        <div class="stat-card"><p class="stat-label">Finished total</p><p class="stat-num">${finished.length}</p>${dnf>0?`<p class="stat-sub">${dnf} DNF</p>`:''}</div>
+      <div class="stat-deck" id="stat-deck">
+        <div class="stat-card"><p class="stat-label">On the shelf</p><p class="stat-num">${total}</p><span class="stat-pip"></span></div>
+        <div class="stat-card"><p class="stat-label">Finished in ${thisYear}</p><p class="stat-num">${finishedThisYear}</p><span class="stat-pip"></span></div>
+        <div class="stat-card"><p class="stat-label">Reading now</p><p class="stat-num">${reading}</p><span class="stat-pip"></span></div>
+        <div class="stat-card"><p class="stat-label">To read</p><p class="stat-num">${want}</p><span class="stat-pip"></span></div>
+        <div class="stat-card"><p class="stat-label">Pages read</p><p class="stat-num small">${totalPages.toLocaleString()}</p><span class="stat-pip"></span></div>
+        <div class="stat-card"><p class="stat-label">Finished total</p><p class="stat-num">${finished.length}</p>${dnf>0?`<p class="stat-sub">${dnf} DNF</p>`:''}<span class="stat-pip"></span></div>
       </div>
+      <p class="stat-deck-hint">↓ swipe down to flip through</p>
       ${yearRows.length ? `
         <div class="section-h">By year</div>
         ${yearRows.map(([y,n]) => `<div class="ranked-row"><span class="ranked-name">${y}</span><span class="ranked-count">${n} ${n===1?'book':'books'}</span></div>`).join('')}
@@ -2947,8 +3268,165 @@ window.addEventListener('error', function(e) {
         <div class="section-h">Most-read authors</div>
         ${topAuthors.map(([a,n]) => `<div class="ranked-row"><span class="ranked-name">${esc(a)}</span><span class="ranked-count">${n}</span></div>`).join('')}
       ` : ''}
+      <button class="recap-trigger-btn" id="recap-trigger-btn">✦ Generate this month's reading recap</button>
     `;
+    initStatDeck();
+    const recapBtn = document.getElementById('recap-trigger-btn');
+    if (recapBtn) recapBtn.onclick = () => showMonthRecap();
   }
+
+  // Stacked, swipe-down stat deck with effects
+  function initStatDeck() {
+    const deck = document.getElementById('stat-deck');
+    if (!deck) return;
+    let cards = Array.from(deck.querySelectorAll('.stat-card'));
+    const n = cards.length;
+    if (!n) return;
+
+    function layout() {
+      cards.forEach((c, i) => {
+        const lift = i === 0 ? 0 : 14 * i;
+        const scale = 1 - Math.min(i, 4) * 0.05;
+        const fade = i > 4 ? 0 : 1 - i * 0.12;
+        c.style.zIndex = String(n - i);
+        c.style.transform = `translateY(${lift}px) scale(${scale})`;
+        c.style.opacity = i > 4 ? '0' : String(fade);
+        c.style.filter = i === 0 ? 'none' : `brightness(${1 - i * 0.06})`;
+        c.classList.remove('dragging');
+        const pip = c.querySelector('.stat-pip');
+        if (pip) pip.textContent = i === 0 ? cards.map((_, k) => k === 0 ? '\u25CF' : '\u25CB').join(' ') : '';
+      });
+    }
+    layout();
+
+    function cycle() {
+      const t = cards.shift();
+      cards.push(t);
+      cards.forEach(c => deck.appendChild(c));
+      layout();
+    }
+
+    let startY = 0, dragging = false, top = null;
+
+    function onDown(e) {
+      top = cards[0];
+      startY = (e.touches ? e.touches[0].clientY : e.clientY);
+      dragging = true;
+      top.classList.add('dragging');
+    }
+    function onMove(e) {
+      if (!dragging) return;
+      const y = (e.touches ? e.touches[0].clientY : e.clientY);
+      let dy = y - startY;
+      if (dy < 0) dy = dy * 0.3;
+      const rot = dy * 0.04;
+      const sc = 1 + Math.min(dy, 200) * 0.0005;
+      top.style.transform = `translateY(${dy}px) rotate(${rot}deg) scale(${sc})`;
+      top.style.opacity = String(Math.max(0.2, 1 - dy / 320));
+      if (e.cancelable) e.preventDefault();
+    }
+    function onUp() {
+      if (!dragging) return;
+      dragging = false;
+      const top0 = top;
+      const m = /translateY\(([-\d.]+)px\)/.exec(top0.style.transform);
+      const dy = m ? parseFloat(m[1]) : 0;
+      top0.classList.remove('dragging');
+      if (dy > 90) {
+        top0.style.transform = `translateY(440px) rotate(${dy*0.05}deg) scale(0.8)`;
+        top0.style.opacity = '0';
+        setTimeout(cycle, 280);
+      } else {
+        layout();
+      }
+    }
+
+    deck.addEventListener('mousedown', onDown);
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    deck.addEventListener('touchstart', onDown, { passive: true });
+    deck.addEventListener('touchmove', onMove, { passive: false });
+    deck.addEventListener('touchend', onUp);
+  }
+
+  // ---------- MONTHLY RECAP ----------
+  function showMonthRecap() {
+    const now = new Date();
+    const yr = now.getFullYear();
+    const mo = now.getMonth(); // 0-based
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const monthName = MONTHS[mo];
+
+    // Books finished this calendar month
+    const finished = books.filter(b => {
+      if (b.status !== 'finished') return false;
+      const d = b.dateFinished || b.dateAdded || '';
+      if (!d) return false;
+      const bd = new Date(d);
+      return bd.getFullYear() === yr && bd.getMonth() === mo;
+    });
+
+    // Count
+    const count = finished.length;
+    document.getElementById('rc-count').textContent = count || '0';
+    document.getElementById('rc-bg-num').textContent = count || '?';
+    document.getElementById('rc-month-label').textContent = monthName + ' ' + yr + '  ✦  Kelly\'s Fandom Bookshelf';
+
+    // Best quote — prefer books with a quote field, else notes
+    const withQuote = finished.filter(b => b.quote);
+    const quoteSource = withQuote.length ? withQuote[Math.floor(Math.random()*withQuote.length)]
+      : finished.filter(b => b.notes).length ? finished.filter(b => b.notes)[0] : null;
+    const quoteEl = document.getElementById('rc-quote');
+    const quoteAuthorEl = document.getElementById('rc-quote-author');
+    if (quoteSource) {
+      const qt = quoteSource.quote || quoteSource.notes || '';
+      quoteEl.textContent = '\u201c' + qt.slice(0,120) + (qt.length>120?'\u2026':'') + '\u201d';
+      quoteEl.style.display = 'block';
+      quoteAuthorEl.textContent = '\u2014 ' + (quoteSource.title||'');
+      quoteAuthorEl.style.display = 'block';
+    } else {
+      quoteEl.style.display = 'none';
+      quoteAuthorEl.style.display = 'none';
+    }
+
+    // Top moods — tally across all finished-this-month books
+    const moodCount = {};
+    finished.forEach(b => (b.moods||[]).forEach(m => { moodCount[m] = (moodCount[m]||0)+1; }));
+    const topMoods = Object.entries(moodCount).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([m])=>m);
+    const moodsEl = document.getElementById('rc-moods');
+    moodsEl.innerHTML = topMoods.map(m => `<span class="recap-mood-tag">${esc(m)}</span>`).join('');
+
+    document.getElementById('recap-modal').classList.remove('hidden');
+  }
+
+  document.getElementById('recap-close-btn').addEventListener('click', () => {
+    document.getElementById('recap-modal').classList.add('hidden');
+  });
+  document.getElementById('recap-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('recap-modal'))
+      document.getElementById('recap-modal').classList.add('hidden');
+  });
+  document.getElementById('recap-dl-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('recap-dl-btn');
+    btn.disabled = true; btn.textContent = 'Generating…';
+    try {
+      const card = document.getElementById('recap-card');
+      const canvas = await html2canvas(card, { scale: 3, useCORS: true, backgroundColor: '#080f0a', logging: false });
+      const now = new Date();
+      const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const link = document.createElement('a');
+      link.download = `kelly_recap_${MONTHS[now.getMonth()]}${now.getFullYear()}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      toast('Recap saved! 📸✨');
+      btn.textContent = '✓ Saved!';
+      setTimeout(() => { btn.textContent = '⬇ Save for Instagram'; btn.disabled = false; }, 2500);
+    } catch(e) {
+      console.error(e);
+      toast('Could not save — try a screenshot');
+      btn.textContent = '⬇ Save for Instagram'; btn.disabled = false;
+    }
+  });
 
   // ---------- BACKUP ----------
   // ---------- BACKUP NUDGE ----------
